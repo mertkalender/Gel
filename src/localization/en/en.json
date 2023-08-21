@@ -1,0 +1,23 @@
+{
+    "login": {
+        "title": "Login",
+        "email": "Email",
+        "password": "Password",
+        "login": "Login",
+        "remember" : "Beni Hatırla",
+        "forgot": "Forgot Password?",
+        "register": "Register",
+        "error": "Invalid email or password"
+    },
+    "register": {
+        "title": "Register",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "password": "Password",
+        "password_confirm": "Confirm Password",
+        "register": "Register",
+        "login": "Login",
+        "error": "Invalid email or password"
+    }
+}
