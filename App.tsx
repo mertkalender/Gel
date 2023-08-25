@@ -1,73 +1,20 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Navigation } from 'react-native-navigation';
-import { colors } from './src/constants/colors';
-import { fontSizes } from './src/constants/fonts';
-import PageHome from './src/pages/Home';
-import PageSettings from './src/pages/Settings';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import 'react-native-gesture-handler';
+import { HomeRoutes } from './src/routes/HomeRoutes';
+import { ProfileRoutes } from './src/routes/ProfileRoutes';
 
-Navigation.registerComponent('Home', () => PageHome);
-Navigation.registerComponent('Settings', () => PageSettings);
+export default function App() {
 
-Navigation.setDefaultOptions({
-  statusBar: {
-    backgroundColor: colors.statusBarColor
-  },
-  topBar: {
-    title: {
-      color: colors.white
-    },
-    backButton: {
-      color: colors.white
-    },
-    background: {
-      color: colors.statusBarColor
-    }
-  },
-  bottomTab: {
-    fontSize: fontSizes.large,
-    selectedFontSize: fontSizes.extraLarge
-  }
-});
+  const Tab = createBottomTabNavigator();
 
-Navigation.events().registerAppLaunchedListener(async () => {
-  Navigation.setRoot({
-    root: {
-      bottomTabs: {
-        children: [
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'Home'
-                  }
-                },
-              ]
-            }
-          },
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'Settings'
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  });
-});
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
-});
+  return (
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={{ headerShown: true, tabBarActiveBackgroundColor: '#000000' }} initialRouteName='Home'>
+        <Tab.Screen name="Home" component={HomeRoutes} />
+        <Tab.Screen name="Settings" component={ProfileRoutes} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+ }

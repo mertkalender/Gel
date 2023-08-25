@@ -1,33 +1,30 @@
-import { View, Text, Button } from "react-native";
-import { Navigation } from "react-native-navigation";
+import { Text, Button} from 'react-native';
+import { HomeContainer } from './style';
 
-const PageHome = (props: any) => {
-    return (
-        <View>
-        <Text>Hello React Native Navigation 👋</Text>
+const PageHome = ({ navigation }) => {
+  return (
+    <HomeContainer>
+      <Text>Hello React Native Navigation 👋</Text>
 
-        <Button
-            title='Push Settings Screen'
-            color='#710ce3'
-            onPress={() => Navigation.push(props.componentId, {
-            component: {
-                name: 'Settings'
-            }
-            })} />
-        </View>
-    );
+      <Button
+        title="Push Settings Screen"
+        color="#710ce3"
+        onPress={() =>
+          navigation.navigate('Details')
+        }
+      />
+    </HomeContainer>
+  );
 };
 PageHome.options = {
-    topBar: {
-        title: {
-        text: 'Home'
-        }
+  topBar: {
+    title: {
+      text: 'Home',
     },
-    bottomTab: {
-        text: 'Home'
-    }
+  },
+  bottomTab: {
+    text: 'Home',
+  },
 };
 
 export default PageHome;
-
-  

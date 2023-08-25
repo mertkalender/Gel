@@ -3,4 +3,5 @@ export const colors = {
     statusBarColor: '#2E2E2E',
     white: '#FFFFFF',
     black: '#000000',
+    background: 'smokewhite',
 };

@@ -1,13 +1,13 @@
 import { View, Text } from "react-native";
 
-const PageSettings = () => {
+const PageProfile = () => {
     return (
       <View>
-        <Text>Settings Screen</Text>
+        <Text>Profile Screen</Text>
       </View>
     );
 }
-PageSettings.options = {
+PageProfile.options = {
     topBar: {
       title: {
         text: 'Settings'
@@ -18,4 +18,4 @@ PageSettings.options = {
     }
 }
 
-export default PageSettings;
+export default PageProfile;

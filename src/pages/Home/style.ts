@@ -1,10 +1,9 @@
-import { View } from "react-native/types";
 import { colors } from "../../constants/colors";
 import styled from 'styled-components/native';
+import { View } from 'react-native';
 
-
-export const homeContainer = styled(View)`
+export const HomeContainer = styled(View)`
     flex: 1;
-    background-color: ${colors.white};
-    padding: 16px;
+    background-color: ${colors.background};
+    padding: 5%;
 `;
