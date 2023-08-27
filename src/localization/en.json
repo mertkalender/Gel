@@ -19,5 +19,19 @@
         "register": "Register",
         "login": "Login",
         "error": "Invalid email or password"
+    },
+    "profile": {
+        "title" : "Profile",
+        "myInfo": "My Info",
+        "myTrips": "Trip history",
+        "settings": "Settings"
+    },
+    "home": {
+        "title": "Home",
+        "iAmDriver": "I am a Driver",
+        "iAmHitchhiker": "I am a Hitchhiker"
+    },
+    "trips": {
+        "title": "Trips"
     }
 }

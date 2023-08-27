@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { ButtonContainer, ButtonText, Container, Input, LoginBox, LoginButton, RegisterButton, Title } from './style';
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn } from '../../../store/slices/userSlice';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 
 
 const PageLogin = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
   const [username, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (

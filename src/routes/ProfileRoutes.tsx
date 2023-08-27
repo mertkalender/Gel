@@ -7,7 +7,7 @@ const ProfileStack = createNativeStackNavigator();
 export function ProfileRoutes() {
     return (
       <ProfileStack.Navigator initialRouteName='Profile'>
-        <ProfileStack.Screen name="My Account" component={PageProfile} />
+        <ProfileStack.Screen name="Profile" component={PageProfile} />
         <ProfileStack.Screen name="Settings" component={PageSettings} />
       </ProfileStack.Navigator>
     );

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import 'react-native-gesture-handler';
 import {HomeRoutes} from './routes/HomeRoutes';
@@ -12,15 +12,25 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from './constants/colors';
 import { fontSizes } from './constants/fonts';
 import { tabbarHeight } from './constants/generic';
+import { TripsRoutes } from './routes/TripsRoutes';
+import { t } from 'i18next';
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+const MainTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: colors.background,
+  },
+};
 
 export default function Root() {
   const Tab = createBottomTabNavigator();
   const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MainTheme}>
       <KeyboardAwareScrollView contentContainerStyle={{flex: 1}}>
         {!isLoggedIn ? (
           <LoginRoutes />
@@ -30,15 +40,17 @@ export default function Root() {
               tabBarStyle: { height: tabbarHeight },
               headerShown: false,
               tabBarActiveBackgroundColor: '#000000',
-              tabBarIcon: ({focused, color, size}) => {
+              tabBarIcon: ({focused, color}) => {
                 let iconName = '';
                 switch (route.name) {
-                  case 'Home':
+                  case 'HomeRoute':
                     iconName = focused ? 'home' : 'home-outline';
                     break;
-                  case 'Profile':
+                  case 'ProfileRoute':
                     iconName = focused ? 'person' : 'person-outline';
                     break;
+                  case "TripsRoute": 
+                    iconName = focused ? 'car' : 'car-outline';
                 }
                 return <Ionicons name={iconName} size={fontSizes.tabbarIcons} color={color} />;
               },
@@ -46,8 +58,9 @@ export default function Root() {
               tabBarInactiveTintColor: colors.tabBarInactiveColor,    
             })}
             initialRouteName="Home">
-            <Tab.Screen name="Home" component={HomeRoutes} />
-            <Tab.Screen name="Profile" component={ProfileRoutes} />
+            <Tab.Screen name="HomeRoute" component={HomeRoutes} options={{title: t('home:title')}}/>
+            <Tab.Screen name="TripsRoute" component={TripsRoutes} options={{title: t('trips:title')}}/>
+            <Tab.Screen name="ProfileRoute" component={ProfileRoutes} options={{title: t('profile:title')}}/>
           </Tab.Navigator>
         )}
       </KeyboardAwareScrollView>

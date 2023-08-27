@@ -6,7 +6,7 @@ const HomeStack = createNativeStackNavigator();
 export function HomeRoutes() {
     return (
       <HomeStack.Navigator>
-        <HomeStack.Screen name="Gel" component={PageHome} />
+        <HomeStack.Screen name="Home" component={PageHome} />
       </HomeStack.Navigator>
     );
   }

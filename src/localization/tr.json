@@ -19,5 +19,19 @@
         "register" : "Kayıt Ol",
         "login" : "Giriş Yap",
         "error" : "E-posta veya şifre hatalı."
+    },
+    "profile": {
+        "title": "Profil",
+        "myInfo": "Bilgilerim",
+        "myTrips": "Seyahat geçmişim",
+        "settings": "Ayarlar"
+    },
+    "home": {
+        "title": "Anasayfa",
+        "iAmDriver": "Sürücüyüm",
+        "iAmHitchhiker": "Otostopçuyum"
+    },
+    "trips": {
+        "title": "Seyahatler"
     }
 }

@@ -1,10 +1,17 @@
-import { Text, Button} from 'react-native';
-import { HomeContainer } from './style';
+import { ButtonContainer, HomeButton, HomeButtonText, HomeContainer } from './style';
+import { t } from 'i18next';
 
-const PageHome = ({ navigation:any }) => {
+const PageHome = ({ navigation } : any) => {
   return (
     <HomeContainer>
-      <Text>Hello React Native Navigation 👋</Text>
+      <ButtonContainer>
+        <HomeButton onPress={() => navigation.navigate('Profile')}>
+          <HomeButtonText>{t('home:iAmDriver')}</HomeButtonText>
+        </HomeButton>
+        <HomeButton onPress={() => navigation.navigate('Profile')}>
+          <HomeButtonText>{t('home:iAmHitchhiker')}</HomeButtonText>
+        </HomeButton>
+      </ButtonContainer>
     </HomeContainer>
   );
 };
