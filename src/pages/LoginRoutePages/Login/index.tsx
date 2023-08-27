@@ -2,26 +2,26 @@ import React, { useState } from 'react';
 import { ButtonContainer, ButtonText, Container, Input, LoginBox, LoginButton, RegisterButton, Title } from './style';
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn } from '../../../store/slices/userSlice';
+import { useTranslation } from 'react-i18next';
 
 
 const PageLogin = () => {
   const dispatch = useDispatch();
-
-  const [username, setUsername] = useState('');
+  const { t } = useTranslation();
+  const [username, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(username, password);
   return (
       <Container>
         <LoginBox>
-        <Title>Login</Title>
-          <Input onChangeText={setUsername} placeholder="Username" />
-          <Input onChangeText={setPassword} placeholder="Password" secureTextEntry />
+        <Title>{t('login:login')}</Title>
+          <Input onChangeText={setEmail} placeholder={t('login:email')} />
+          <Input onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
           <ButtonContainer>
             <LoginButton onPress={() => dispatch(setIsLoggedIn(true))}>
-              <ButtonText>Login</ButtonText>
+              <ButtonText>{t('login:login')}</ButtonText>
             </LoginButton>
             <RegisterButton>
-              <ButtonText>Register</ButtonText>
+              <ButtonText>{t('login:register')}</ButtonText>
             </RegisterButton>
           </ButtonContainer>
         </LoginBox>

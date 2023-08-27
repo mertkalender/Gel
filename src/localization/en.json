@@ -4,7 +4,7 @@
         "email": "Email",
         "password": "Password",
         "login": "Login",
-        "remember" : "Beni Hatırla",
+        "remember" : "Remember me",
         "forgot": "Forgot Password?",
         "register": "Register",
         "error": "Invalid email or password"
