@@ -5,21 +5,21 @@ import { setIsLoggedIn } from '../../../store/slices/userSlice';
 import { t } from 'i18next';
 
 
-const PageLogin = () => {
+const PageLogin = ({ navigation } : any) => {
   const dispatch = useDispatch();
-  const [username, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
       <Container>
         <LoginBox>
-        <Title>{t('login:login')}</Title>
+        <Title>{t('login:title')}</Title>
           <Input onChangeText={setEmail} placeholder={t('login:email')} />
           <Input onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
           <ButtonContainer>
             <LoginButton onPress={() => dispatch(setIsLoggedIn(true))}>
               <ButtonText>{t('login:login')}</ButtonText>
             </LoginButton>
-            <RegisterButton>
+            <RegisterButton onPress={() => navigation.navigate('Register')}>
               <ButtonText>{t('login:register')}</ButtonText>
             </RegisterButton>
           </ButtonContainer>

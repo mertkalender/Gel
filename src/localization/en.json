@@ -15,9 +15,9 @@
         "surname": "Surname",
         "email": "Email",
         "password": "Password",
-        "password_confirm": "Confirm Password",
+        "passwordConfirm": "Confirm Password",
         "register": "Register",
-        "login": "Login",
+        "login": "You have an account? Login",
         "error": "Invalid email or password"
     },
     "profile": {

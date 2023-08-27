@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { loginBoxHeight, limitScreenSize, screenHeight, screenWidth } from '../../../constants/generic';
+import { limitScreenSize, registerBoxHeight, screenHeight, screenWidth } from '../../../constants/generic';
 import { fontSizes } from '../../../constants/fonts';
 
 export const Container = styled.View`
@@ -9,12 +9,12 @@ export const Container = styled.View`
   align-items: center;
 `;
 
-export const LoginBox = styled.View`
+export const RegisterBox = styled.View`
   background-color: #333;
   padding: 20px;
   border-radius: 10px;
   width: ${screenWidth * 0.9}px;
-  height: ${loginBoxHeight}px;
+  height: ${registerBoxHeight}px;
   justify-content: space-around;
 `;
 
@@ -38,6 +38,15 @@ export const ButtonContainer = styled.View`
 `;
 
 export const LoginButton = styled.TouchableOpacity`
+  background-color: #555;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+`;
+
+export const RegisterButton = styled.TouchableOpacity`
   background-color: #007bff;
   padding: 10px;
   border-radius: 5px;
@@ -45,15 +54,6 @@ export const LoginButton = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   margin-bottom: 10px;
-`;
-
-export const RegisterButton = styled.TouchableOpacity`
-  background-color: #555;
-  padding: 10px;
-  border-radius: 5px;
-  align-items: center;
-  flex: 1;
-  justify-content: center;
 `;
 
 export const ButtonText = styled.Text`

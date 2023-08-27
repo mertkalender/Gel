@@ -7,11 +7,3 @@ export type User = {
   surname: string;
   profilePicture: string;
 };
-
-export type ImageData = {
-  url: string;
-  title: string;
-  author: string;
-  is_video: boolean;
-  created_utc: number;
-};

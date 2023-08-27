@@ -15,7 +15,7 @@
         "surname" : "Soyad",
         "email" : "E-posta",
         "password" : "Şifre",
-        "password_confirm" : "Şifre Tekrarı",
+        "passwordConfirm" : "Şifre Tekrarı",
         "register" : "Kayıt Ol",
         "login" : "Giriş Yap",
         "error" : "E-posta veya şifre hatalı."

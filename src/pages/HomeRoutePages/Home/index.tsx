@@ -5,10 +5,10 @@ const PageHome = ({ navigation } : any) => {
   return (
     <HomeContainer>
       <ButtonContainer>
-        <HomeButton onPress={() => navigation.navigate('Profile')}>
+        <HomeButton onPress={() => {}}>
           <HomeButtonText>{t('home:iAmDriver')}</HomeButtonText>
         </HomeButton>
-        <HomeButton onPress={() => navigation.navigate('Profile')}>
+        <HomeButton onPress={() => {}}>
           <HomeButtonText>{t('home:iAmHitchhiker')}</HomeButtonText>
         </HomeButton>
       </ButtonContainer>

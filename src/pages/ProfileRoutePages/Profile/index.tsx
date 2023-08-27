@@ -11,7 +11,7 @@ const PageProfile = ({ navigation }: any) => {
           <ProfileImageContainer>
             <ProfileImage source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} />
           </ProfileImageContainer>
-          <ProfileInfoText>Name</ProfileInfoText>
+          <ProfileInfoText>Name Surname</ProfileInfoText>
         </ProfileInfo>
         <ProfileList navigation={navigation} />
       </Container>
