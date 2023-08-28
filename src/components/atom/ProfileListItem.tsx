@@ -19,6 +19,7 @@ const ListItemText = styled.Text`
 interface Props {
     title: string;
     onPress: () => void;
+    iconName: string;
 }
 
 export const ProfileListItem = (props: Props) => {
@@ -29,7 +30,7 @@ export const ProfileListItem = (props: Props) => {
         {props.title}
       </ListItemText>
       <Text>
-        <Icon name={'chevron-forward-outline'} size={fontSizes.tabbarIcons} color={colors.white}/>
+        <Icon name={props.iconName} size={fontSizes.tabbarIcons} color={colors.white}/>
       </Text>
     </ListItem>
   );

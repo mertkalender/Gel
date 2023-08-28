@@ -24,4 +24,8 @@ export const profileMenu = [
         title: t('profile:settings'),
         navigationPage: 'Settings'
     },
+    {
+        title: t('profile:logout'),
+        navigationPage: null
+    },
 ]

@@ -24,7 +24,8 @@
         "title" : "Profile",
         "myInfo": "My Info",
         "myTrips": "Trip history",
-        "settings": "Settings"
+        "settings": "Settings",
+        "logout": "Log out"
     },
     "home": {
         "title": "Home",

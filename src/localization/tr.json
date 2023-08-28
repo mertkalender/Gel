@@ -24,7 +24,8 @@
         "title": "Profil",
         "myInfo": "Bilgilerim",
         "myTrips": "Seyahat geçmişim",
-        "settings": "Ayarlar"
+        "settings": "Ayarlar",
+        "logout": "Çıkış yap"
     },
     "home": {
         "title": "Anasayfa",
