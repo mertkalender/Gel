@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "670487224592",
+    "project_id": "gel-app-5e865",
+    "storage_bucket": "gel-app-5e865.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670487224592:android:4fa4366477351f3c154595",
+        "android_client_info": {
+          "package_name": "com.gel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNsdSD1KAGF7USFCJBWTVYQXffZLL-qx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
