@@ -13,8 +13,8 @@ const PageLogin = ({ navigation } : any) => {
       <Container>
         <LoginBox>
         <Title>{t('login:title')}</Title>
-          <Input onChangeText={setEmail} placeholder={t('login:email')} />
-          <Input onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
+          <Input keyboardType='email-address' onChangeText={setEmail} placeholder={t('login:email')} />
+          <Input textContentType='password' onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
           <ButtonContainer>
             <LoginButton onPress={() => dispatch(setIsLoggedIn(true))}>
               <ButtonText>{t('login:login')}</ButtonText>

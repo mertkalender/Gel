@@ -18,7 +18,15 @@
         "passwordConfirm" : "Şifre Tekrarı",
         "register" : "Kayıt Ol",
         "login" : "Giriş Yap",
-        "error" : "E-posta veya şifre hatalı."
+        "success" : "Başarılı!",
+        "successMessage" : "Kayıt başarılı. Giriş yapabilirsiniz.",
+        "emptyFields" : "Lütfen tüm alanları doldurunuz.",
+        "passwordsNotMatch" : "Şifreler uyuşmuyor.",
+        "emailAlreadyInUse" : "Bu e-posta adresi kullanımda.",
+        "invalidEmail" : "Geçersiz e-posta adresi.",
+        "weakPassword" : "Şifre en az 6 karakter olmalıdır.",
+        "sthWrong" : "Bir şeyler yanlış",
+        "unknownError" : "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
     },
     "profile": {
         "title": "Profil",

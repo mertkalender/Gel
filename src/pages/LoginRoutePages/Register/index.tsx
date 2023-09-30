@@ -10,37 +10,87 @@ import {
   Title,
 } from './style';
 import {useDispatch} from 'react-redux';
-import {setIsLoggedIn} from '../../../store/slices/userSlice';
+import Toast from 'react-native-toast-message';
 import {t} from 'i18next';
+import auth from '@react-native-firebase/auth';
+import { Alert } from 'react-native';
 
 const PageRegister = ({ navigation } : any) => {
-  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const validateInputs = () => {
+    if (!name || !surname || !email || !password || !confirmPassword) {
+      Alert.alert(t('register:sthWrong'), t('register:emptyFields'));
+      return false;
+    }
+    else if (password !== confirmPassword) {
+      Alert.alert(t('register:sthWrong'), t('register:passwordsNotMatch'));
+      return false;
+    }
+    else if (!email.includes('@') || !email.split('@')[1].includes('.')) {
+      Alert.alert(t('register:sthWrong'), t('register:invalidEmail'));
+      return false;
+    }
+    return true;
+  }
+
+  const handleRegister = () => {
+    if (!validateInputs()) {
+      return;
+    }
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        Toast.show({
+          type: 'success',
+          text1: t('register:success'),
+          text2: t('register:successMessage'),
+          position: 'bottom',
+        });
+        navigation.navigate('Login');
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case 'auth/invalid-email':
+            Alert.alert(t('register:sthWrong'), t('register:invalidEmail'));
+            break;
+          case 'auth/email-already-in-use':
+            Alert.alert(t('register:sthWrong'), t('register:emailAlreadyInUse'));
+            break;
+          case 'auth/weak-password':
+            Alert.alert(t('register:sthWrong'), t('register:weakPassword'));
+            break;
+          default:
+            Alert.alert(t('register:sthWrong'), t('register:unknownError'));
+        }
+      });
+  }
+
   return (
     <Container>
       <RegisterBox>
         <Title>{t('register:title')}</Title>
-        <Input onChangeText={setName} placeholder={t('register:name')} />
-        <Input onChangeText={setSurname} placeholder={t('register:surname')} />
-        <Input onChangeText={setEmail} placeholder={t('register:email')} />
+        <Input onChangeText={(val) => setName(val.trim())} placeholder={t('register:name')} />
+        <Input onChangeText={(val) => setSurname(val.trim())} placeholder={t('register:surname')} />
+        <Input keyboardType='email-address' onChangeText={(val) => setEmail(val.trim())} placeholder={t('register:email')} />
         <Input
           onChangeText={setPassword}
-          placeholder={t('login:password')}
+          placeholder={t('register:password')}
           secureTextEntry
-          keyboardType='visible-password'
+          textContentType='newPassword'
         />
         <Input
           onChangeText={setConfirmPassword}
-          placeholder={t('login:passwordConfirm')}
+          placeholder={t('register:passwordConfirm')}
           secureTextEntry
-          keyboardType='visible-password'
+          textContentType='newPassword'
         />
         <ButtonContainer>
-          <RegisterButton>
+          <RegisterButton onPress={handleRegister}>
             <ButtonText>{t('register:register')}</ButtonText>
           </RegisterButton>
           <LoginButton onPress={() => navigation.navigate('Login')}>
