@@ -67,6 +67,7 @@ const PageRegister = ({ navigation } : any) => {
           default:
             Alert.alert(t('register:sthWrong'), t('register:unknownError'));
         }
+        return Promise.reject(error);
       });
   }
 

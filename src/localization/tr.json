@@ -7,7 +7,16 @@
         "remember" : "Beni Hatırla",
         "forgot" : "Şifremi Unuttum",
         "register" : "Kayıt Ol",
-        "error" : "E-posta veya şifre hatalı."
+        "error" : "E-posta veya şifre hatalı.",
+        "sthWrong" : "Bir şeyler yanlış",
+        "emptyFields" : "Lütfen tüm alanları doldurunuz.",
+        "unknownError" : "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        "invalidEmail" : "Geçersiz e-posta adresi.",
+        "userDisabled" : "Bu kullanıcı engellenmiş.",
+        "userNotFound" : "Bu kullanıcı bulunamadı.",
+        "invalidCredentials" : "E-posta ya da şifre hatalı",
+        "success" : "Başarılı!",
+        "successMessage" : "Başarıyla giriş yapıldı. Keyfini çıkarın!"
     },
     "register" : {
         "title" : "Kayıt Ol",
@@ -33,7 +42,9 @@
         "myInfo": "Bilgilerim",
         "myTrips": "Seyahat geçmişim",
         "settings": "Ayarlar",
-        "logout": "Çıkış yap"
+        "logout": "Çıkış yap",
+        "logoutSuccess": "Başarılı!",
+        "logoutSuccessMessage": "Başarıyla çıkış yapıldı. Görüşmek üzere!"
     },
     "home": {
         "title": "Anasayfa",

@@ -7,7 +7,16 @@
         "remember" : "Remember me",
         "forgot": "Forgot Password?",
         "register": "Register",
-        "error": "Invalid email or password"
+        "error": "Invalid email or password",
+        "sthWrong" : "Something went wrong",
+        "emptyFields" : "Please fill all fields.",
+        "unknownError" : "An unexpected error occurred. Please try again later.",
+        "invalidEmail" : "Invalid email.",
+        "userDisabled" : "This user is disabled.",
+        "userNotFound" : "User not found.",
+        "invalidCredentials" : "Invalid Credentials. E-mail or password is wrong.",
+        "success" : "Success!",
+        "successMessage" : "Successfully logged-in. Enjoy!"
     },
     "register": {
         "title": "Register",
@@ -33,7 +42,9 @@
         "myInfo": "My Info",
         "myTrips": "Trip history",
         "settings": "Settings",
-        "logout": "Log out"
+        "logout": "Log out",
+        "logoutSuccess": "Success!",
+        "logoutSuccessMessage": "Successfully logged-out. See you soon!"
     },
     "home": {
         "title": "Home",
