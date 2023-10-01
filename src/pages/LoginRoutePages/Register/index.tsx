@@ -14,6 +14,7 @@ import Toast from 'react-native-toast-message';
 import {t} from 'i18next';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
+import { createUser } from '../../../utils/firestore';
 
 const PageRegister = ({ navigation } : any) => {
   const [name, setName] = useState('');
@@ -44,7 +45,8 @@ const PageRegister = ({ navigation } : any) => {
     }
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((res) => {
+        createUser(res.user.uid, name, surname, email);
         Toast.show({
           type: 'success',
           text1: t('register:success'),
@@ -65,6 +67,7 @@ const PageRegister = ({ navigation } : any) => {
             Alert.alert(t('register:sthWrong'), t('register:weakPassword'));
             break;
           default:
+            console.log(error);
             Alert.alert(t('register:sthWrong'), t('register:unknownError'));
         }
         return Promise.reject(error);
