@@ -2,8 +2,11 @@ import React from 'react';
 import { Container, ProfileImage, ProfileImageContainer, ProfileInfo, ProfileInfoText } from './style';
 import { ProfileList } from '../../../components/molecule/ProfileList';
 import { ScrollView } from 'react-native';
+import { useAppSelector } from '../../../store/store';
 
 const PageProfile = ({ navigation }: any) => {
+
+  const userData = useAppSelector(state => state.user.userData);
   return (
     <ScrollView>
       <Container>
@@ -11,7 +14,7 @@ const PageProfile = ({ navigation }: any) => {
           <ProfileImageContainer>
             <ProfileImage source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} />
           </ProfileImageContainer>
-          <ProfileInfoText>Name Surname</ProfileInfoText>
+          <ProfileInfoText>{userData.name} {userData.surname}</ProfileInfoText>
         </ProfileInfo>
         <ProfileList navigation={navigation} />
       </Container>

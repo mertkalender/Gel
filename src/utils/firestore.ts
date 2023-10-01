@@ -13,14 +13,17 @@ export function createUser( _userId: string, _name: string, _surname: string, _e
         console.log(error);
     });
 }
-export function getUser( userId: string ) {
-  useEffect(() => {
-    const subscriber = firestore()
-      .collection(COLLECTIONS.USERS)
-      .doc(userId)
-      .onSnapshot(documentSnapshot => {
-        console.log('User data: ', documentSnapshot.data());
-      });
-    return () => subscriber();
-  }, [userId]);
-}
+
+export async function getUser(userId: string) {
+    try {
+      const documentSnapshot = await firestore().collection(COLLECTIONS.USERS).doc(userId).get();
+  
+      if (documentSnapshot.exists) {
+        return documentSnapshot.data();
+      } else {
+        throw new Error('User does not exist!');    }
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }

@@ -2,12 +2,17 @@ import {createAction, createSlice, PrepareAction} from '@reduxjs/toolkit';
 import {User} from '../../types/user';
 
 export interface UserState {
-  user: User[];
+  userData: User;
   isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
-  user: [],
+  userData: {
+    name: '',
+    surname: '',
+    email: '',
+    profilePicture: '',
+  },
   isLoggedIn: false,
 };
 
@@ -18,6 +23,13 @@ export const setIsLoggedIn = createAction<PrepareAction<boolean>>(
   }),
 );
 
+export const setUser = createAction<PrepareAction<User>>(
+  'user/setUser',
+  user => ({
+    payload: user,
+  }),
+);
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -25,6 +37,9 @@ export const userSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(setIsLoggedIn, (state, action) => {
       state.isLoggedIn = action.payload;
+    });
+    builder.addCase(setUser, (state, action) => {
+      state.userData = action.payload;
     });
   },
 });

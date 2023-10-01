@@ -6,16 +6,13 @@ import {HomeRoutes} from './routes/HomeRoutes';
 import {ProfileRoutes} from './routes/ProfileRoutes';
 import {LoginRoutes} from './routes/LoginRoutes';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {TypedUseSelectorHook, useSelector} from 'react-redux';
-import {RootState} from './store/store';
+import {useAppSelector} from './store/store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {colors} from './constants/colors';
 import {fontSizes} from './constants/fonts';
 import {tabbarHeight} from './constants/generic';
 import {TripsRoutes} from './routes/TripsRoutes';
 import {t} from 'i18next';
-
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const MainTheme = {
   ...DefaultTheme,
