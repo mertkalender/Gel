@@ -1,6 +1,6 @@
 {
     "login" : {
-        "title:" : "Giriş Yap",
+        "title" : "Giriş Yap",
         "email" : "E-posta",
         "password" : "Şifre",
         "login" : "Giriş Yap",
@@ -46,12 +46,20 @@
         "logoutSuccess": "Başarılı!",
         "logoutSuccessMessage": "Başarıyla çıkış yapıldı. Görüşmek üzere!"
     },
+    "settings" : {
+        "title" : "Ayarlar",
+        "language" : "Dil",
+        "turkish" : "Türkçe",
+        "english" : "İngilizce"
+    },
     "home": {
         "title": "Anasayfa",
         "iAmDriver": "Sürücüyüm",
         "iAmHitchhiker": "Otostopçuyum"
     },
     "trips": {
-        "title": "Seyahatler"
+        "title": "Seyahatler",
+        "creator": "Oluşturan",
+        "passangerCount": "Yolcu sayısı"
     }
 }

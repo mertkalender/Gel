@@ -46,12 +46,20 @@
         "logoutSuccess": "Success!",
         "logoutSuccessMessage": "Successfully logged-out. See you soon!"
     },
+    "settings" : {
+        "title" : "Settings",
+        "language" : "Language",
+        "turkish" : "Turkish",
+        "english" : "English"
+    },
     "home": {
         "title": "Home",
         "iAmDriver": "I am a Driver",
         "iAmHitchhiker": "I am a Hitchhiker"
     },
     "trips": {
-        "title": "Trips"
+        "title": "Trips",
+        "creator": "Creator",
+        "passangerCount": "Passanger Count"
     }
 }

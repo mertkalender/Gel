@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { ButtonContainer, ButtonText, Container, Input, LoginBox, LoginButton, RegisterButton, Title } from './style';
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn, setUser } from '../../../store/slices/userSlice';
-import { t } from 'i18next';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { getUser } from '../../../utils/firestore';
+import { useTranslation } from 'react-i18next';
 
 
 const PageLogin = ({ navigation } : any) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const { t } = useTranslation();
   const validateInputs = () => {
     if (!email || !password) {
       Alert.alert(t('login:sthWrong'), t('login:emptyFields'));

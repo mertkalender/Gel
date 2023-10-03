@@ -26,4 +26,19 @@ export async function getUser(userId: string) {
       console.error('Error:', error);
       throw error;
     }
-  }
+}
+
+export const getTrips = async () => {
+    try {
+        const querySnapshot = await firestore().collection(COLLECTIONS.TRIPS).get();
+        if (querySnapshot.empty) {
+            return []; // Return an empty array if there are no documents
+        }
+        const trips = querySnapshot.docs.map((doc) => doc.data());
+        return trips; // Return the array of trips
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+    

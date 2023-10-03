@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 import {screenWidth} from '../../constants/generic';
 import {ProfileListItem} from '../atom/ProfileListItem';
-import {profileMenu} from '../../constants/generic';
-import {t} from 'i18next';
+import {getProfileMenu} from '../../constants/generic';
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn } from '../../store/slices/userSlice';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ListContainer = styled.View`
   background-color: #333;
@@ -25,7 +25,7 @@ const Divider = styled.View`
 
 export const ProfileList = ({navigation}: any) => {
   const dispatch = useDispatch();
-
+  const {t} = useTranslation();
   const _handleSignOut = async () => {
     await auth().signOut().then(() => {;
       dispatch(setIsLoggedIn(false));
@@ -40,7 +40,7 @@ export const ProfileList = ({navigation}: any) => {
 
   return (
     <ListContainer>
-      {profileMenu.map((item, index) => {
+      {getProfileMenu().map((item, index) => {
         return (
           <Fragment key={index}>
             {item.title !== t('profile:logout') ? (

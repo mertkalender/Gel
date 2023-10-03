@@ -12,7 +12,7 @@ import {colors} from './constants/colors';
 import {fontSizes} from './constants/fonts';
 import {tabbarHeight} from './constants/generic';
 import {TripsRoutes} from './routes/TripsRoutes';
-import {t} from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const MainTheme = {
   ...DefaultTheme,
@@ -23,8 +23,10 @@ const MainTheme = {
 };
 
 export default function Root() {
+  const { t } = useTranslation();
   const Tab = createBottomTabNavigator();
   const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
+  
   const _renderIcons = ({focused, color, route}: any) => {
     let iconName = '';
     switch (route.name) {

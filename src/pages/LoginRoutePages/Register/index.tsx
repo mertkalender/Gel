@@ -9,12 +9,11 @@ import {
   RegisterButton,
   Title,
 } from './style';
-import {useDispatch} from 'react-redux';
 import Toast from 'react-native-toast-message';
-import {t} from 'i18next';
 import auth from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import { createUser } from '../../../utils/firestore';
+import { useTranslation } from 'react-i18next';
 
 const PageRegister = ({ navigation } : any) => {
   const [name, setName] = useState('');
@@ -22,6 +21,7 @@ const PageRegister = ({ navigation } : any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { t } = useTranslation();
 
   const validateInputs = () => {
     if (!name || !surname || !email || !password || !confirmPassword) {

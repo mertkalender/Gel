@@ -1,7 +1,11 @@
 import { ButtonContainer, HomeButton, HomeButtonText, HomeContainer } from './style';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
+
 
 const PageHome = ({ navigation } : any) => {
+
+  const { t } = useTranslation();
+
   return (
     <HomeContainer>
       <ButtonContainer>
