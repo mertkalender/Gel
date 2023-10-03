@@ -24,7 +24,7 @@ export const SettingsItemText = styled.Text`
 `;
 
 export const StyledPicker = styled(Picker)`
-    width: 40%;
+    width: 45%;
     height: 100%;
     background-color: transparent;
     color: ${colors.white};
