@@ -60,6 +60,6 @@
     "trips": {
         "title": "Seyahatler",
         "creator": "Oluşturan",
-        "passangerCount": "Yolcu sayısı"
+        "passengerCount": "Yolcu sayısı"
     }
 }

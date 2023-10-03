@@ -23,7 +23,7 @@ const PageTrips = () => {
   return (
     <ScrollView>
       {trips?.map((trip, index) => (
-        <TripListItem key={index} creator={trip.creator} passangerCount={trip.passangerCount} startPoint={trip.startPoint} endPoint={trip.endPoint} />
+        <TripListItem key={index} creator={trip.creator} passengerCount={trip.passengerCount} startPoint={trip.startPoint} endPoint={trip.endPoint} />
       ))}
     </ScrollView>
   );

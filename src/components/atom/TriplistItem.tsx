@@ -7,7 +7,7 @@ import {useTranslation} from 'react-i18next';
 
 export const TripListItem = ({
   creator,
-  passangerCount,
+  passengerCount,
   startPoint,
   endPoint,
 }: Trip) => {
@@ -22,8 +22,8 @@ export const TripListItem = ({
           <TriplistText>{creator}</TriplistText>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <TriplistLabel>{t('trips:passangerCount')}: </TriplistLabel>
-          <TriplistText>{passangerCount}</TriplistText>
+          <TriplistLabel>{t('trips:passengerCount')}: </TriplistLabel>
+          <TriplistText>{passengerCount}</TriplistText>
         </View>
       </TriplistRow>
       <TriplistRow>

@@ -60,6 +60,6 @@
     "trips": {
         "title": "Trips",
         "creator": "Creator",
-        "passangerCount": "Passanger Count"
+        "passengerCount": "Passenger Count"
     }
 }
