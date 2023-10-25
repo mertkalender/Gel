@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import PageTrips from '../pages/TripsRoıutePages/Trips';
+import PageTrips from '../pages/TripsRoutePages/Trips';
 
 const TripsStack = createNativeStackNavigator();
 

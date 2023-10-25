@@ -29,7 +29,8 @@ const PageLogin = ({ navigation } : any) => {
     await auth().signInWithEmailAndPassword(email, password)
       .then(async (res) => {
         const userInfo = await getUser(res.user.uid);
-        dispatch(setUser(userInfo));
+        console.log('USERINFO: ', {id: res.user.uid, ...userInfo})
+        dispatch(setUser({id: res.user.uid, ...userInfo}));
         dispatch(setIsLoggedIn(true));
         Toast.show({
           type: 'success',

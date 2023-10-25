@@ -9,10 +9,10 @@ const PageHome = ({ navigation } : any) => {
   return (
     <HomeContainer>
       <ButtonContainer>
-        <HomeButton onPress={() => {}}>
+        <HomeButton onPress={() => {navigation.navigate('CreateTrip', {isDriver: true})}}>
           <HomeButtonText>{t('home:iAmDriver')}</HomeButtonText>
         </HomeButton>
-        <HomeButton onPress={() => {}}>
+        <HomeButton onPress={() => {navigation.navigate('CreateTrip', {isDriver: false})}}>
           <HomeButtonText>{t('home:iAmHitchhiker')}</HomeButtonText>
         </HomeButton>
       </ButtonContainer>

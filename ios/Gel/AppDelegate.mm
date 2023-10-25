@@ -1,7 +1,5 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
-#import <ReactNativeNavigation/ReactNativeNavigation.h>
-
 #import <React/RCTBundleURLProvider.h>
 
 @implementation AppDelegate

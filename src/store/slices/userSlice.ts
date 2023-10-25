@@ -12,6 +12,7 @@ const initialState: UserState = {
     surname: '',
     email: '',
     profilePicture: '',
+    id: '',
   },
   isLoggedIn: false,
 };

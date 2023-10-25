@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import { COLLECTIONS } from '../constants/firebase';
+import { Trip } from '../types/trip';
 
 export function createUser( _userId: string, _name: string, _surname: string, _email: string ) {
     firestore()
@@ -42,3 +43,11 @@ export const getTrips = async () => {
     }
 }
     
+export const createTrip = async (trip: Trip) => {
+    try {
+        await firestore().collection(COLLECTIONS.TRIPS).add(trip);
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}

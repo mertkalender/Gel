@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import 'react-native-gesture-handler';
 import {HomeRoutes} from './routes/HomeRoutes';
 import {ProfileRoutes} from './routes/ProfileRoutes';
 import {LoginRoutes} from './routes/LoginRoutes';

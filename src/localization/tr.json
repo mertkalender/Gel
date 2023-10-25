@@ -61,5 +61,18 @@
         "title": "Seyahatler",
         "creator": "Oluşturan",
         "passengerCount": "Yolcu sayısı"
+    },
+    "createTrip": {
+        "from": "Nereden",
+        "to": "Nereye",
+        "selectDate": "Tarih seçiniz",
+        "date": "Tarih",
+        "passengerCount": "Yolcu sayısı",
+        "create": "Oluştur",
+        "success": "Başarılı!",
+        "successMessage": "Seyahat başarıyla oluşturuldu.",
+        "emptyFields": "Lütfen tüm alanları doldurunuz.",
+        "sthWrong": "Bir şeyler yanlış",
+        "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
     }
 }
