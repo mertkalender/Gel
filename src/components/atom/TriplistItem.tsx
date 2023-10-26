@@ -4,56 +4,52 @@ import {Trip} from '../../types/trip';
 import {triplistBoxHeight} from '../../constants/generic';
 import {fontSizes} from '../../constants/fonts';
 import {useTranslation} from 'react-i18next';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../../constants/colors';
 
-export const TripListItem = ({
-  creator,
-  passengerCount,
-  startPoint,
-  endPoint,
-}: Trip) => {
+interface TripListItemProps {
+  trip: Trip;
+  onPress: () => void;
+ }
+
+export const TripListItem = ({trip, onPress}: TripListItemProps) => {
   
   const { t } = useTranslation();
 
   return (
-    <TriplistContainer>
+    <TriplistContainer onPress={onPress}>
+      <DirectionRow>
+        <TriplistText>{trip.startPoint}</TriplistText>
+        <TriplistText>{'--------------->'}</TriplistText>
+        <TriplistText>{trip.endPoint}</TriplistText>
+      </DirectionRow>
       <TriplistRow>
+      {!trip.isCreatorDriver ? (
         <View style={{flexDirection: 'row'}}>
-          <TriplistLabel>{t('trips:creator')}: </TriplistLabel>
-          <TriplistText>{creator}</TriplistText>
+          <Ionicons style={{alignSelf: 'center'}} name={'person-outline'} size={fontSizes.passengerIcon} color={colors.white}/>
         </View>
+      ) : (
         <View style={{flexDirection: 'row'}}>
-          <TriplistLabel>{t('trips:passengerCount')}: </TriplistLabel>
-          <TriplistText>{passengerCount}</TriplistText>
+          <Ionicons style={{alignSelf: 'center'}} name={'person'} size={fontSizes.passengerIcon} color={colors.white}/>
+          <TriplistText> {trip.passengerCount}</TriplistText>
         </View>
-      </TriplistRow>
-      <TriplistRow>
-        <View style={{flexDirection: 'row'}}>
-          <TriplistText>{startPoint}</TriplistText>
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <TriplistText>{'--------------->'}</TriplistText>
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <TriplistText>{endPoint}</TriplistText>
-        </View>
+      )}
       </TriplistRow>
     </TriplistContainer>
   );
 };
 
-export const TriplistContainer = styled.View`
+export const TriplistContainer = styled.TouchableOpacity`
   flex: 1;
-  background-color: #333;
+  background-color: ${colors.gray};
   justify-content: space-between;
   align-items: flex-start;
   margin-horizontal: 10px;
   border-radius: 10px;
   padding-horizontal: 10px;
   borderbottomwidth: 1px;
-  backgroundcolor: #fff;
   margin-vertical: 5px;
   borderradius: 8px;
-  elevation: 2;
   height: ${triplistBoxHeight}px;
 `;
 
@@ -66,18 +62,22 @@ export const TriplistRow = styled.View`
   marginbottom: 5px;
 `;
 
+export const DirectionRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 2;
+  width: 100%;
+  align-items: center;
+  marginbottom: 5px;
+`;
+
 export const TriplistLabel = styled.Text`
-  font-size: 16px;
+  font-size: ${fontSizes.extraLarge}px;
   font-weight: bold;
   color: #fff;
 `;
 
 export const TriplistText = styled.Text`
-  font-size: 16px;
+  font-size: ${fontSizes.large}px;
   color: #fff;
-`;
-
-export const StyledText = styled.Text`
-  color: #fff;
-  font-size: ${fontSizes.medium}px;
 `;

@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { loginBoxHeight, limitScreenSize, screenHeight, screenWidth } from '../../../constants/generic';
 import { fontSizes } from '../../../constants/fonts';
+import { colors } from '../../../constants/colors';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,7 +11,7 @@ export const Container = styled.View`
 `;
 
 export const LoginBox = styled.View`
-  background-color: #333;
+  background-color: ${colors.gray};
   padding: 20px;
   border-radius: 10px;
   width: ${screenWidth * 0.9}px;
@@ -38,7 +39,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const LoginButton = styled.TouchableOpacity`
-  background-color: #007bff;
+  background-color: ${colors.primary};
   padding: 10px;
   border-radius: 5px;
   align-items: center;
@@ -58,5 +59,5 @@ export const RegisterButton = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   color: #fff;
-  font-size: ${fontSizes.large}px;
+  font-size: ${fontSizes.medium}px;
 `;

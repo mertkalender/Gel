@@ -92,7 +92,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
             onChangeText={val => setPassengerCount(parseInt(val))}
           />
         )}
-        <CreateButton onPress={() => handleCreateTrip}>
+        <CreateButton onPress={handleCreateTrip}>
           <ButtonText>{t('createTrip:create')}</ButtonText>
         </CreateButton>
       </FormContainer>

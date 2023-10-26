@@ -4,7 +4,7 @@ import { getTrips } from "../../../utils/firestore";
 import { Trip } from "../../../types/trip";
 import { TripListItem } from "../../../components/atom/TriplistItem";
 
-const PageTrips = () => {
+const PageTrips = ({ navigation } : any) => {
 
   const [trips, setTrips] = React.useState<Trip[]>();
 
@@ -23,7 +23,7 @@ const PageTrips = () => {
   return (
     <ScrollView>
       {trips?.map((trip, index) => (
-        <TripListItem key={index} creator={trip.creator} passengerCount={trip.passengerCount} startPoint={trip.startPoint} endPoint={trip.endPoint} />
+        <TripListItem key={index} trip={trip} onPress={()=> navigation.navigate('TripDetails', {trip: trip})}/>
       ))}
     </ScrollView>
   );

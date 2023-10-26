@@ -6,6 +6,7 @@ import {
   screenWidth,
 } from '../../../constants/generic';
 import {fontSizes} from '../../../constants/fonts';
+import { colors } from '../../../constants/colors';
 
 export const Container = styled.View`
   flex: 1;
@@ -16,7 +17,7 @@ export const Container = styled.View`
 `;
 
 export const ProfileInfo = styled.View`
-  background-color: #333;
+  background-color: ${colors.gray};
   border-radius: 10px;
   width: ${screenWidth * 0.95}px;
   height: ${screenHeight * 0.15}px;

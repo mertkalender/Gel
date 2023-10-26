@@ -8,9 +8,10 @@ import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { colors } from '../../constants/colors';
 
 const ListContainer = styled.View`
-  background-color: #333;
+  background-color: ${colors.gray};
   margin: 10px;
   border-radius: 10px;
   width: ${screenWidth * 0.95}px;

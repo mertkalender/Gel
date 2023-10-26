@@ -13,7 +13,7 @@ const ListItem = styled.TouchableOpacity`
 
 const ListItemText = styled.Text`
   color: #fff;
-  font-size: ${fontSizes.extraLarge}px;
+  font-size: ${fontSizes.large}px;
 `;
 
 interface Props {

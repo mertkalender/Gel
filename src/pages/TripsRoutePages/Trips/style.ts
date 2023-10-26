@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 import { fontSizes } from '../../../constants/fonts';
 import { triplistBoxHeight } from '../../../constants/generic';
+import { colors } from '../../../constants/colors';
 
 export const TriplistContainer = styled.View`
   flex: 1;
-  background-color: #333;
+  background-color: ${colors.gray};
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
