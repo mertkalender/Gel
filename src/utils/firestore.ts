@@ -3,6 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 import { COLLECTIONS } from '../constants/firebase';
 import { Trip } from '../types/trip';
 import { User } from '../types/user';
+import { AttendanceRequest } from '../types/attendanceRequest';
 
 export function createUser( _userId: string, _name: string, _surname: string, _email: string ) {
     firestore()
@@ -36,7 +37,14 @@ export const getTrips = async () => {
         if (querySnapshot.empty) {
             return []; // Return an empty array if there are no documents
         }
-        const trips = querySnapshot.docs.map((doc) => doc.data());
+        // merge doc id and data
+        const trips = querySnapshot.docs.map((doc) => {
+            return {
+                id: doc.id,
+                ...doc.data(),
+            } as Trip;
+        });
+        console.log('TRİPS: ', trips);
         return trips; // Return the array of trips
     } catch (error) {
         console.error('Error:', error);
@@ -47,6 +55,17 @@ export const getTrips = async () => {
 export const createTrip = async (trip: Trip) => {
     try {
         await firestore().collection(COLLECTIONS.TRIPS).add(trip);
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+export const createAttendanceRequest = async (tripID: string, attendanceRequest: AttendanceRequest) => {
+    try {
+        await firestore().collection(COLLECTIONS.TRIPS).doc(tripID).set({
+            attendanceRequests: firestore.FieldValue.arrayUnion(attendanceRequest),
+        }, { merge: true });
     } catch (error) {
         console.error('Error:', error);
         throw error;

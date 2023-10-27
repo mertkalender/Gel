@@ -12,6 +12,7 @@ const PageTrips = ({ navigation } : any) => {
     const fetchData = async () => {
         try {
             const trips = await getTrips();
+            console.log('trips: ', trips);
             setTrips(trips as Trip[]);
         } catch (error) {
             console.error('Error fetching trips:', error);

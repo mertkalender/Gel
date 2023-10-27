@@ -1,4 +1,8 @@
 {
+    "generic": {
+        "sthWrong": "Something went wrong",
+        "unknownError": "An unexpected error occurred. Please try again later."
+    },
     "login": {
         "title": "Login",
         "email": "Email",
@@ -61,7 +65,9 @@
         "title": "Trips",
         "creator": "Creator",
         "passengerCount": "Passenger Count",
-        "date": "Date"
+        "date": "Date",
+        "success": "Success!",
+        "requestSentSuccess": "Request sent successfully."
     },
     "createTrip": {
         "from": "From",

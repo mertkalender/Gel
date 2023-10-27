@@ -1,4 +1,8 @@
 {
+    "generic": {
+        "sthWrong": "Bir şeyler yanlış",
+        "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+    },
     "login" : {
         "title" : "Giriş Yap",
         "email" : "E-posta",
@@ -61,7 +65,9 @@
         "title": "Seyahatler",
         "creator": "Oluşturan",
         "passengerCount": "Yolcu sayısı",
-        "date": "Tarih"
+        "date": "Tarih",
+        "success": "Başarılı!",
+        "requestSentSuccess": "Talep başarıyla gönderildi."
     },
     "createTrip": {
         "from": "Nereden",

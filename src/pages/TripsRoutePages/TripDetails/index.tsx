@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   ArrowImage,
   ButtonText,
@@ -11,27 +11,53 @@ import {
 } from './style';
 import {useTranslation} from 'react-i18next';
 import {Trip} from '../../../types/trip';
-import { getUser } from '../../../utils/firestore';
-import { User } from '../../../types/user';
+import {createAttendanceRequest, getUser} from '../../../utils/firestore';
+import {User} from '../../../types/user';
+import {
+  AttendanceRequest,
+  AttendanceStatus,
+} from '../../../types/attendanceRequest';
+import {useAppSelector} from '../../../store/store';
+import Toast from 'react-native-toast-message';
+import { Alert } from 'react-native';
 
 export const PageTripDetails = ({route, navigation}: any) => {
-const trip: Trip = route.params.trip;
-const [user, setUser] = React.useState<User>()
+  const trip: Trip = route.params.trip;
+  const [user, setUser] = React.useState<User>();
 
-const fetchUser = async () => {
+  const userData = useAppSelector(state => state.user.userData);
+
+  const fetchUser = async () => {
     setUser(await getUser(trip.creator));
-};
+  };
 
-useEffect(() => {
+  useEffect(() => {
     fetchUser();
-}, []);
+  }, []);
 
-const _handleOnPress = () => {
-    
-}
+  const _handleOnPress = async () => {
+    const tempAttendanceRequest: AttendanceRequest = {
+      requesterID: userData.id,
+      status: AttendanceStatus.PENDING,
+    };
+    await createAttendanceRequest(trip.id as string, tempAttendanceRequest)
+      .then(() => {
+        Toast.show({
+          type: 'success',
+          text1: t('trips:success'),
+          text2: t('trips:requestSentSuccess'),
+          position: 'bottom',
+        });
+        navigation.goBack();
+      })
+      .catch(error => {
+        console.log(error);
+        Alert.alert(t('generic:sthWrong'), t('generic:unknownError'));
+      });
+  };
 
-const {t} = useTranslation();
-console.log(trip);
+  const {t} = useTranslation();
+  console.log(trip);
   return (
     <Container>
       <DestinationRow>
@@ -44,7 +70,9 @@ console.log(trip);
       </DestinationRow>
       <InfoRow>
         <InfoLabel>{t(`trips:creator`)}</InfoLabel>
-        <InfoLabel>{user?.name} {user?.surname}</InfoLabel>
+        <InfoLabel>
+          {user?.name} {user?.surname}
+        </InfoLabel>
       </InfoRow>
       <InfoRow>
         <InfoLabel>{t(`trips:date`)}</InfoLabel>
@@ -59,7 +87,7 @@ console.log(trip);
         <></>
       )}
       <StyledButton>
-        <ButtonText>
+        <ButtonText onPress={_handleOnPress}>
           {trip.isCreatorDriver ? 'Request to Attend' : 'Invite to your car'}
         </ButtonText>
       </StyledButton>

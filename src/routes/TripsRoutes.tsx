@@ -6,7 +6,7 @@ const TripsStack = createNativeStackNavigator();
 
 export function TripsRoutes() {
     return (
-      <TripsStack.Navigator>
+      <TripsStack.Navigator screenOptions={{headerShown: false}}>
         <TripsStack.Screen name="Trips" component={PageTrips} />
         <TripsStack.Screen name="TripDetails" component={PageTripDetails} />
       </TripsStack.Navigator>
