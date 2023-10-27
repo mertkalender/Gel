@@ -1,11 +1,11 @@
 export const colors = {
-    //status bar color - darkgray
-    statusBarColor: '#2E2E2E',
     white: '#FFFFFF',
-    lightGray: '#F2F2F2',
-    gray: '#333',
     black: '#000000',
+    red: '#D22B2B',
+    lightGray: '#7f7f7f ',
+    gray: '#333',
     background: '#1a1a1a',
+    statusBarColor: '#2E2E2E',
     tabBarActiveColor: '#ffffff',
     tabBarInactiveColor: '#2E2E2E',
     buttonColor: '#ffffff',

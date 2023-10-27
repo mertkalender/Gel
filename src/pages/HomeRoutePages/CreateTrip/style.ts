@@ -15,6 +15,7 @@ export const FormContainer = styled(View)`
   justify-content: space-around;
   width: ${screenWidth * 0.9}px;
   height: ${createTripBoxHeight}px;
+  background-color: ${colors.gray};
 `;
 
 export const Input = styled.TextInput`
@@ -48,5 +49,5 @@ export const CreateButton = styled(TouchableOpacity)`
 
 export const ButtonText = styled.Text`
   color: #fff;
-  font-size: ${fontSizes.large}px;
+  font-size: ${fontSizes.medium}px;
 `;

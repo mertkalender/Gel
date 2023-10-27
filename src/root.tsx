@@ -6,7 +6,7 @@ import {ProfileRoutes} from './routes/ProfileRoutes';
 import {LoginRoutes} from './routes/LoginRoutes';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useAppSelector} from './store/store';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from './constants/colors';
 import {fontSizes} from './constants/fonts';
 import {tabbarHeight} from './constants/generic';
@@ -39,7 +39,7 @@ export default function Root() {
         iconName = focused ? 'car' : 'car-outline';
     }
     return (
-      <Ionicons name={iconName} size={fontSizes.tabbarIcons} color={color} />
+      <Icon name={iconName} size={fontSizes.tabbarIcons} color={color} />
     );
   };
 

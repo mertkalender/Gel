@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next';
 import {useState} from 'react';
 import {Alert, Text} from 'react-native';
 import {createTrip} from '../../../utils/firestore';
-import {Trip} from '../../../types/trip';
+import {Timestamp, Trip} from '../../../types/trip';
 import Toast from 'react-native-toast-message';
 import { useAppSelector } from '../../../store/store';
 
@@ -35,6 +35,24 @@ const PageCreateTrip = ({route, navigation}: any) => {
     return true;
   };
 
+  const handlePassengerCountInputChange = (value: string) => {
+    const parsedQty = Number.parseInt(value)
+    if (Number.isNaN(parsedQty)) {
+      setPassengerCount(0) //setter for state
+    } else if (parsedQty > 10 || parsedQty < 1) {
+      Toast.show({
+        type: 'error',
+        text1: t('createTrip:passengerCountError'),
+        text2: '',
+        position: 'bottom',
+        visibilityTime: 1600,
+      });
+      setPassengerCount(10)
+    } else {
+      setPassengerCount(parsedQty)
+    }
+  }
+
   const handleCreateTrip = async () => {
     if (!validateInputs()) {
       return;
@@ -43,7 +61,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       creator: userData.id,
       startPoint: from,
       endPoint: to,
-      date: date,
+      date: Timestamp.fromDate(date),
       passengerCount: passengerCount,
       isCreatorDriver: isDriver,
     };
@@ -89,7 +107,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
           <Input
             keyboardType="numeric"
             placeholder={t('createTrip:passengerCount')}
-            onChangeText={val => setPassengerCount(parseInt(val))}
+            onChangeText={val => handlePassengerCountInputChange(val)}
           />
         )}
         <CreateButton onPress={handleCreateTrip}>

@@ -1,8 +1,12 @@
+import { FirebaseFirestoreTypes, firebase } from '@react-native-firebase/firestore';
+
+export class Timestamp extends firebase.firestore.Timestamp {}
+
 export type Trip = {
     creator: string;
     startPoint: string;
     endPoint: string;
-    date: Date;
+    date: FirebaseFirestoreTypes.Timestamp;
     passengerCount: number;
     isCreatorDriver: boolean;
 };

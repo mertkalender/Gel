@@ -52,3 +52,8 @@ export const ButtonText = styled.Text`
   color: #fff;
   font-size: ${fontSizes.large}px;
 `;
+
+export const ArrowImage = styled.Image`
+    width: 50%;
+    height: 50%;
+`;

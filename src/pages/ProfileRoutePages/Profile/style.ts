@@ -20,7 +20,7 @@ export const ProfileInfo = styled.View`
   background-color: ${colors.gray};
   border-radius: 10px;
   width: ${screenWidth * 0.95}px;
-  height: ${screenHeight * 0.15}px;
+  height: ${screenHeight * 0.18}px;
   justify-content: space-around;
 `;
 

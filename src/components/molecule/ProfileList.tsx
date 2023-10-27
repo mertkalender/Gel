@@ -20,8 +20,10 @@ const ListContainer = styled.View`
 `;
 
 const Divider = styled.View`
-  borderbottomwidth: 1px;
+  border-bottom-width: 1px;
   margin-horizontal: 2%;
+  margin-left: 10%;
+  border-bottom-color: ${colors.lightGray};
 `;
 
 export const ProfileList = ({navigation}: any) => {
@@ -46,18 +48,22 @@ export const ProfileList = ({navigation}: any) => {
           <Fragment key={index}>
             {item.title !== t('profile:logout') ? (
               <ProfileListItem
-                iconName="chevron-forward-outline"
+                rightIconName="chevron-forward-outline"
+                leftIconName={item.leftIconName}
                 title={item.title}
                 onPress={() => navigation.navigate(item.navigationPage)}
+                color={colors.white}
               />
             ) : (
               <ProfileListItem
-                iconName="log-out-outline"
+                rightIconName="chevron-forward-outline"
+                leftIconName={item.leftIconName}
                 title={item.title}
                 onPress={_handleSignOut}
+                color={colors.red}
               />
             )}
-            <Divider />
+            {index !== getProfileMenu().length - 1 ? <Divider /> : <></>}
           </Fragment>
         );
       })}

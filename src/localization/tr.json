@@ -40,7 +40,7 @@
     "profile": {
         "title": "Profil",
         "myInfo": "Bilgilerim",
-        "myTrips": "Seyahat geçmişim",
+        "myTrips": "Seyahatlerim",
         "settings": "Ayarlar",
         "logout": "Çıkış yap",
         "logoutSuccess": "Başarılı!",
@@ -60,7 +60,8 @@
     "trips": {
         "title": "Seyahatler",
         "creator": "Oluşturan",
-        "passengerCount": "Yolcu sayısı"
+        "passengerCount": "Yolcu sayısı",
+        "date": "Tarih"
     },
     "createTrip": {
         "from": "Nereden",
@@ -73,6 +74,7 @@
         "successMessage": "Seyahat başarıyla oluşturuldu.",
         "emptyFields": "Lütfen tüm alanları doldurunuz.",
         "sthWrong": "Bir şeyler yanlış",
-        "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+        "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        "passengerCountError": "Yolcu sayısı 1 ile 10 arasında olmalıdır."
     }
 }
