@@ -64,6 +64,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       date: Timestamp.fromDate(date),
       passengerCount: passengerCount,
       isCreatorDriver: isDriver,
+      attendanceRequests: [],
     };
     await createTrip(tempTrip)
       .then(() => {

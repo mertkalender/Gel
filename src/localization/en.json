@@ -67,7 +67,8 @@
         "passengerCount": "Passenger Count",
         "date": "Date",
         "success": "Success!",
-        "requestSentSuccess": "Request sent successfully."
+        "requestSentSuccess": "Request sent successfully.",
+        "attendanceRequests": "Attendance Requests"
     },
     "createTrip": {
         "from": "From",

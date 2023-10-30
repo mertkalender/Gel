@@ -6,7 +6,7 @@ const HomeStack = createNativeStackNavigator();
 
 export function HomeRoutes() {
     return (
-      <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Navigator>
         <HomeStack.Screen name="Home" component={PageHome} />
         <HomeStack.Screen name="CreateTrip" component={PageCreateTrip} />
       </HomeStack.Navigator>

@@ -5,7 +5,7 @@ export const limitScreenSize = 650;
 export const screenHeight = Dimensions.get('screen').height;
 export const screenWidth = Dimensions.get('screen').width;
 
-export const tabbarHeight = screenHeight > limitScreenSize ? 50 : 40;
+export const tabbarHeight = screenHeight > limitScreenSize ? 70 : 40;
 export const profileImageSize = screenHeight > limitScreenSize ? 100 : 70;
 export const loginBoxHeight = screenHeight > limitScreenSize ? screenHeight * 0.45 : screenHeight * 0.6
 export const createTripBoxHeight = screenHeight > limitScreenSize ? screenHeight * 0.33 : screenHeight * 0.44
@@ -25,7 +25,7 @@ export const getProfileMenu = () => {
       {
         leftIconName: 'car',
         title: t('profile:myTrips'),
-        navigationPage: 'Settings',
+        navigationPage: 'MyTrips',
       },
       {
         leftIconName: 'settings',

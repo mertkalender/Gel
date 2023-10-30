@@ -1,4 +1,5 @@
 import { FirebaseFirestoreTypes, firebase } from '@react-native-firebase/firestore';
+import { AttendanceRequest } from './attendanceRequest';
 
 export class Timestamp extends firebase.firestore.Timestamp {}
 
@@ -10,4 +11,5 @@ export type Trip = {
     date: FirebaseFirestoreTypes.Timestamp;
     passengerCount: number;
     isCreatorDriver: boolean;
+    attendanceRequests: AttendanceRequest[];
 };

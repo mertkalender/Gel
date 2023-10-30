@@ -67,7 +67,8 @@
         "passengerCount": "Yolcu sayısı",
         "date": "Tarih",
         "success": "Başarılı!",
-        "requestSentSuccess": "Talep başarıyla gönderildi."
+        "requestSentSuccess": "Talep başarıyla gönderildi.",
+        "attendanceRequests": "Katılım istekleri"
     },
     "createTrip": {
         "from": "Nereden",

@@ -80,7 +80,7 @@ const PageRegister = ({ navigation } : any) => {
         <Title>{t('register:title')}</Title>
         <Input onChangeText={(val) => setName(val.trim())} placeholder={t('register:name')} />
         <Input onChangeText={(val) => setSurname(val.trim())} placeholder={t('register:surname')} />
-        <Input keyboardType='email-address' onChangeText={(val) => setEmail(val.trim())} placeholder={t('register:email')} />
+        <Input keyboardType='email-address' autoCapitalize='none' onChangeText={(val) => setEmail(val.trim())} placeholder={t('register:email')} />
         <Input
           onChangeText={setPassword}
           placeholder={t('register:password')}

@@ -6,7 +6,7 @@ const LoginStack = createNativeStackNavigator();
 
 export function LoginRoutes() {
     return (
-      <LoginStack.Navigator screenOptions={{headerShown: false}}>
+      <LoginStack.Navigator>
         <LoginStack.Screen name="Login" component={PageLogin} />
         <LoginStack.Screen name="Register" component={PageRegister} />
       </LoginStack.Navigator>

@@ -35,7 +35,7 @@ const PageLogin = ({ navigation } : any) => {
           type: 'success',
           text1: t('login:success'),
           text2: t('login:successMessage'),
-          position: 'bottom',
+          position: 'top',
         });
       })
       .catch((error) => {
@@ -65,7 +65,7 @@ const PageLogin = ({ navigation } : any) => {
       <Container>
         <LoginBox>
         <Title>{t('login:title')}</Title>
-          <Input keyboardType='email-address' onChangeText={setEmail} placeholder={t('login:email')} />
+          <Input keyboardType='email-address' autoCapitalize='none' onChangeText={setEmail} placeholder={t('login:email')} />
           <Input textContentType='password' onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
           <ButtonContainer>
             <LoginButton onPress={handleLogin}>

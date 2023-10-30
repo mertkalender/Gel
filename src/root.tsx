@@ -46,13 +46,11 @@ export default function Root() {
   
   return (
     <NavigationContainer theme={MainTheme}>
-      <KeyboardAwareScrollView contentContainerStyle={{flex: 1}}>
         {!isLoggedIn ? (
           <LoginRoutes />
         ) : (
           <Tab.Navigator
             screenOptions={({route}) => ({
-              tabBarStyle: {height: tabbarHeight},
               headerShown: false,
               tabBarActiveBackgroundColor: '#000000',
               tabBarIcon: ({focused, color}) => {
@@ -79,7 +77,6 @@ export default function Root() {
             />
           </Tab.Navigator>
         )}
-      </KeyboardAwareScrollView>
     </NavigationContainer>
   );
 }

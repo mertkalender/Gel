@@ -19,14 +19,14 @@ import {
 } from '../../../types/attendanceRequest';
 import {useAppSelector} from '../../../store/store';
 import Toast from 'react-native-toast-message';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
 export const PageTripDetails = ({route, navigation}: any) => {
   const trip: Trip = route.params.trip;
   const [user, setUser] = React.useState<User>();
 
   const userData = useAppSelector(state => state.user.userData);
-
+  const isOwnTrip = userData.id === trip.creator;
   const fetchUser = async () => {
     setUser(await getUser(trip.creator));
   };
@@ -57,7 +57,6 @@ export const PageTripDetails = ({route, navigation}: any) => {
   };
 
   const {t} = useTranslation();
-  console.log(trip);
   return (
     <Container>
       <DestinationRow>
@@ -86,11 +85,15 @@ export const PageTripDetails = ({route, navigation}: any) => {
       ) : (
         <></>
       )}
-      <StyledButton>
-        <ButtonText onPress={_handleOnPress}>
-          {trip.isCreatorDriver ? 'Request to Attend' : 'Invite to your car'}
-        </ButtonText>
-      </StyledButton>
+      {!isOwnTrip ? (
+        <StyledButton>
+          <ButtonText onPress={_handleOnPress}>
+            {trip.isCreatorDriver ? 'Request to Attend' : 'Invite to your car'}
+          </ButtonText>
+        </StyledButton>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };
