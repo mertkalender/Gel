@@ -10,7 +10,7 @@ export const Container = styled.View`
 `;
 
 export const DestinationRow = styled.View`
-    flex: 8;
+    flex: 1;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 5%;
@@ -61,7 +61,6 @@ export const ArrowImage = styled.Image`
 export const AttendanceRequestsContainer = styled.View`
     flex: 1;
     justify-content: center;
-    align-items: flex-start;
     background-color: ${colors.gray};
     border-radius: 10px;
     padding: 5%;

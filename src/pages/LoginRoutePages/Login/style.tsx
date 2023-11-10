@@ -40,7 +40,7 @@ export const ButtonContainer = styled.View`
 
 export const LoginButton = styled.TouchableOpacity`
   background-color: ${colors.primary};
-  padding: 10px;
+  padding: 2%;
   border-radius: 5px;
   align-items: center;
   flex: 1;
@@ -50,7 +50,7 @@ export const LoginButton = styled.TouchableOpacity`
 
 export const RegisterButton = styled.TouchableOpacity`
   background-color: #555;
-  padding: 10px;
+  padding: 2%;
   border-radius: 5px;
   align-items: center;
   flex: 1;

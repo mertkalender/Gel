@@ -20,6 +20,7 @@ import {
 import {useAppSelector} from '../../../store/store';
 import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
+import { isAlreadyRequested } from '../../../utils/functions';
 
 export const PageTripDetails = ({route, navigation}: any) => {
   const trip: Trip = route.params.trip;
@@ -86,8 +87,8 @@ export const PageTripDetails = ({route, navigation}: any) => {
         <></>
       )}
       {!isOwnTrip ? (
-        <StyledButton>
-          <ButtonText onPress={_handleOnPress}>
+        <StyledButton disabled={isAlreadyRequested(trip.attendanceRequests, userData.id)} onPress={_handleOnPress}>
+          <ButtonText >
             {trip.isCreatorDriver ? 'Request to Attend' : 'Invite to your car'}
           </ButtonText>
         </StyledButton>

@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PageProfile from '../pages/ProfileRoutePages/Profile';
 import PageSettings from '../pages/ProfileRoutePages/Settings';
 import PageMyTrips from '../pages/ProfileRoutePages/MyTrips';
-import { PageMyTripDetails } from '../pages/ProfileRoutePages/MyTripDetails';
+import PageMyTripDetails from '../pages/ProfileRoutePages/MyTripDetails';
 
 const ProfileStack = createNativeStackNavigator();
 

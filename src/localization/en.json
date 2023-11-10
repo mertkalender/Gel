@@ -68,7 +68,7 @@
         "date": "Date",
         "success": "Success!",
         "requestSentSuccess": "Request sent successfully.",
-        "attendanceRequests": "Attendance Requests"
+        "noRequestFound": "No request found"
     },
     "createTrip": {
         "from": "From",

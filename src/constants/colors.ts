@@ -4,6 +4,7 @@ export const colors = {
     red: '#D22B2B',
     lightGray: '#7f7f7f ',
     gray: '#333',
+    darkGray: '#242526',
     background: '#1a1a1a',
     statusBarColor: '#2E2E2E',
     tabBarActiveColor: '#ffffff',

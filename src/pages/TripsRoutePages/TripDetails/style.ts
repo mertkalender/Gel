@@ -2,6 +2,10 @@ import styled from 'styled-components/native';
 import { fontSizes } from '../../../constants/fonts';
 import { colors } from '../../../constants/colors';
 
+interface ButtonProps {
+  disabled: boolean;
+}
+
 export const Container = styled.View`
     flex: 1;
     background-color: ${colors.background};
@@ -38,8 +42,8 @@ export const InfoLabel = styled.Text`
     color: ${colors.white};
 `;
 
-export const StyledButton = styled.TouchableOpacity`
-  background-color: ${colors.primary};
+export const StyledButton = styled.TouchableOpacity<ButtonProps>`
+  background-color: ${props => props.disabled ? colors.darkGray : colors.primary};
   padding: 10px;
   border-radius: 5px;
   align-items: center;

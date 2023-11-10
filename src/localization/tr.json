@@ -68,7 +68,7 @@
         "date": "Tarih",
         "success": "Başarılı!",
         "requestSentSuccess": "Talep başarıyla gönderildi.",
-        "attendanceRequests": "Katılım istekleri"
+        "noRequestFound": "İstek bulunamadı"
     },
     "createTrip": {
         "from": "Nereden",
