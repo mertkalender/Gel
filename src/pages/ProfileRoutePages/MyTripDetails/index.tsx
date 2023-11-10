@@ -22,7 +22,7 @@ const PageMyTripDetails = ({route}: any) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'first', title: `${t(`trips:details`)}`},
-    {key: 'second', title: `${t(`trips:requests`)}`},
+    {key: 'second', title: `${trip.isCreatorDriver ? t(`trips:requests`)+` (${trip.attendanceRequests?.length})` : t(`trips:invitations`)+` (${trip.invitations?.length})`}`},
   ]);
 
   const layout = useWindowDimensions();
@@ -30,10 +30,10 @@ const PageMyTripDetails = ({route}: any) => {
   const [requesters, setRequesters] = React.useState<User[]>([]);
 
   const fetchRequesters = async () => {
-    const requesterIDs = trip.attendanceRequests.map(
+    const requesterIDs = trip.attendanceRequests?.map(
       request => request.requesterID,
     );
-    const tempResponse = await getUsers(requesterIDs);
+    const tempResponse = await getUsers(requesterIDs as string[]);
     setRequesters(tempResponse);
   };
 

@@ -6,6 +6,7 @@ import {User} from '../types/user';
 import {AttendanceRequest} from '../types/attendanceRequest';
 import {useDispatch} from 'react-redux';
 import {setTrips} from '../store/slices/tripsSlice';
+import { Invitation } from '../types/invitation';
 
 export function createUser(
   _userId: string,
@@ -140,3 +141,23 @@ export const createAttendanceRequest = async (
     throw error;
   }
 };
+
+export const createInvitation = async (
+  tripID: string,
+  invitation: Invitation,
+) => {
+  try {
+    await firestore()
+      .collection(COLLECTIONS.TRIPS)
+      .doc(tripID)
+      .set(
+        {
+          invitations: firestore.FieldValue.arrayUnion(invitation),
+        },
+        {merge: true},
+      );
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}

@@ -57,7 +57,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
     if (!validateInputs()) {
       return;
     }
-    const tempTrip: Trip = {
+    const tempTripDriver: Trip = {
       creator: userData.id,
       startPoint: from,
       endPoint: to,
@@ -66,7 +66,16 @@ const PageCreateTrip = ({route, navigation}: any) => {
       isCreatorDriver: isDriver,
       attendanceRequests: [],
     };
-    await createTrip(tempTrip)
+    const tempTripHitchhiker: Trip = {
+      creator: userData.id,
+      startPoint: from,
+      endPoint: to,
+      date: Timestamp.fromDate(date),
+      passengerCount: passengerCount,
+      isCreatorDriver: isDriver,
+      attendanceRequests: [],
+    };
+    await createTrip(isDriver ? tempTripDriver : tempTripHitchhiker)
       .then(() => {
         Toast.show({
           type: 'success',

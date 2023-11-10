@@ -68,9 +68,13 @@
         "date": "Date",
         "success": "Success!",
         "requestSentSuccess": "Request sent successfully.",
+        "invitationSentSuccess": "Invitation sent successfully.",
         "noRequestFound": "No request found",
         "details": "Details",
-        "requests": "Requests"
+        "requests": "Requests",
+        "invitations": "Invitations",
+        "requestToAttend": "Request to Attend",
+        "inviteToYourCar": "Invite to Your Car"
     },
     "createTrip": {
         "from": "From",

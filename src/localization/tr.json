@@ -68,9 +68,13 @@
         "date": "Tarih",
         "success": "Başarılı!",
         "requestSentSuccess": "Talep başarıyla gönderildi.",
+        "invitationSentSuccess": "Davet başarıyla gönderildi.",
         "noRequestFound": "İstek bulunamadı",
         "details": "Detaylar",
-        "requests": "İstekler"
+        "requests": "İstekler",
+        "invitations": "Davetler",
+        "requestToAttend": "Katılmak İste",
+        "inviteToYourCar": "Aracına Davet Et"
     },
     "createTrip": {
         "from": "Nereden",

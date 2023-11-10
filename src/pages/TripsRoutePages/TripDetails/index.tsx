@@ -11,7 +11,7 @@ import {
 } from './style';
 import {useTranslation} from 'react-i18next';
 import {Trip} from '../../../types/trip';
-import {createAttendanceRequest, getUser} from '../../../utils/firestore';
+import {createAttendanceRequest, createInvitation, getUser} from '../../../utils/firestore';
 import {User} from '../../../types/user';
 import {
   AttendanceRequest,
@@ -21,6 +21,7 @@ import {useAppSelector} from '../../../store/store';
 import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
 import { isAlreadyRequested } from '../../../utils/functions';
+import { Invitation, InvitationStatus } from '../../../types/invitation';
 
 export const PageTripDetails = ({route, navigation}: any) => {
   const trip: Trip = route.params.trip;
@@ -37,24 +38,46 @@ export const PageTripDetails = ({route, navigation}: any) => {
   }, []);
 
   const _handleOnPress = async () => {
-    const tempAttendanceRequest: AttendanceRequest = {
-      requesterID: userData.id,
-      status: AttendanceStatus.PENDING,
-    };
-    await createAttendanceRequest(trip.id as string, tempAttendanceRequest)
-      .then(() => {
-        Toast.show({
-          type: 'success',
-          text1: t('trips:success'),
-          text2: t('trips:requestSentSuccess'),
-          position: 'bottom',
+    if(trip.isCreatorDriver) {
+      const tempAttendanceRequest: AttendanceRequest = {
+        requesterID: userData.id,
+        status: AttendanceStatus.PENDING,
+      };
+      await createAttendanceRequest(trip.id as string, tempAttendanceRequest)
+        .then(() => {
+          Toast.show({
+            type: 'success',
+            text1: t('trips:success'),
+            text2: t('trips:requestSentSuccess'),
+            position: 'bottom',
+          });
+          navigation.goBack();
+        })
+        .catch(error => {
+          console.log(error);
+          Alert.alert(t('generic:sthWrong'), t('generic:unknownError'));
         });
-        navigation.goBack();
-      })
-      .catch(error => {
-        console.log(error);
-        Alert.alert(t('generic:sthWrong'), t('generic:unknownError'));
-      });
+    }
+    else {
+      const tempInvitation: Invitation = {
+        inviterID: userData.id,
+        status: InvitationStatus.PENDING,
+      };
+      await createInvitation(trip.id as string, tempInvitation)
+        .then(() => {
+          Toast.show({
+            type: 'success',
+            text1: t('trips:success'),
+            text2: t('trips:invitationSentSuccess'),
+            position: 'bottom',
+          });
+          navigation.goBack();
+        })
+        .catch(error => {
+          console.log(error);
+          Alert.alert(t('generic:sthWrong'), t('generic:unknownError'));
+        });
+    }
   };
 
   const {t} = useTranslation();
@@ -87,9 +110,9 @@ export const PageTripDetails = ({route, navigation}: any) => {
         <></>
       )}
       {!isOwnTrip ? (
-        <StyledButton disabled={isAlreadyRequested(trip.attendanceRequests, userData.id)} onPress={_handleOnPress}>
+        <StyledButton disabled={isAlreadyRequested(trip, userData.id)} onPress={_handleOnPress}>
           <ButtonText >
-            {trip.isCreatorDriver ? 'Request to Attend' : 'Invite to your car'}
+            {trip.isCreatorDriver ? t('trips:requestToAttend') : t('trips:inviteToYourCar')}
           </ButtonText>
         </StyledButton>
       ) : (
