@@ -1,7 +1,8 @@
 {
     "generic": {
         "sthWrong": "Something went wrong",
-        "unknownError": "An unexpected error occurred. Please try again later."
+        "unknownError": "An unexpected error occurred. Please try again later.",
+        "noDataFound": "Ooops... No data found."
     },
     "login": {
         "title": "Login",
@@ -69,7 +70,6 @@
         "success": "Success!",
         "requestSentSuccess": "Request sent successfully.",
         "invitationSentSuccess": "Invitation sent successfully.",
-        "noRequestFound": "No request found",
         "details": "Details",
         "requests": "Requests",
         "invitations": "Invitations",

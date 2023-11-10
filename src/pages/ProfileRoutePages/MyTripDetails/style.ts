@@ -60,7 +60,7 @@ export const ArrowImage = styled.Image`
 
 export const AttendanceRequestsContainer = styled.View`
     flex: 1;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: ${colors.gray};
     border-radius: 10px;
     padding: 5%;

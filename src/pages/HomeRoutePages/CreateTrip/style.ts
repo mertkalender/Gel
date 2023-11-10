@@ -15,7 +15,6 @@ export const FormContainer = styled(View)`
   justify-content: space-around;
   width: ${screenWidth * 0.9}px;
   height: ${createTripBoxHeight}px;
-  background-color: ${colors.gray};
 `;
 
 export const Input = styled.TextInput`

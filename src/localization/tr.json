@@ -1,7 +1,8 @@
 {
     "generic": {
         "sthWrong": "Bir şeyler yanlış",
-        "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+        "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        "noDataFound": "Ups... Veri bulunamadı."
     },
     "login" : {
         "title" : "Giriş Yap",
@@ -69,7 +70,6 @@
         "success": "Başarılı!",
         "requestSentSuccess": "Talep başarıyla gönderildi.",
         "invitationSentSuccess": "Davet başarıyla gönderildi.",
-        "noRequestFound": "İstek bulunamadı",
         "details": "Detaylar",
         "requests": "İstekler",
         "invitations": "Davetler",

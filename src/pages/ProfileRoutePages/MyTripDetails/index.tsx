@@ -14,7 +14,6 @@ import {Trip} from '../../../types/trip';
 import {getUsers} from '../../../utils/firestore';
 import {User} from '../../../types/user';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {View, useWindowDimensions} from 'react-native';
 
 const PageMyTripDetails = ({route}: any) => {
   const {t} = useTranslation();
@@ -25,14 +24,20 @@ const PageMyTripDetails = ({route}: any) => {
     {key: 'second', title: `${trip.isCreatorDriver ? t(`trips:requests`)+` (${trip.attendanceRequests?.length})` : t(`trips:invitations`)+` (${trip.invitations?.length})`}`},
   ]);
 
-  const layout = useWindowDimensions();
-
   const [requesters, setRequesters] = React.useState<User[]>([]);
 
   const fetchRequesters = async () => {
-    const requesterIDs = trip.attendanceRequests?.map(
-      request => request.requesterID,
-    );
+    let requesterIDs: string[] = [];
+    if(trip.isCreatorDriver) {
+      requesterIDs = trip.attendanceRequests?.map(
+        request => request.requesterID,
+      ) as string[];
+    }
+    else {
+      requesterIDs = trip.invitations?.map(
+        invitation => invitation.inviterID,
+      ) as string[];
+    }
     const tempResponse = await getUsers(requesterIDs as string[]);
     setRequesters(tempResponse);
   };
@@ -64,9 +69,9 @@ const PageMyTripDetails = ({route}: any) => {
 
   const RequestsTab = () => {
     return (
-      <AttendanceRequestsContainer style={{alignItems: requesters.length === 0 ? 'center' : 'flex-start'}}>
+      <AttendanceRequestsContainer style={{alignItems: requesters.length === 0 ? 'center' : 'flex-start', justifyContent: requesters.length === 0 ? 'center' : 'flex-start'}}>
         {requesters.length === 0 ? (
-          <InfoLabel>{t(`trips:noRequestFound`)}</InfoLabel>
+          <InfoLabel>{t(`generic:noDataFound`)}</InfoLabel>
         ) : (
           <></>
         )}
