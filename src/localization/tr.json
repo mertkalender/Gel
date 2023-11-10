@@ -68,7 +68,9 @@
         "date": "Tarih",
         "success": "Başarılı!",
         "requestSentSuccess": "Talep başarıyla gönderildi.",
-        "noRequestFound": "İstek bulunamadı"
+        "noRequestFound": "İstek bulunamadı",
+        "details": "Detaylar",
+        "requests": "İstekler"
     },
     "createTrip": {
         "from": "Nereden",

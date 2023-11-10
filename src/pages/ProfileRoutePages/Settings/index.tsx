@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {
   SettingsContainer,
   SettingsItemText,
   SettingsRow,
   StyledPicker,
+  StyledPickerIOS,
 } from './style';
 import {Picker} from '@react-native-picker/picker';
 import i18next from 'i18next';
+import { colors } from '../../../constants/colors';
 
 const PageSettings = () => {
   const selectedLanguageCode = i18next.language;
@@ -29,8 +31,22 @@ const PageSettings = () => {
     <SettingsContainer>
       <SettingsRow>
         <SettingsItemText>{t('settings:language')}:</SettingsItemText>
+        {Platform.OS === 'ios' ? (
+          <StyledPickerIOS
+            itemStyle={{color: colors.white}}
+            selectedValue={lang}
+            onValueChange={(itemValue, itemIndex) =>
+              handleLanguageChange(itemValue)
+            }>
+            {languages.map((lang, i) => {
+              return (
+                <Picker.Item key={i} label={lang.label} value={lang.code} />
+              );
+            })}
+          </StyledPickerIOS>
+        ) : (
         <StyledPicker
-          dropdownIconColor={'#fff'}
+          dropdownIconColor={colors.white}
           mode="dropdown"
           selectedValue={lang}
           onValueChange={(itemValue, itemIndex) =>
@@ -40,6 +56,7 @@ const PageSettings = () => {
             return <Picker.Item key={i} label={lang.label} value={lang.code} />;
           })}
         </StyledPicker>
+        )}
       </SettingsRow>
     </SettingsContainer>
   );

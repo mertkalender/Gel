@@ -68,7 +68,9 @@
         "date": "Date",
         "success": "Success!",
         "requestSentSuccess": "Request sent successfully.",
-        "noRequestFound": "No request found"
+        "noRequestFound": "No request found",
+        "details": "Details",
+        "requests": "Requests"
     },
     "createTrip": {
         "from": "From",

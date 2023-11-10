@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 import { fontSizes } from '../../../constants/fonts';
-import {Picker} from '@react-native-picker/picker';
+import {Picker, PickerIOS} from '@react-native-picker/picker';
 import { colors } from '../../../constants/colors';
 
 export const SettingsContainer = styled.View`
     flex: 1;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
+    padding: 5%;
 `;
 
 export const SettingsRow = styled.View`
@@ -24,6 +24,13 @@ export const SettingsItemText = styled.Text`
 `;
 
 export const StyledPicker = styled(Picker)`
+    width: 45%;
+    height: 100%;
+    background-color: transparent;
+    color: ${colors.white};
+`;
+
+export const StyledPickerIOS = styled(PickerIOS)`
     width: 45%;
     height: 100%;
     background-color: transparent;

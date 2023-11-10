@@ -21,8 +21,8 @@ const PageMyTripDetails = ({route}: any) => {
   const trip: Trip = route.params.trip;
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'first', title: 'Details'},
-    {key: 'second', title: 'Requests'},
+    {key: 'first', title: `${t(`trips:details`)}`},
+    {key: 'second', title: `${t(`trips:requests`)}`},
   ]);
 
   const layout = useWindowDimensions();
