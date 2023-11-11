@@ -101,21 +101,20 @@ export const PageTripDetails = ({route, navigation}: any) => {
         />
         <DestinationText color={colors.black}>{trip.endPoint.toUpperCase()}</DestinationText>
       </DestinationRow>
-
       <InfoContainer>
         <InfoRow>
-          <InfoLabel>{t(`trips:creator`)}</InfoLabel>
+          <InfoLabel bold>{t(`trips:creator`)}</InfoLabel>
           <InfoLabel>
             {user?.name} {user?.surname}
           </InfoLabel>
         </InfoRow>
         <InfoRow>
-          <InfoLabel>{t(`trips:date`)}</InfoLabel>
+          <InfoLabel bold>{t(`trips:date`)}</InfoLabel>
           <InfoLabel>{new Date(trip.date.toDate()).toDateString()}</InfoLabel>
         </InfoRow>
         {trip.isCreatorDriver ? (
           <InfoRow>
-            <InfoLabel>{t(`trips:passengerCount`)}</InfoLabel>
+            <InfoLabel bold>{t(`trips:passengerCount`)}</InfoLabel>
             <InfoLabel>{trip.passengerCount}</InfoLabel>
           </InfoRow>
         ) : (

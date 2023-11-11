@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {
   ArrowImage,
   AttendanceRequestsContainer,
+  BackgroundImage,
   ButtonsContainer,
   Container,
   DestinationRow,
@@ -29,6 +30,7 @@ import {
   AttendanceRequest,
   RequestStatus,
 } from '../../../types/trip';
+import {colors} from '../../../constants/colors';
 
 const PageMyTripDetails = ({route}: any) => {
   const {t} = useTranslation();
@@ -63,7 +65,7 @@ const PageMyTripDetails = ({route}: any) => {
   const fetchRequesters = async () => {
     let tempArray: string[] = [];
     if (trip.isCreatorDriver) {
-      tempArray = filteredRequests?.map((request) => request.requesterID);
+      tempArray = filteredRequests?.map(request => request.requesterID);
     } else {
       tempArray = filteredInvitations?.map(invitation => invitation.inviterID);
     }
@@ -167,13 +169,13 @@ const PageMyTripDetails = ({route}: any) => {
     return (
       <>
         <InfoRow>
-          <InfoLabel>{t(`trips:date`)}</InfoLabel>
+          <InfoLabel bold>{t(`trips:date`)}</InfoLabel>
           <InfoLabel>{new Date(trip.date.toDate()).toDateString()}</InfoLabel>
         </InfoRow>
         {trip.isCreatorDriver ? (
           <>
             <InfoRow>
-              <InfoLabel>{t(`trips:passengerCount`)}</InfoLabel>
+              <InfoLabel bold>{t(`trips:passengerCount`)}</InfoLabel>
               <InfoLabel>{trip.passengerCount}</InfoLabel>
             </InfoRow>
           </>
@@ -224,19 +226,29 @@ const PageMyTripDetails = ({route}: any) => {
 
   return (
     <Container>
+      <BackgroundImage
+        resizeMode="cover"
+        source={require('../../../assets/images/road.png')}
+      />
       <DestinationRow>
-        <DestinationText>{trip.startPoint}</DestinationText>
+        <DestinationText>{trip.startPoint.toUpperCase()}</DestinationText>
         <ArrowImage
           resizeMode="contain"
           source={require('../../../assets/images/arrow-vertical.png')}
         />
-        <DestinationText>{trip.endPoint}</DestinationText>
+        <DestinationText>{trip.endPoint.toUpperCase()}</DestinationText>
       </DestinationRow>
       <TabView
         renderTabBar={props => (
-          <TabBar style={{backgroundColor: 'transparent'}} {...props} />
+          <TabBar
+            labelStyle={{fontWeight: 'bold'}}
+            activeColor={colors.black}
+            inactiveColor={colors.darkGray}
+            style={{backgroundColor: 'transparent'}}
+            {...props}
+          />
         )}
-        style={{flex: 2, height: 100}}
+        style={{flex: 6, height: 100}}
         navigationState={{index, routes}}
         renderScene={_renderScene}
         onIndexChange={setIndex}

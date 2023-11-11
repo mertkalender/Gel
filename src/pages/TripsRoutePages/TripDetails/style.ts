@@ -6,8 +6,8 @@ interface ButtonProps {
   disabled: boolean;
 }
 
-interface DestinationTextProps {
-  color: string;
+interface InfoTextProps {
+  bold?: boolean;
 }
 
 export const Container = styled.View`
@@ -32,9 +32,9 @@ export const DestinationRow = styled.View`
   margin-bottom: 5%;
 `;
 
-export const DestinationText = styled.Text<DestinationTextProps>`
+export const DestinationText = styled.Text`
   font-size: ${fontSizes.extraLarge}px;
-  color: ${props => props.color};
+  color: ${colors.black};
   font-weight: bold;
 `;
 
@@ -58,9 +58,9 @@ export const InfoRow = styled.View`
   margin-bottom: 5%;
 `;
 
-export const InfoLabel = styled.Text`
+export const InfoLabel = styled.Text<InfoTextProps>`
   font-size: ${fontSizes.medium}px;
-  font-weight: bold;
+  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
   color: ${colors.white};
 `;
 
