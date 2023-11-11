@@ -37,12 +37,13 @@ export const DestinationText = styled.Text`
 
 export const InfoRow = styled.View`
   flex: 1;
+  max-height: 40%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: ${colors.gray};
   border-radius: 10px;
-  padding: 5%;
+  padding-horizontal: 5%;
   margin-bottom: 5%;
 `;
 

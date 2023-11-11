@@ -54,7 +54,7 @@ export const InfoRow = styled.View`
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  padding: 5%;
+  padding-horizontal: 5%;
   margin-bottom: 5%;
 `;
 

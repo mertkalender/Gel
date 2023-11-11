@@ -241,9 +241,10 @@ const PageMyTripDetails = ({route}: any) => {
       <TabView
         renderTabBar={props => (
           <TabBar
+            indicatorStyle={{backgroundColor: colors.gray, width: '45%', marginLeft: 10}}
             labelStyle={{fontWeight: 'bold'}}
             activeColor={colors.black}
-            inactiveColor={colors.darkGray}
+            inactiveColor={colors.gray}
             style={{backgroundColor: 'transparent'}}
             {...props}
           />
