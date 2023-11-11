@@ -2,7 +2,11 @@
     "generic": {
         "sthWrong": "Bir şeyler yanlış",
         "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
-        "noDataFound": "Ups... Veri bulunamadı."
+        "noDataFound": "Ups... Veri bulunamadı.",
+        "wait": "Bekle...",
+        "accept": "Kabul Et",
+        "cancel": "İptal",
+        "reject": "Reddet"
     },
     "login" : {
         "title" : "Giriş Yap",
@@ -74,7 +78,11 @@
         "requests": "İstekler",
         "invitations": "Davetler",
         "requestToAttend": "Katılmak İste",
-        "inviteToYourCar": "Aracına Davet Et"
+        "inviteToYourCar": "Aracına Davet Et",
+        "acceptInvitationMessage": "Daveti kabul etmek istediğine emin misin?",
+        "acceptRequestMessage": "İsteği kabul etmek istediğine emin misin?",
+        "rejectInvitationMessage": "Daveti reddetmek istediğine emin misin?",
+        "rejectRequestMessage": "İsteği reddetmek istediğine emin misin?"
     },
     "createTrip": {
         "from": "Nereden",

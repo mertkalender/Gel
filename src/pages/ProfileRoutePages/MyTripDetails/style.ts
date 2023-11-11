@@ -67,9 +67,25 @@ export const AttendanceRequestsContainer = styled.View`
     margin-bottom: 5%;
 `;
 
-export const Divider = styled.View`
-  border-bottom-width: 1px;
-  border-bottom-color: ${colors.lightGray};
-  width: 100%;
-  margin-vertical: 3%;
+export const RequestRow = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${colors.gray};
+    border-radius: 10px;
+    padding: 5%;
+    margin-bottom: 5%;
+`;
+
+export const ButtonsContainer = styled.View`
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const NameContainer = styled.View`
+    flex: 3;
+    justify-content: center;
+    align-items: flex-start;
 `;

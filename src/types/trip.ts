@@ -1,8 +1,19 @@
 import { FirebaseFirestoreTypes, firebase } from '@react-native-firebase/firestore';
-import { AttendanceRequest } from './attendanceRequest';
-import { Invitation } from './invitation';
 
 export class Timestamp extends firebase.firestore.Timestamp {}
+
+export enum TripStatus {
+    ACTIVE = 'ACTIVE',
+    CANCELLED = 'CANCELLED',
+    COMPLETED = 'COMPLETED',
+    PAST = 'PAST',
+}
+
+export enum RequestStatus {
+    PENDING = 'pending',
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
+}
 
 export type Trip = {
     id?: string;
@@ -14,4 +25,15 @@ export type Trip = {
     isCreatorDriver: boolean;
     attendanceRequests?: AttendanceRequest[];
     invitations?: Invitation[];
+    status: TripStatus;
+};
+
+export type Invitation = {
+    inviterID: string;
+    status: RequestStatus;
+};
+
+export type AttendanceRequest = {
+    requesterID: string;
+    status: RequestStatus;
 };

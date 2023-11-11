@@ -2,7 +2,11 @@
     "generic": {
         "sthWrong": "Something went wrong",
         "unknownError": "An unexpected error occurred. Please try again later.",
-        "noDataFound": "Ooops... No data found."
+        "noDataFound": "Ooops... No data found.",
+        "wait": "Wait...",
+        "accept": "Accept",
+        "cancel": "Cancel",
+        "reject": "Reject"
     },
     "login": {
         "title": "Login",
@@ -74,7 +78,12 @@
         "requests": "Requests",
         "invitations": "Invitations",
         "requestToAttend": "Request to Attend",
-        "inviteToYourCar": "Invite to Your Car"
+        "inviteToYourCar": "Invite to Your Car",
+        "acceptInvitationMessage": "Are you sure you want to accept this invitation",
+        "acceptRequestMessage": "Are you sure you want to accept this request?",
+        "rejectInvitationMessage": "Are you sure you want to reject this invitation",
+        "rejectRequestMessage": "Are you sure you want to reject this request?"
+
     },
     "createTrip": {
         "from": "From",

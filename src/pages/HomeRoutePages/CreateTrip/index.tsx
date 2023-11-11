@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next';
 import {useState} from 'react';
 import {Alert, Text} from 'react-native';
 import {createTrip} from '../../../utils/firestore';
-import {Timestamp, Trip} from '../../../types/trip';
+import {Timestamp, Trip, TripStatus} from '../../../types/trip';
 import Toast from 'react-native-toast-message';
 import { useAppSelector } from '../../../store/store';
 
@@ -65,6 +65,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       passengerCount: passengerCount,
       isCreatorDriver: isDriver,
       attendanceRequests: [],
+      status: TripStatus.ACTIVE
     };
     const tempTripHitchhiker: Trip = {
       creator: userData.id,
@@ -73,7 +74,8 @@ const PageCreateTrip = ({route, navigation}: any) => {
       date: Timestamp.fromDate(date),
       passengerCount: passengerCount,
       isCreatorDriver: isDriver,
-      attendanceRequests: [],
+      invitations: [],
+      status: TripStatus.ACTIVE
     };
     await createTrip(isDriver ? tempTripDriver : tempTripHitchhiker)
       .then(() => {

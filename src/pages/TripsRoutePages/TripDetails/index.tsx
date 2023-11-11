@@ -1,27 +1,34 @@
 import React, {useEffect} from 'react';
 import {
   ArrowImage,
+  BackgroundImage,
   ButtonText,
   Container,
   DestinationRow,
   DestinationText,
+  InfoContainer,
   InfoLabel,
   InfoRow,
   StyledButton,
 } from './style';
 import {useTranslation} from 'react-i18next';
 import {Trip} from '../../../types/trip';
-import {createAttendanceRequest, createInvitation, getUser} from '../../../utils/firestore';
+import {
+  createAttendanceRequest,
+  createInvitation,
+  getUser,
+} from '../../../utils/firestore';
 import {User} from '../../../types/user';
 import {
   AttendanceRequest,
-  AttendanceStatus,
-} from '../../../types/attendanceRequest';
+  Invitation,
+  RequestStatus,
+} from '../../../types/trip';
 import {useAppSelector} from '../../../store/store';
 import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
-import { isAlreadyRequested } from '../../../utils/functions';
-import { Invitation, InvitationStatus } from '../../../types/invitation';
+import {isAlreadyRequested} from '../../../utils/functions';
+import { colors } from '../../../constants/colors';
 
 export const PageTripDetails = ({route, navigation}: any) => {
   const trip: Trip = route.params.trip;
@@ -38,10 +45,10 @@ export const PageTripDetails = ({route, navigation}: any) => {
   }, []);
 
   const _handleOnPress = async () => {
-    if(trip.isCreatorDriver) {
+    if (trip.isCreatorDriver) {
       const tempAttendanceRequest: AttendanceRequest = {
         requesterID: userData.id,
-        status: AttendanceStatus.PENDING,
+        status: RequestStatus.PENDING,
       };
       await createAttendanceRequest(trip.id as string, tempAttendanceRequest)
         .then(() => {
@@ -57,11 +64,10 @@ export const PageTripDetails = ({route, navigation}: any) => {
           console.log(error);
           Alert.alert(t('generic:sthWrong'), t('generic:unknownError'));
         });
-    }
-    else {
+    } else {
       const tempInvitation: Invitation = {
         inviterID: userData.id,
-        status: InvitationStatus.PENDING,
+        status: RequestStatus.PENDING,
       };
       await createInvitation(trip.id as string, tempInvitation)
         .then(() => {
@@ -83,41 +89,52 @@ export const PageTripDetails = ({route, navigation}: any) => {
   const {t} = useTranslation();
   return (
     <Container>
+      <BackgroundImage
+        resizeMode="cover"
+        source={require('../../../assets/images/road.png')}
+      />
       <DestinationRow>
-        <DestinationText>{trip.startPoint}</DestinationText>
+        <DestinationText color={colors.black}>{trip.startPoint.toUpperCase()}</DestinationText>
         <ArrowImage
           resizeMode="contain"
           source={require('../../../assets/images/arrow-vertical.png')}
         />
-        <DestinationText>{trip.endPoint}</DestinationText>
+        <DestinationText color={colors.black}>{trip.endPoint.toUpperCase()}</DestinationText>
       </DestinationRow>
-      <InfoRow>
-        <InfoLabel>{t(`trips:creator`)}</InfoLabel>
-        <InfoLabel>
-          {user?.name} {user?.surname}
-        </InfoLabel>
-      </InfoRow>
-      <InfoRow>
-        <InfoLabel>{t(`trips:date`)}</InfoLabel>
-        <InfoLabel>{new Date(trip.date.toDate()).toDateString()}</InfoLabel>
-      </InfoRow>
-      {trip.isCreatorDriver ? (
+
+      <InfoContainer>
         <InfoRow>
-          <InfoLabel>{t(`trips:passengerCount`)}</InfoLabel>
-          <InfoLabel>{trip.passengerCount}</InfoLabel>
+          <InfoLabel>{t(`trips:creator`)}</InfoLabel>
+          <InfoLabel>
+            {user?.name} {user?.surname}
+          </InfoLabel>
         </InfoRow>
-      ) : (
-        <></>
-      )}
-      {!isOwnTrip ? (
-        <StyledButton disabled={isAlreadyRequested(trip, userData.id)} onPress={_handleOnPress}>
-          <ButtonText >
-            {trip.isCreatorDriver ? t('trips:requestToAttend') : t('trips:inviteToYourCar')}
-          </ButtonText>
-        </StyledButton>
-      ) : (
-        <></>
-      )}
+        <InfoRow>
+          <InfoLabel>{t(`trips:date`)}</InfoLabel>
+          <InfoLabel>{new Date(trip.date.toDate()).toDateString()}</InfoLabel>
+        </InfoRow>
+        {trip.isCreatorDriver ? (
+          <InfoRow>
+            <InfoLabel>{t(`trips:passengerCount`)}</InfoLabel>
+            <InfoLabel>{trip.passengerCount}</InfoLabel>
+          </InfoRow>
+        ) : (
+          <></>
+        )}
+        {!isOwnTrip ? (
+          <StyledButton
+            disabled={isAlreadyRequested(trip, userData.id)}
+            onPress={_handleOnPress}>
+            <ButtonText>
+              {trip.isCreatorDriver
+                ? t('trips:requestToAttend')
+                : t('trips:inviteToYourCar')}
+            </ButtonText>
+          </StyledButton>
+        ) : (
+          <></>
+        )}
+      </InfoContainer>
     </Container>
   );
 };
