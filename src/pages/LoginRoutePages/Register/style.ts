@@ -31,6 +31,7 @@ export const Input = styled.TextInput`
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
+  color: ${colors.black};
 `;
 
 export const ButtonContainer = styled.View`

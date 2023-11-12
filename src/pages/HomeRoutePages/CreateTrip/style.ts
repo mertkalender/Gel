@@ -19,6 +19,7 @@ export const FormContainer = styled(View)`
 
 export const Input = styled.TextInput`
   background-color: #fff;
+  color: ${colors.black};
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
