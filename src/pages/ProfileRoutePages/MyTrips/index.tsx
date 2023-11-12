@@ -90,13 +90,13 @@ const PageMyTrips = ({navigation}: any) => {
       renderTabBar={props => (
         <TabBar
           indicatorStyle={{
-            backgroundColor: colors.lightGray,
+            backgroundColor: '#BEBEBE',
             width: '45%',
             marginLeft: 10,
           }}
           labelStyle={{fontWeight: 'bold'}}
           activeColor={colors.white}
-          inactiveColor={colors.lightGray}
+          inactiveColor={'#BEBEBE'}
           style={{backgroundColor: 'transparent'}}
           {...props}
         />
