@@ -13,7 +13,8 @@ import {Alert, Text} from 'react-native';
 import {createTrip} from '../../../utils/firestore';
 import {Timestamp, Trip, TripStatus} from '../../../types/trip';
 import Toast from 'react-native-toast-message';
-import { useAppSelector } from '../../../store/store';
+import {useAppSelector} from '../../../store/store';
+import {colors} from '../../../constants/colors';
 
 const PageCreateTrip = ({route, navigation}: any) => {
   const {t} = useTranslation();
@@ -36,9 +37,9 @@ const PageCreateTrip = ({route, navigation}: any) => {
   };
 
   const handlePassengerCountInputChange = (value: string) => {
-    const parsedQty = Number.parseInt(value)
+    const parsedQty = Number.parseInt(value);
     if (Number.isNaN(parsedQty)) {
-      setPassengerCount(0) //setter for state
+      setPassengerCount(0); //setter for state
     } else if (parsedQty > 10 || parsedQty < 1) {
       Toast.show({
         type: 'error',
@@ -47,11 +48,11 @@ const PageCreateTrip = ({route, navigation}: any) => {
         position: 'bottom',
         visibilityTime: 1600,
       });
-      setPassengerCount(10)
+      setPassengerCount(10);
     } else {
-      setPassengerCount(parsedQty)
+      setPassengerCount(parsedQty);
     }
-  }
+  };
 
   const handleCreateTrip = async () => {
     if (!validateInputs()) {
@@ -65,7 +66,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       passengerCount: passengerCount,
       isCreatorDriver: isDriver,
       attendanceRequests: [],
-      status: TripStatus.ACTIVE
+      status: TripStatus.ACTIVE,
     };
     const tempTripHitchhiker: Trip = {
       creator: userData.id,
@@ -75,7 +76,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       passengerCount: passengerCount,
       isCreatorDriver: isDriver,
       invitations: [],
-      status: TripStatus.ACTIVE
+      status: TripStatus.ACTIVE,
     };
     await createTrip(isDriver ? tempTripDriver : tempTripHitchhiker)
       .then(() => {
@@ -96,8 +97,16 @@ const PageCreateTrip = ({route, navigation}: any) => {
   return (
     <Container>
       <FormContainer>
-        <Input placeholder={t('createTrip:from')} onChangeText={setFrom} />
-        <Input placeholder={t('createTrip:to')} onChangeText={setTo} />
+        <Input
+          placeholderTextColor={colors.gray}
+          placeholder={t('createTrip:from')}
+          onChangeText={setFrom}
+        />
+        <Input
+          placeholderTextColor={colors.gray}
+          placeholder={t('createTrip:to')}
+          onChangeText={setTo}
+        />
         <DatePickerContainer onPress={() => setShowDatePicker(true)}>
           <Text>
             {isDateSelected ? date.toLocaleString() : t('createTrip:date')}
@@ -117,6 +126,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
         </DatePickerContainer>
         {isDriver && (
           <Input
+            placeholderTextColor={colors.gray}
             keyboardType="numeric"
             placeholder={t('createTrip:passengerCount')}
             onChangeText={val => handlePassengerCountInputChange(val)}

@@ -7,6 +7,7 @@ import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { getUser } from '../../../utils/firestore';
 import { useTranslation } from 'react-i18next';
+import { colors } from '../../../constants/colors';
 
 
 const PageLogin = ({ navigation } : any) => {
@@ -65,8 +66,8 @@ const PageLogin = ({ navigation } : any) => {
       <Container>
         <LoginBox>
         <Title>{t('login:title')}</Title>
-          <Input keyboardType='email-address' autoCapitalize='none' onChangeText={setEmail} placeholder={t('login:email')} />
-          <Input textContentType='password' onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
+          <Input placeholderTextColor={colors.gray} keyboardType='email-address' autoCapitalize='none' onChangeText={setEmail} placeholder={t('login:email')} />
+          <Input placeholderTextColor={colors.gray} textContentType='password' autoCapitalize='none' onChangeText={setPassword} placeholder={t('login:password')} secureTextEntry />
           <ButtonContainer>
             <LoginButton onPress={handleLogin}>
               <ButtonText>{t('login:login')}</ButtonText>
