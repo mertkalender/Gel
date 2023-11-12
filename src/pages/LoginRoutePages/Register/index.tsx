@@ -11,7 +11,7 @@ import {
 } from './style';
 import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
-import {Alert} from 'react-native';
+import {ActivityIndicator, Alert} from 'react-native';
 import {createUser} from '../../../utils/firestore';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../../../constants/colors';
@@ -22,6 +22,7 @@ const PageRegister = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const {t} = useTranslation();
 
   const validateInputs = () => {
@@ -39,6 +40,7 @@ const PageRegister = ({navigation}: any) => {
   };
 
   const handleRegister = () => {
+    setLoading(true);
     if (!validateInputs()) {
       return;
     }
@@ -74,6 +76,7 @@ const PageRegister = ({navigation}: any) => {
         }
         return Promise.reject(error);
       });
+    setLoading(false);
   };
 
   return (
@@ -114,6 +117,7 @@ const PageRegister = ({navigation}: any) => {
         <ButtonContainer>
           <RegisterButton onPress={handleRegister}>
             <ButtonText>{t('register:register')}</ButtonText>
+            {loading && <ActivityIndicator style={{marginLeft: 10}} size="small" color={colors.white} />}
           </RegisterButton>
           <LoginButton onPress={() => navigation.navigate('Login')}>
             <ButtonText>{t('register:login')}</ButtonText>

@@ -9,7 +9,7 @@ import {
 } from './style';
 import {useTranslation} from 'react-i18next';
 import {useState} from 'react';
-import {Alert, Text} from 'react-native';
+import {ActivityIndicator, Alert, Text} from 'react-native';
 import {createTrip} from '../../../utils/firestore';
 import {Timestamp, Trip, TripStatus} from '../../../types/trip';
 import Toast from 'react-native-toast-message';
@@ -25,6 +25,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
   const [to, setTo] = useState('');
   const [passengerCount, setPassengerCount] = useState(0);
   const {isDriver} = route.params;
+  const [loading, setLoading] = useState(false)
 
   const userData = useAppSelector(state => state.user.userData);
 
@@ -55,6 +56,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
   };
 
   const handleCreateTrip = async () => {
+    setLoading(true);
     if (!validateInputs()) {
       return;
     }
@@ -93,6 +95,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
         Alert.alert(t('createTrip:sthWrong'), t('createTrip:unknownError'));
         return Promise.reject(error);
       });
+    setLoading(false);
   };
   return (
     <Container>
@@ -134,6 +137,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
         )}
         <CreateButton onPress={handleCreateTrip}>
           <ButtonText>{t('createTrip:create')}</ButtonText>
+          {loading && <ActivityIndicator style={{marginLeft: 10}} size="small" color={colors.white} />}
         </CreateButton>
       </FormContainer>
     </Container>

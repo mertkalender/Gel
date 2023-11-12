@@ -40,6 +40,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const LoginButton = styled.TouchableOpacity`
+  flex-direction: row;
   background-color: ${colors.primary};
   padding: 2%;
   border-radius: 5px;

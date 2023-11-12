@@ -49,6 +49,7 @@ export const LoginButton = styled.TouchableOpacity`
 `;
 
 export const RegisterButton = styled.TouchableOpacity`
+  flex-direction: row;
   background-color: ${colors.primary};
   padding: 2%;
   border-radius: 5px;

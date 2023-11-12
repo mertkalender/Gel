@@ -3,7 +3,7 @@ import { ButtonContainer, ButtonText, Container, Input, LoginBox, LoginButton, R
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn, setUser } from '../../../store/slices/userSlice';
 import auth from '@react-native-firebase/auth';
-import { Alert } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { getUser } from '../../../utils/firestore';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,7 @@ const PageLogin = ({ navigation } : any) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false)
   const { t } = useTranslation();
   const validateInputs = () => {
     if (!email || !password) {
@@ -24,13 +25,15 @@ const PageLogin = ({ navigation } : any) => {
   }
 
   const handleLogin = async () => {
+    setLoading(true);
     if (!validateInputs()) {
       return;
     }
     await auth().signInWithEmailAndPassword(email, password)
       .then(async (res) => {
         const userInfo = await getUser(res.user.uid);
-        dispatch(setUser({id: res.user.uid, ...userInfo}));
+        console.log('userInfo:', userInfo);
+        dispatch(setUser(userInfo));
         dispatch(setIsLoggedIn(true));
         Toast.show({
           type: 'success',
@@ -60,6 +63,7 @@ const PageLogin = ({ navigation } : any) => {
         }
         return Promise.reject(error);
       });
+    setLoading(false);
   }
 
   return (
@@ -71,6 +75,7 @@ const PageLogin = ({ navigation } : any) => {
           <ButtonContainer>
             <LoginButton onPress={handleLogin}>
               <ButtonText>{t('login:login')}</ButtonText>
+              {loading && <ActivityIndicator style={{marginLeft: 10}} size="small" color={colors.white} />}
             </LoginButton>
             <RegisterButton onPress={() => navigation.navigate('Register')}>
               <ButtonText>{t('login:register')}</ButtonText>

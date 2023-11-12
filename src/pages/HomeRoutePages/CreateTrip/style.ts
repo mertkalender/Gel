@@ -38,6 +38,7 @@ export const DatePickerContainer = styled(TouchableOpacity)`
 `;
 
 export const CreateButton = styled(TouchableOpacity)`
+  flex-direction: row;
   background-color: ${colors.primary};
   padding: 10px;
   border-radius: 5px;

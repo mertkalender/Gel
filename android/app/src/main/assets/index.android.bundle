@@ -787,6 +787,7 @@ __d((function(g,r,i,a,m,e,d){Object.defineProperty(e,"__esModule",{value:!0}),e.
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
+  color: ${r(d[2]).colors.black};
 `,e.ButtonContainer=t.default.View`
   justify-content: center;
   height: ${r(d[3]).screenHeight>r(d[3]).limitScreenSize?.12*r(d[3]).screenHeight:.15*r(d[3]).screenHeight}px;
@@ -882,6 +883,7 @@ __d((function(g,r,i,a,m,e,d){Object.defineProperty(e,"__esModule",{value:!0}),e.
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
+  color: ${r(d[2]).colors.black};
 `,e.ButtonContainer=t.default.View`
   justify-content: center;
   height: ${r(d[3]).screenHeight>r(d[3]).limitScreenSize?.12*r(d[3]).screenHeight:.15*r(d[3]).screenHeight}px;
@@ -952,6 +954,7 @@ __d((function(g,r,i,a,m,e,d){Object.defineProperty(e,"__esModule",{value:!0}),e.
   height: ${r(d[4]).createTripBoxHeight}px;
 `,e.Input=t.default.TextInput`
   background-color: #fff;
+  color: ${r(d[3]).colors.black};
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;

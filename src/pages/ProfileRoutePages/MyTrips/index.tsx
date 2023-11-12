@@ -7,10 +7,12 @@ import {colors} from '../../../constants/colors';
 import {Trip} from '../../../types/trip';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {useTranslation} from 'react-i18next';
+import { getGuestTrips } from '../../../utils/functions';
 
 const PageMyTrips = ({navigation}: any) => {
   const {t} = useTranslation();
   const [trips, setTrips] = React.useState<Trip[]>([]);
+  const [guestTrips, setGuestTrips] = React.useState<Trip[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
 
   const [index, setIndex] = React.useState(0);
@@ -33,6 +35,8 @@ const PageMyTrips = ({navigation}: any) => {
     try {
       const tempTrips = await getTripByCreator(userData.id);
       setTrips(tempTrips);
+      const tempGuestTrips = await getGuestTrips(userData.id);
+      setGuestTrips(tempGuestTrips);
     } catch (error) {
       console.error('Error fetching trips:', error);
     }
@@ -70,7 +74,7 @@ const PageMyTrips = ({navigation}: any) => {
           onRefresh={onRefresh}
         />
       }>
-      {trips?.map((trip, index) => (
+      {guestTrips?.map((trip, index) => (
         <TripListItem
           key={index}
           trip={trip}

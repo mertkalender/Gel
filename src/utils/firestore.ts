@@ -31,7 +31,7 @@ export async function getUser(userId: string): Promise<User> {
       .get();
 
     if (documentSnapshot.exists) {
-      return documentSnapshot.data() as User;
+      return {id: userId, ...documentSnapshot.data()} as User;
     } else {
       throw new Error('User does not exist!');
     }
@@ -158,10 +158,7 @@ export const createInvitation = async (
   }
 };
 
-export const acceptInvitation = async (
-  trip: Trip,
-  invitation: Invitation,
-) => {
+export const acceptInvitation = async (trip: Trip, invitation: Invitation) => {
   try {
     const updatedInvitations = trip.invitations?.map(_invitation => {
       if (_invitation.inviterID === invitation.inviterID) {
