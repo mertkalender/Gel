@@ -94,12 +94,12 @@ export const PageTripDetails = ({route, navigation}: any) => {
         source={require('../../../assets/images/road.png')}
       />
       <DestinationRow>
-        <DestinationText color={colors.black}>{trip.startPoint.toUpperCase()}</DestinationText>
+        <DestinationText>{trip.startPoint.toUpperCase()}</DestinationText>
         <ArrowImage
           resizeMode="contain"
           source={require('../../../assets/images/arrow-vertical.png')}
         />
-        <DestinationText color={colors.black}>{trip.endPoint.toUpperCase()}</DestinationText>
+        <DestinationText>{trip.endPoint.toUpperCase()}</DestinationText>
       </DestinationRow>
       <InfoContainer>
         <InfoRow>

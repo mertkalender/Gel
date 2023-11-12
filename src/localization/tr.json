@@ -82,7 +82,9 @@
         "acceptInvitationMessage": "Daveti kabul etmek istediğine emin misin?",
         "acceptRequestMessage": "İsteği kabul etmek istediğine emin misin?",
         "rejectInvitationMessage": "Daveti reddetmek istediğine emin misin?",
-        "rejectRequestMessage": "İsteği reddetmek istediğine emin misin?"
+        "rejectRequestMessage": "İsteği reddetmek istediğine emin misin?",
+        "own": "Benim Sürüşlerim",
+        "guest": "Katıldıklarım"
     },
     "createTrip": {
         "from": "Nereden",

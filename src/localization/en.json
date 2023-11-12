@@ -82,8 +82,9 @@
         "acceptInvitationMessage": "Are you sure you want to accept this invitation",
         "acceptRequestMessage": "Are you sure you want to accept this request?",
         "rejectInvitationMessage": "Are you sure you want to reject this invitation",
-        "rejectRequestMessage": "Are you sure you want to reject this request?"
-
+        "rejectRequestMessage": "Are you sure you want to reject this request?",
+        "own": "Own",
+        "guest": "Guest"
     },
     "createTrip": {
         "from": "From",
