@@ -111,7 +111,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
           onChangeText={setTo}
         />
         <DatePickerContainer onPress={() => setShowDatePicker(true)}>
-          <Text>
+          <Text style={{color: isDateSelected ? colors.black : colors.gray}}>
             {isDateSelected ? date.toLocaleString() : t('createTrip:date')}
           </Text>
           <DatePicker

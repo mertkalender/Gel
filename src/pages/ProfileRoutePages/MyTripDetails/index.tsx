@@ -130,7 +130,7 @@ const PageMyTripDetails = ({route}: any) => {
           {
             text: t(`generic:reject`),
             onPress: () => {
-              rejectAttendanceRequest(trip.id as string, {
+              rejectAttendanceRequest(trip, {
                 requesterID: requester.id,
                 status: RequestStatus.REJECTED,
               });
@@ -150,7 +150,7 @@ const PageMyTripDetails = ({route}: any) => {
           {
             text: t(`generic:reject`),
             onPress: () => {
-              rejectInvitation(trip.id as string, {
+              rejectInvitation(trip, {
                 inviterID: requester.id,
                 status: RequestStatus.REJECTED,
               });
@@ -241,7 +241,11 @@ const PageMyTripDetails = ({route}: any) => {
       <TabView
         renderTabBar={props => (
           <TabBar
-            indicatorStyle={{backgroundColor: colors.gray, width: '45%', marginLeft: 10}}
+            indicatorStyle={{
+              backgroundColor: colors.gray,
+              width: '45%',
+              marginLeft: 10,
+            }}
             labelStyle={{fontWeight: 'bold'}}
             activeColor={colors.black}
             inactiveColor={colors.gray}

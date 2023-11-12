@@ -175,9 +175,7 @@ export const acceptInvitation = async (trip: Trip, invitation: Invitation) => {
       .doc(trip.id)
       .set(
         {
-          invitations: firestore.FieldValue.arrayUnion({
-            ...invitation,
-          }),
+          invitations: updatedInvitations,
           status: TripStatus.COMPLETED,
         },
         {merge: true},
@@ -220,18 +218,27 @@ export const acceptAttendanceRequest = async (
 };
 
 export const rejectAttendanceRequest = async (
-  tripID: string,
+  trip: Trip,
   attendanceRequest: AttendanceRequest,
 ) => {
   try {
+
+    const updatedAttendanceRequests = trip.attendanceRequests?.map(request => {
+      if (request.requesterID === attendanceRequest.requesterID) {
+        return {
+          ...request,
+          status: attendanceRequest.status,
+        };
+      }
+      return request;
+    });
+
     await firestore()
       .collection(COLLECTIONS.TRIPS)
-      .doc(tripID)
+      .doc(trip.id)
       .set(
         {
-          attendanceRequests: firestore.FieldValue.arrayUnion({
-            ...attendanceRequest,
-          }),
+          attendanceRequests: updatedAttendanceRequests,
         },
         {merge: true},
       );
@@ -242,18 +249,26 @@ export const rejectAttendanceRequest = async (
 };
 
 export const rejectInvitation = async (
-  tripID: string,
+  trip: Trip,
   invitation: Invitation,
 ) => {
   try {
+    const updatedInvitations = trip.invitations?.map(_invitation => {
+      if (_invitation.inviterID === invitation.inviterID) {
+        return {
+          ..._invitation,
+          status: invitation.status,
+        };
+      }
+      return _invitation;
+    });
+
     await firestore()
       .collection(COLLECTIONS.TRIPS)
-      .doc(tripID)
+      .doc(trip.id)
       .set(
         {
-          invitations: firestore.FieldValue.arrayUnion({
-            ...invitation,
-          }),
+          invitations: updatedInvitations,
         },
         {merge: true},
       );
