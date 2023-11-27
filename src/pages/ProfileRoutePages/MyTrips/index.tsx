@@ -1,42 +1,44 @@
 import React, {useEffect} from 'react';
-import {RefreshControl, ScrollView} from 'react-native';
-import {getTripByCreator} from '../../../utils/firestore';
+import {FlatList, ScrollView} from 'react-native';
+import {getTrips} from '../../../utils/firestore';
 import {TripListItem} from '../../../components/atom/TriplistItem';
 import {useAppSelector} from '../../../store/store';
 import {colors} from '../../../constants/colors';
 import {Trip} from '../../../types/trip';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {useTranslation} from 'react-i18next';
-import { getGuestTrips } from '../../../utils/functions';
+import { useDispatch } from 'react-redux';
 
 const PageMyTrips = ({navigation}: any) => {
   const {t} = useTranslation();
-  const [trips, setTrips] = React.useState<Trip[]>([]);
+  const dispatch = useDispatch();
+
+  const [myTrips, setMyTrips] = React.useState<Trip[]>([]);
   const [guestTrips, setGuestTrips] = React.useState<Trip[]>([]);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const tripsData = useAppSelector(state => state.trips.trips);
 
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [routes, setRoutes] = React.useState([
     {key: 'first', title: `${t(`trips:own`)}`},
     {key: 'second', title: `${t(`trips:guest`)}`},
   ]);
 
   const userData = useAppSelector(state => state.user.userData);
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      fetchData().then(() => {
-        setRefreshing(false);
-      });
-    }, 1000);
-  }, []);
 
   const fetchData = async () => {
     try {
-      const tempTrips = await getTripByCreator(userData.id);
-      setTrips(tempTrips);
-      const tempGuestTrips = await getGuestTrips(userData.id);
+      await getTrips(dispatch)
+      const tempTrips = tripsData.filter(trip => trip.creator === userData.id);
+      setMyTrips(tempTrips);
+      const tempGuestTrips = tripsData.filter(trip =>
+        trip.attendanceRequests?.some(
+          request =>
+            request.requesterID === userData.id &&
+            request.status === 'accepted',
+        ),
+      );
       setGuestTrips(tempGuestTrips);
+      setRoutes(routes)
     } catch (error) {
       console.error('Error fetching trips:', error);
     }
@@ -47,41 +49,47 @@ const PageMyTrips = ({navigation}: any) => {
   }, []);
 
   const OwnTrips = () => (
-    <ScrollView
-      refreshControl={
-        <RefreshControl
-          tintColor={colors.white}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }>
-      {trips?.map((trip, index) => (
+    <FlatList
+      data={myTrips}
+      keyExtractor={item => item.id as string}
+      renderItem={({item}) => (
         <TripListItem
-          key={index}
-          trip={trip}
-          onPress={() => navigation.navigate('MyTripDetails', {trip: trip})}
+          trip={item}
+          onPress={() => navigation.navigate('MyTripDetails', {trip: item})}
         />
-      ))}
-    </ScrollView>
+      )}
+    />
+    // <ScrollView>
+    //   {myTrips?.map((trip, index) => (
+    //     <TripListItem
+    //       key={index}
+    //       trip={trip}
+    //       onPress={() => navigation.navigate('MyTripDetails', {trip: trip})}
+    //     />
+    //   ))}
+    // </ScrollView>
   );
 
   const GuestTrips = () => (
-    <ScrollView
-      refreshControl={
-        <RefreshControl
-          tintColor={colors.white}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }>
-      {guestTrips?.map((trip, index) => (
-        <TripListItem
-          key={index}
-          trip={trip}
-          onPress={() => navigation.navigate('MyTripDetails', {trip: trip})}
-        />
-      ))}
-    </ScrollView>
+    <FlatList
+    data={guestTrips}
+    keyExtractor={item => item.id as string}
+    renderItem={({item}) => (
+      <TripListItem
+        trip={item}
+        onPress={() => navigation.navigate('MyTripDetails', {trip: item})}
+      />
+    )}
+  />
+    // <ScrollView>
+    //   {guestTrips?.map((trip, index) => (
+    //     <TripListItem
+    //       key={index}
+    //       trip={trip}
+    //       onPress={() => navigation.navigate('MyTripDetails', {trip: trip})}
+    //     />
+    //   ))}
+    // </ScrollView>
   );
 
   const _renderScene = SceneMap({

@@ -22,7 +22,6 @@ const PageSettings = () => {
     {code: 'tr', label: t('language:turkish')},
   ];
   const handleLanguageChange = (language: string) => {
-    console.log(language);
     changeLang(language);
     i18next.changeLanguage(language);
   };

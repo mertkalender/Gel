@@ -27,12 +27,12 @@ const PageLogin = ({ navigation } : any) => {
   const handleLogin = async () => {
     setLoading(true);
     if (!validateInputs()) {
+      setLoading(false);
       return;
     }
     await auth().signInWithEmailAndPassword(email, password)
       .then(async (res) => {
         const userInfo = await getUser(res.user.uid);
-        console.log('userInfo:', userInfo);
         dispatch(setUser(userInfo));
         dispatch(setIsLoggedIn(true));
         Toast.show({

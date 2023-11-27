@@ -12,7 +12,7 @@ import {
 import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
 import {ActivityIndicator, Alert} from 'react-native';
-import {createUser} from '../../../utils/firestore';
+import {createUser, sendVerificationEmail} from '../../../utils/firestore';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../../../constants/colors';
 
@@ -42,8 +42,12 @@ const PageRegister = ({navigation}: any) => {
   const handleRegister = () => {
     setLoading(true);
     if (!validateInputs()) {
+      setLoading(false);
       return;
     }
+    //create a 5 digit random number
+    const verificationCode = Math.floor(10000 + Math.random() * 90000);
+    sendVerificationEmail(email, verificationCode.toString());
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {

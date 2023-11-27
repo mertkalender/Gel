@@ -3,6 +3,8 @@ import {COLLECTIONS} from '../constants/firebase';
 import {Trip, TripStatus} from '../types/trip';
 import {User} from '../types/user';
 import {AttendanceRequest, Invitation} from '../types/trip';
+import {setTrips} from '../store/slices/tripsSlice';
+import { generateEmailVerificationHTML } from '../assets/email/email-verification';
 
 export function createUser(
   _userId: string,
@@ -63,26 +65,22 @@ export function getUsers(userIDs: string[]): Promise<User[]> {
   });
 }
 
-export async function getTrips(): Promise<Trip[]> {
-  return new Promise<Trip[]>((resolve, reject) => {
-    const unsubscribe = firestore()
-      .collection(COLLECTIONS.TRIPS)
-      .orderBy('date', 'desc')
-      .onSnapshot(
-        querySnapshot => {
-          const trips = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-          })) as Trip[];
-          resolve(trips);
-        },
-        error => {
-          console.error('Error fetching trips:', error);
-          reject(error);
-        },
-      );
-    return unsubscribe;
-  });
+export async function getTrips(dispatch: any) {
+  firestore()
+    .collection(COLLECTIONS.TRIPS)
+    .orderBy('date', 'desc')
+    .onSnapshot(
+      querySnapshot => {
+        const trips = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Trip[];
+        dispatch(setTrips(trips));
+      },
+      error => {
+        console.error('Error fetching trips:', error);
+      },
+    );
 }
 
 export async function getTripByCreator(creatorID: string): Promise<Trip[]> {
@@ -170,16 +168,13 @@ export const acceptInvitation = async (trip: Trip, invitation: Invitation) => {
       return _invitation;
     });
 
-    await firestore()
-      .collection(COLLECTIONS.TRIPS)
-      .doc(trip.id)
-      .set(
-        {
-          invitations: updatedInvitations,
-          status: TripStatus.COMPLETED,
-        },
-        {merge: true},
-      );
+    await firestore().collection(COLLECTIONS.TRIPS).doc(trip.id).set(
+      {
+        invitations: updatedInvitations,
+        status: TripStatus.COMPLETED,
+      },
+      {merge: true},
+    );
   } catch (error) {
     console.error('Error:', error);
     throw error;
@@ -222,7 +217,6 @@ export const rejectAttendanceRequest = async (
   attendanceRequest: AttendanceRequest,
 ) => {
   try {
-
     const updatedAttendanceRequests = trip.attendanceRequests?.map(request => {
       if (request.requesterID === attendanceRequest.requesterID) {
         return {
@@ -233,25 +227,19 @@ export const rejectAttendanceRequest = async (
       return request;
     });
 
-    await firestore()
-      .collection(COLLECTIONS.TRIPS)
-      .doc(trip.id)
-      .set(
-        {
-          attendanceRequests: updatedAttendanceRequests,
-        },
-        {merge: true},
-      );
+    await firestore().collection(COLLECTIONS.TRIPS).doc(trip.id).set(
+      {
+        attendanceRequests: updatedAttendanceRequests,
+      },
+      {merge: true},
+    );
   } catch (error) {
     console.error('Error:', error);
     throw error;
   }
 };
 
-export const rejectInvitation = async (
-  trip: Trip,
-  invitation: Invitation,
-) => {
+export const rejectInvitation = async (trip: Trip, invitation: Invitation) => {
   try {
     const updatedInvitations = trip.invitations?.map(_invitation => {
       if (_invitation.inviterID === invitation.inviterID) {
@@ -263,17 +251,28 @@ export const rejectInvitation = async (
       return _invitation;
     });
 
-    await firestore()
-      .collection(COLLECTIONS.TRIPS)
-      .doc(trip.id)
-      .set(
-        {
-          invitations: updatedInvitations,
-        },
-        {merge: true},
-      );
+    await firestore().collection(COLLECTIONS.TRIPS).doc(trip.id).set(
+      {
+        invitations: updatedInvitations,
+      },
+      {merge: true},
+    );
   } catch (error) {
     console.error('Error:', error);
     throw error;
   }
 };
+
+export const sendVerificationEmail = async (receiver: string, verificationCode: string) => {
+  try {
+    await firestore().collection(COLLECTIONS.EMAIL).add({
+      to: [receiver],
+      message: {
+        subject: 'GEL Verify Email',
+        html: generateEmailVerificationHTML({ verificationCode }),
+      }})
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}

@@ -34,14 +34,18 @@ const PageCreateTrip = ({route, navigation}: any) => {
       Alert.alert(t('createTrip:sthWrong'), t('createTrip:emptyFields'));
       return false;
     }
+    if(isDriver){
+      if(passengerCount < 1 || passengerCount > 10 || !passengerCount){
+        Alert.alert(t('createTrip:sthWrong'), t('createTrip:passengerCountError'));
+        return false;
+      }
+    }
     return true;
   };
 
   const handlePassengerCountInputChange = (value: string) => {
     const parsedQty = Number.parseInt(value);
-    if (Number.isNaN(parsedQty)) {
-      setPassengerCount(0); //setter for state
-    } else if (parsedQty > 10 || parsedQty < 1) {
+    if (parsedQty > 10 || parsedQty < 1) {
       Toast.show({
         type: 'error',
         text1: t('createTrip:passengerCountError'),
@@ -49,7 +53,6 @@ const PageCreateTrip = ({route, navigation}: any) => {
         position: 'bottom',
         visibilityTime: 1600,
       });
-      setPassengerCount(10);
     } else {
       setPassengerCount(parsedQty);
     }
@@ -58,6 +61,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
   const handleCreateTrip = async () => {
     setLoading(true);
     if (!validateInputs()) {
+      setLoading(false);      
       return;
     }
     const tempTripDriver: Trip = {
