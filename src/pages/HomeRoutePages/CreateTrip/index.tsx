@@ -26,19 +26,13 @@ const PageCreateTrip = ({route, navigation}: any) => {
   const [passengerCount, setPassengerCount] = useState(0);
   const {isDriver} = route.params;
   const [loading, setLoading] = useState(false)
-
+  const [disabled, setDisabled] = useState(false)
   const userData = useAppSelector(state => state.user.userData);
 
   const validateInputs = () => {
     if (!from || !to || !isDateSelected) {
       Alert.alert(t('createTrip:sthWrong'), t('createTrip:emptyFields'));
       return false;
-    }
-    if(isDriver){
-      if(passengerCount < 1 || passengerCount > 10 || !passengerCount){
-        Alert.alert(t('createTrip:sthWrong'), t('createTrip:passengerCountError'));
-        return false;
-      }
     }
     return true;
   };
@@ -53,7 +47,9 @@ const PageCreateTrip = ({route, navigation}: any) => {
         position: 'bottom',
         visibilityTime: 1600,
       });
+      setDisabled(true);
     } else {
+      setDisabled(false);
       setPassengerCount(parsedQty);
     }
   };
@@ -95,6 +91,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
         navigation.navigate('Home');
       })
       .catch(error => {
+        setLoading(false);
         console.log('error:', error);
         Alert.alert(t('createTrip:sthWrong'), t('createTrip:unknownError'));
         return Promise.reject(error);
@@ -139,7 +136,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
             onChangeText={val => handlePassengerCountInputChange(val)}
           />
         )}
-        <CreateButton onPress={handleCreateTrip}>
+        <CreateButton disabled={disabled} onPress={handleCreateTrip}>
           <ButtonText>{t('createTrip:create')}</ButtonText>
           {loading && <ActivityIndicator style={{marginLeft: 10}} size="small" color={colors.white} />}
         </CreateButton>

@@ -12,9 +12,10 @@ import {
 import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
 import {ActivityIndicator, Alert} from 'react-native';
-import {createUser, sendVerificationEmail} from '../../../utils/firestore';
+import {createUser} from '../../../utils/firestore';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../../../constants/colors';
+import VerificationPopup from '../../../components/molecule/VerificationPopup';
 
 const PageRegister = ({navigation}: any) => {
   const [name, setName] = useState('');
@@ -23,6 +24,7 @@ const PageRegister = ({navigation}: any) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isVerificationPopupVisible, setIsVerificationPopupVisible] = useState(false);
   const {t} = useTranslation();
 
   const validateInputs = () => {
@@ -39,15 +41,16 @@ const PageRegister = ({navigation}: any) => {
     return true;
   };
 
-  const handleRegister = () => {
-    setLoading(true);
+  const handleVerification = () => {
     if (!validateInputs()) {
-      setLoading(false);
       return;
     }
-    //create a 5 digit random number
-    const verificationCode = Math.floor(10000 + Math.random() * 90000);
-    sendVerificationEmail(email, verificationCode.toString());
+    setIsVerificationPopupVisible(true);
+  };
+
+  const handleRegister = () => {
+
+    setLoading(true);
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
@@ -61,6 +64,7 @@ const PageRegister = ({navigation}: any) => {
         navigation.navigate('Login');
       })
       .catch(error => {
+        setLoading(false);
         switch (error.code) {
           case 'auth/invalid-email':
             Alert.alert(t('register:sthWrong'), t('register:invalidEmail'));
@@ -80,24 +84,27 @@ const PageRegister = ({navigation}: any) => {
         }
         return Promise.reject(error);
       });
-    setLoading(false);
   };
 
   return (
     <Container>
+      <VerificationPopup setLoading={setLoading} isVisible={isVerificationPopupVisible} setVisible={setIsVerificationPopupVisible} email={email} onClose={() => setIsVerificationPopupVisible(false)} onSubmit={handleRegister}/>
       <RegisterBox>
         <Title>{t('register:title')}</Title>
         <Input
+          autoComplete='off'
           placeholderTextColor={colors.gray}
           onChangeText={val => setName(val.trim())}
           placeholder={t('register:name')}
         />
         <Input
+          autoComplete='off'
           placeholderTextColor={colors.gray}
           onChangeText={val => setSurname(val.trim())}
           placeholder={t('register:surname')}
         />
         <Input
+          autoComplete='off'
           placeholderTextColor={colors.gray}
           keyboardType="email-address"
           autoCapitalize="none"
@@ -105,21 +112,25 @@ const PageRegister = ({navigation}: any) => {
           placeholder={t('register:email')}
         />
         <Input
+          autoComplete='off'
           placeholderTextColor={colors.gray}
           onChangeText={setPassword}
           placeholder={t('register:password')}
           secureTextEntry
+          autoCapitalize="none"
           textContentType="newPassword"
         />
         <Input
+          autoComplete='off'
           placeholderTextColor={colors.gray}
           onChangeText={setConfirmPassword}
           placeholder={t('register:passwordConfirm')}
           secureTextEntry
+          autoCapitalize="none"
           textContentType="newPassword"
         />
         <ButtonContainer>
-          <RegisterButton onPress={handleRegister}>
+          <RegisterButton onPress={handleVerification}>
             <ButtonText>{t('register:register')}</ButtonText>
             {loading && <ActivityIndicator style={{marginLeft: 10}} size="small" color={colors.white} />}
           </RegisterButton>

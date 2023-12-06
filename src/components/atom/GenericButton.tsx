@@ -16,7 +16,6 @@ const StyledTouchableOpacity = styled(TouchableOpacity)`
     padding: 10px;
     justify-content: center;
     align-items: center;
-    margin: 10px;
 `;
 
 const StyledText = styled(Text)`
@@ -25,7 +24,7 @@ const StyledText = styled(Text)`
 
 export const GenericButton = ({  onPress, text, buttonStyle, textStyle }: GenericButtonProps) => {
     return (
-        <StyledTouchableOpacity style={buttonStyle? buttonStyle : null} onPress={() => onPress}>
+        <StyledTouchableOpacity style={buttonStyle? buttonStyle : null} onPress={onPress}>
             <StyledText style={textStyle? textStyle : null}>{text}</StyledText>
         </StyledTouchableOpacity>
     );

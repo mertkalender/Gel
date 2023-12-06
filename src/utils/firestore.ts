@@ -265,10 +265,11 @@ export const rejectInvitation = async (trip: Trip, invitation: Invitation) => {
 
 export const sendVerificationEmail = async (receiver: string, verificationCode: string) => {
   try {
+    console.log('Sending verification email to: ', receiver, 'with code: ', verificationCode);
     await firestore().collection(COLLECTIONS.EMAIL).add({
       to: [receiver],
       message: {
-        subject: 'GEL Verify Email',
+        subject: `GEL Verification - ${verificationCode}`,
         html: generateEmailVerificationHTML({ verificationCode }),
       }})
   } catch (error) {

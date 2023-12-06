@@ -5,6 +5,7 @@
         "noDataFound": "Ooops... No data found.",
         "wait": "Wait...",
         "accept": "Accept",
+        "submit": "Submit",
         "cancel": "Cancel",
         "reject": "Reject"
     },
@@ -44,7 +45,9 @@
         "invalidEmail" : "Invalid email.",
         "weakPassword" : "Password must be at least 6 characters long.",
         "sthWrong" : "Something went wrong",
-        "unknownError" : "An unexpected error occurred. Please try again later."
+        "unknownError" : "An unexpected error occurred. Please try again later.",
+        "verificationText": "A verification code has been sent to your email. Please enter the code to verify your account.",
+        "verificationError": "Verification code is wrong. Please try again."
     },
     "profile": {
         "title" : "Profile",

@@ -5,6 +5,7 @@
         "noDataFound": "Ups... Veri bulunamadı.",
         "wait": "Bekle...",
         "accept": "Kabul Et",
+        "submit": "Gönder",
         "cancel": "İptal",
         "reject": "Reddet"
     },
@@ -44,7 +45,9 @@
         "invalidEmail" : "Geçersiz e-posta adresi.",
         "weakPassword" : "Şifre en az 6 karakter olmalıdır.",
         "sthWrong" : "Bir şeyler yanlış",
-        "unknownError" : "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+        "unknownError" : "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        "verificationText": "E-posta adresinize bir onay kodu gönderildi. Lütfen kodu giriniz.",
+        "verificationError": "Onay kodu hatalı. Lütfen tekrar deneyiniz."
     },
     "profile": {
         "title": "Profil",

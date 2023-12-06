@@ -4,6 +4,10 @@ import {TouchableOpacity, View} from 'react-native';
 import {createTripBoxHeight, screenWidth} from '../../../constants/generic';
 import { fontSizes } from '../../../constants/fonts';
 
+interface CreateButtonProps {
+  disabled: boolean;
+}
+
 export const Container = styled(View)`
   flex: 1;
   background-color: ${colors.background};
@@ -37,9 +41,10 @@ export const DatePickerContainer = styled(TouchableOpacity)`
   margin-bottom: 20px;
 `;
 
-export const CreateButton = styled(TouchableOpacity)`
+export const CreateButton = styled(TouchableOpacity)<CreateButtonProps>`
   flex-direction: row;
-  background-color: ${colors.primary};
+  background-color: ${props =>
+    props.disabled ? colors.darkGray : colors.primary};
   padding: 10px;
   border-radius: 5px;
   align-items: center;

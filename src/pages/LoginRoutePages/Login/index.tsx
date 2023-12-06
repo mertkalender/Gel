@@ -43,6 +43,7 @@ const PageLogin = ({ navigation } : any) => {
         });
       })
       .catch((error) => {
+        setLoading(false);
         console.log('error:', error);
         switch (error.code) {
           case 'auth/invalid-email':
