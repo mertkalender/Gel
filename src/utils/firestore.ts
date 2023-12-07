@@ -21,7 +21,7 @@ export function createUser(
       email: _email,
     })
     .catch(error => {
-      console.log(error);
+      console.error('Error:', error);
     });
 }
 
@@ -263,14 +263,13 @@ export const rejectInvitation = async (trip: Trip, invitation: Invitation) => {
   }
 };
 
-export const sendVerificationEmail = async (receiver: string, verificationCode: string) => {
+export const sendVerificationEmail = async (receiver: string, verificationCode: string, receiverName: string) => {
   try {
-    console.log('Sending verification email to: ', receiver, 'with code: ', verificationCode);
     await firestore().collection(COLLECTIONS.EMAIL).add({
       to: [receiver],
       message: {
         subject: `GEL Verification - ${verificationCode}`,
-        html: generateEmailVerificationHTML({ verificationCode }),
+        html: generateEmailVerificationHTML({ verificationCode, receiverName }),
       }})
   } catch (error) {
     console.error('Error:', error);

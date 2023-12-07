@@ -14,6 +14,7 @@ import { sendVerificationEmail } from '../../utils/firestore';
 interface VerificationPopupProps {
   isVisible: boolean;
   email: string;
+  name: string;
   onClose: () => void;
   onSubmit: () => void;
   setVisible: (isVisible: boolean) => void;
@@ -23,6 +24,7 @@ interface VerificationPopupProps {
 const VerificationPopup: React.FC<VerificationPopupProps> = ({
   isVisible,
   email,
+  name,
   onClose,
   onSubmit,
   setVisible,
@@ -116,7 +118,7 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
     const tempCode = Math.floor(100000 + Math.random() * 900000).toString();
     setVerificationCode(tempCode);
 
-    sendVerificationEmail(email, tempCode).then(() => {
+    sendVerificationEmail(email, tempCode, name).then(() => {
       setVisible(true);
     });
   }

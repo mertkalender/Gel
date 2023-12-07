@@ -1,8 +1,9 @@
 interface EmailVerificationProps {
   verificationCode: string;
+  receiverName: string;
 }
 
-export const generateEmailVerificationHTML = ({ verificationCode }: EmailVerificationProps): string => {
+export const generateEmailVerificationHTML = ({ verificationCode, receiverName }: EmailVerificationProps): string => {
   return `
     <!DOCTYPE html>
     <html>
@@ -20,7 +21,7 @@ export const generateEmailVerificationHTML = ({ verificationCode }: EmailVerific
 
       <tr>
         <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-          <p style="margin: 0;">Hi! Thank you for signing up to "GEL", please enter the code below on your application to activate your account. Afterwards, you can safely delete this email.</p>
+          <p style="margin: 0;">Hi ${receiverName}!<br><br>We are happy to see you among us! Please enter the code below on your application to activate your account. Afterwards, you can safely delete this email.<br><br>Enjoy GEL!!</p>
         </td>
       </tr>
 
@@ -32,7 +33,7 @@ export const generateEmailVerificationHTML = ({ verificationCode }: EmailVerific
                 <table border="0" cellpadding="0" cellspacing="0">
                   <tr>
                     <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                      <p target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">${verificationCode}</p>
+                      <p target="_blank" style="display: inline-block; padding: 3px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">${verificationCode}</p>
                     </td>
                   </tr>
                 </table>
