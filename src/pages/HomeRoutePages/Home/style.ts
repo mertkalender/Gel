@@ -1,6 +1,6 @@
 import { colors } from "../../../constants/colors";
 import styled from 'styled-components/native';
-import { Button, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 import { fontSizes } from "../../../constants/fonts";
 
 export const HomeContainer = styled(View)`

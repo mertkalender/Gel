@@ -1,7 +1,5 @@
 import {TouchableOpacity} from 'react-native';
 import {
-  ButtonContainer,
-  HomeButton,
   HomeButtonText,
   HomeContainer,
   BackgroundImage,
