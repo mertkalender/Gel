@@ -1,21 +1,43 @@
-import { ButtonContainer, HomeButton, HomeButtonText, HomeContainer } from './style';
-import { useTranslation } from 'react-i18next';
+import {TouchableOpacity} from 'react-native';
+import {
+  ButtonContainer,
+  HomeButton,
+  HomeButtonText,
+  HomeContainer,
+  BackgroundImage,
+} from './style';
+import {useTranslation} from 'react-i18next';
+import { colors } from '../../../constants/colors';
 
-
-const PageHome = ({ navigation } : any) => {
-
-  const { t } = useTranslation();
+const PageHome = ({navigation}: any) => {
+  const {t} = useTranslation();
 
   return (
     <HomeContainer>
-      <ButtonContainer>
-        <HomeButton onPress={() => {navigation.navigate('CreateTrip', {isDriver: true})}}>
-          <HomeButtonText>{t('home:iAmDriver')}</HomeButtonText>
-        </HomeButton>
-        <HomeButton onPress={() => {navigation.navigate('CreateTrip', {isDriver: false})}}>
+      <TouchableOpacity
+        style={{flex: 1, width: '100%'}}
+        onPress={() => {
+          navigation.navigate('CreateTrip', {isDriver: true});
+        }}>
+        <BackgroundImage
+          style={{justifyContent: 'flex-end'}}
+          resizeMode='cover'
+          source={require('../../../assets/images/driver_home.png')}>
+          <HomeButtonText style={{color: colors.white}}>{t('home:iAmDriver')}</HomeButtonText>
+        </BackgroundImage>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{flex: 1, width: '100%'}}
+        onPress={() => {
+          navigation.navigate('CreateTrip', {isDriver: false});
+        }}>
+        <BackgroundImage
+          style={{justifyContent: 'flex-start'}}
+          resizeMode='cover'
+          source={require('../../../assets/images/hitchhiker.png')}>
           <HomeButtonText>{t('home:iAmHitchhiker')}</HomeButtonText>
-        </HomeButton>
-      </ButtonContainer>
+        </BackgroundImage>
+      </TouchableOpacity>
     </HomeContainer>
   );
 };
