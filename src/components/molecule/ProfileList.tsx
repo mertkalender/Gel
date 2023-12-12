@@ -32,12 +32,6 @@ export const ProfileList = ({navigation}: any) => {
   const _handleSignOut = async () => {
     await auth().signOut().then(() => {;
       dispatch(setIsLoggedIn(false));
-      Toast.show({
-        type: 'success',
-        text1: t('profile:logoutSuccess'),
-        text2: t('profile:logoutSuccessMessage'),
-        position: 'bottom',
-      });
     });
   }
 

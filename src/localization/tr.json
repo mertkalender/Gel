@@ -24,9 +24,7 @@
         "invalidEmail" : "Geçersiz e-posta adresi.",
         "userDisabled" : "Bu kullanıcı engellenmiş.",
         "userNotFound" : "Bu kullanıcı bulunamadı.",
-        "invalidCredentials" : "E-posta ya da şifre hatalı",
-        "success" : "Başarılı!",
-        "successMessage" : "Başarıyla giriş yapıldı. Keyfini çıkarın!"
+        "invalidCredentials" : "E-posta ya da şifre hatalı"
     },
     "register" : {
         "title" : "Kayıt Ol",
@@ -54,9 +52,7 @@
         "myInfo": "Bilgilerim",
         "myTrips": "Seyahatlerim",
         "settings": "Ayarlar",
-        "logout": "Çıkış yap",
-        "logoutSuccess": "Başarılı!",
-        "logoutSuccessMessage": "Başarıyla çıkış yapıldı. Görüşmek üzere!"
+        "logout": "Çıkış yap"
     },
     "settings" : {
         "title" : "Ayarlar",

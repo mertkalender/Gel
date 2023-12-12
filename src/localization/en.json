@@ -24,9 +24,7 @@
         "invalidEmail" : "Invalid email.",
         "userDisabled" : "This user is disabled.",
         "userNotFound" : "User not found.",
-        "invalidCredentials" : "Invalid Credentials. E-mail or password is wrong.",
-        "success" : "Success!",
-        "successMessage" : "Successfully logged-in. Enjoy!"
+        "invalidCredentials" : "Invalid Credentials. E-mail or password is wrong."
     },
     "register": {
         "title": "Register",
@@ -54,9 +52,7 @@
         "myInfo": "My Info",
         "myTrips": "Trips",
         "settings": "Settings",
-        "logout": "Log out",
-        "logoutSuccess": "Success!",
-        "logoutSuccessMessage": "Successfully logged-out. See you soon!"
+        "logout": "Log out"
     },
     "settings" : {
         "title" : "Settings",

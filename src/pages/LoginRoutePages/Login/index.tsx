@@ -35,12 +35,6 @@ const PageLogin = ({ navigation } : any) => {
         const userInfo = await getUser(res.user.uid);
         dispatch(setUser(userInfo));
         dispatch(setIsLoggedIn(true));
-        Toast.show({
-          type: 'success',
-          text1: t('login:success'),
-          text2: t('login:successMessage'),
-          position: 'top',
-        });
       })
       .catch((error) => {
         setLoading(false);
