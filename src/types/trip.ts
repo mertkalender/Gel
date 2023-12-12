@@ -22,6 +22,7 @@ export type Trip = {
     endPoint: string;
     date: FirebaseFirestoreTypes.Timestamp;
     passengerCount: number;
+    passengers: string[];
     isCreatorDriver: boolean;
     attendanceRequests?: AttendanceRequest[];
     invitations?: Invitation[];

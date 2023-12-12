@@ -202,7 +202,9 @@ export const acceptAttendanceRequest = async (
       .set(
         {
           attendanceRequests: updatedAttendanceRequests,
-          passengerCount: firestore.FieldValue.increment(1),
+          passengers: firestore.FieldValue.arrayUnion(
+            attendanceRequest.requesterID,
+          ),
         },
         {merge: true},
       );
