@@ -69,6 +69,7 @@
         "title": "Trips",
         "creator": "Creator",
         "passengerCount": "Passenger Count",
+        "passengers": "Passengers",
         "date": "Date",
         "success": "Success!",
         "requestSentSuccess": "Request sent successfully.",

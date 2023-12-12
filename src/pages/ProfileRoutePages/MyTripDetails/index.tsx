@@ -7,9 +7,14 @@ import {
   Container,
   DestinationRow,
   DestinationText,
+  Divider,
   InfoLabel,
   InfoRow,
+  LightDivider,
   NameContainer,
+  PassengerImage,
+  PassengerInfo,
+  PassengersWrapper,
   RequestRow,
 } from './style';
 import {useTranslation} from 'react-i18next';
@@ -24,7 +29,7 @@ import {
 import {User} from '../../../types/user';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Alert, TouchableOpacity} from 'react-native';
+import {Alert, ScrollView, TouchableOpacity, View} from 'react-native';
 import {
   Invitation,
   AttendanceRequest,
@@ -36,7 +41,7 @@ const PageMyTripDetails = ({route}: any) => {
   const {t} = useTranslation();
   const trip: Trip = route.params.trip;
   const [index, setIndex] = React.useState(0);
-
+  const [passengers, setPassengers] = React.useState<User[]>([]);
   const [filteredRequests] = React.useState<AttendanceRequest[]>(
     trip.attendanceRequests?.filter(
       request => request.status === RequestStatus.PENDING,
@@ -73,8 +78,14 @@ const PageMyTripDetails = ({route}: any) => {
     setRequesters(response);
   };
 
+  const fetchPassengers = async () => {
+    const response = await getUsers(trip.passengers as string[]);
+    setPassengers(response);
+  };
+
   useEffect(() => {
     fetchRequesters();
+    fetchPassengers();
   }, []);
 
   const _handleAcceptRequest = (requester: User) => {
@@ -167,22 +178,46 @@ const PageMyTripDetails = ({route}: any) => {
 
   const DetailsTab = () => {
     return (
-      <>
+      <View style={{flex: 1, marginTop: 10}}>
         <InfoRow>
           <InfoLabel bold>{t(`trips:date`)}</InfoLabel>
           <InfoLabel>{new Date(trip.date.toDate()).toDateString()}</InfoLabel>
         </InfoRow>
         {trip.isCreatorDriver ? (
           <>
-            <InfoRow>
-              <InfoLabel bold>{t(`trips:passengerCount`)}</InfoLabel>
-              <InfoLabel>{trip.passengerCount}</InfoLabel>
-            </InfoRow>
+            <PassengersWrapper>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <InfoLabel bold>{t(`trips:passengers`)}</InfoLabel>
+                <InfoLabel>{'(' + trip.passengers.length + ')'}</InfoLabel>
+              </View>
+              <Divider />
+              <ScrollView>
+                {passengers?.map((passenger, index) => (
+                  <>
+                    <View
+                      style={{
+                        marginVertical: 10,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
+                      <PassengerImage
+                        source={require('../../../assets/images/default-avatar.png')}
+                      />
+                      <PassengerInfo key={index}>
+                        {passenger.name} {passenger.surname}
+                      </PassengerInfo>
+                    </View>
+                    {index !== passengers.length - 1 && <LightDivider />}
+                  </>
+                ))}
+              </ScrollView>
+            </PassengersWrapper>
           </>
         ) : (
           <></>
         )}
-      </>
+      </View>
     );
   };
 
@@ -243,8 +278,8 @@ const PageMyTripDetails = ({route}: any) => {
           <TabBar
             indicatorStyle={{
               backgroundColor: colors.gray,
-              width: '45%',
-              marginLeft: 10,
+              width: '35%',
+              marginLeft: 25,
             }}
             labelStyle={{fontWeight: 'bold'}}
             activeColor={colors.black}
@@ -253,6 +288,7 @@ const PageMyTripDetails = ({route}: any) => {
             {...props}
           />
         )}
+        sceneContainerStyle={{backgroundColor: colors.gray, borderRadius: 30}}
         style={{flex: 6, height: 100}}
         navigationState={{index, routes}}
         renderScene={_renderScene}

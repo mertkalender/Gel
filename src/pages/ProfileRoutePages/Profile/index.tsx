@@ -12,7 +12,7 @@ const PageProfile = ({ navigation }: any) => {
       <Container>
         <ProfileInfo>
           <ProfileImageContainer>
-            <ProfileImage source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} />
+            <ProfileImage resizeMode='stretch' source={require('../../../assets/images/default-avatar.png')} />
           </ProfileImageContainer>
           <ProfileInfoText>{userData.name} {userData.surname}</ProfileInfoText>
         </ProfileInfo>

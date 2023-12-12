@@ -69,6 +69,7 @@
         "title": "Seyahatler",
         "creator": "Oluşturan",
         "passengerCount": "Yolcu sayısı",
+        "passengers" : "Yolcular",
         "date": "Tarih",
         "success": "Başarılı!",
         "requestSentSuccess": "Talep başarıyla gönderildi.",

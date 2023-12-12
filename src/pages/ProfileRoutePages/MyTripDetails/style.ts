@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import {colors} from '../../../constants/colors';
 import {fontSizes} from '../../../constants/fonts';
+import { passengerImageSize } from '../../../constants/generic';
 
   interface InfoTextProps {
     bold?: boolean;
@@ -41,10 +42,7 @@ export const InfoRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${colors.gray};
-  border-radius: 10px;
   padding-horizontal: 5%;
-  margin-bottom: 5%;
 `;
 
 export const InfoLabel = styled.Text<InfoTextProps>`
@@ -77,7 +75,6 @@ export const AttendanceRequestsContainer = styled.View`
   flex: 1;
   justify-content: flex-start;
   background-color: ${colors.gray};
-  border-radius: 10px;
   padding: 5%;
   margin-bottom: 5%;
 `;
@@ -103,4 +100,34 @@ export const NameContainer = styled.View`
   flex: 3;
   justify-content: center;
   align-items: flex-start;
+`;
+
+export const Divider = styled.View`
+  border-bottom-width: 1px;
+  margin-top: 10px;
+  border-bottom-color: ${colors.lightGray};
+`;
+
+export const LightDivider = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: ${colors.lightGray};
+  margin-horizontal: 10%;
+`;
+
+export const PassengersWrapper = styled.View`
+  flex: 4;
+  justify-content: flex-start;
+  padding: 5%;
+`;
+
+export const PassengerInfo = styled.Text`
+  font-size: ${fontSizes.medium}px;
+  color: ${colors.white};
+`;
+
+export const PassengerImage = styled.Image`
+  width: ${passengerImageSize}px;
+  height: ${passengerImageSize}px;
+  border-radius: 20px;
+  margin-right: 10px;
 `;
