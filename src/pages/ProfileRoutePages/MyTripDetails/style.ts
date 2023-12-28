@@ -74,7 +74,6 @@ export const ArrowImage = styled.Image`
 export const AttendanceRequestsContainer = styled.View`
   flex: 1;
   justify-content: flex-start;
-  background-color: ${colors.gray};
   padding: 5%;
   margin-bottom: 5%;
 `;

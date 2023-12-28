@@ -12,9 +12,6 @@ import { useDispatch } from 'react-redux';
 const PageMyTrips = ({navigation}: any) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
-
-  const [myTrips, setMyTrips] = React.useState<Trip[]>([]);
-  const [guestTrips, setGuestTrips] = React.useState<Trip[]>([]);
   const tripsData = useAppSelector(state => state.trips.trips);
 
   const [index, setIndex] = React.useState(0);
@@ -27,18 +24,7 @@ const PageMyTrips = ({navigation}: any) => {
 
   const fetchData = async () => {
     try {
-      await getTrips(dispatch)
-      const tempTrips = tripsData.filter(trip => trip.creator === userData.id);
-      setMyTrips(tempTrips);
-      const tempGuestTrips = tripsData.filter(trip =>
-        trip.attendanceRequests?.some(
-          request =>
-            request.requesterID === userData.id &&
-            request.status === 'accepted',
-        ),
-      );
-      setGuestTrips(tempGuestTrips);
-      setRoutes(routes)
+      await getTrips(dispatch);
     } catch (error) {
       console.error('Error fetching trips:', error);
     }
@@ -50,7 +36,7 @@ const PageMyTrips = ({navigation}: any) => {
 
   const OwnTrips = () => (
     <FlatList
-      data={myTrips}
+      data={tripsData.filter(trip => trip.creator === userData.id)}
       keyExtractor={item => item.id as string}
       renderItem={({item}) => (
         <TripListItem
@@ -72,7 +58,13 @@ const PageMyTrips = ({navigation}: any) => {
 
   const GuestTrips = () => (
     <FlatList
-    data={guestTrips}
+    data={tripsData.filter(trip =>
+      trip.attendanceRequests?.some(
+        request =>
+          request.requesterID === userData.id &&
+          request.status === 'accepted',
+      ),
+    )}
     keyExtractor={item => item.id as string}
     renderItem={({item}) => (
       <TripListItem

@@ -189,7 +189,7 @@ const PageMyTripDetails = ({route}: any) => {
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <InfoLabel bold>{t(`trips:passengers`)}</InfoLabel>
-                <InfoLabel>{'(' + trip.passengers.length + ')'}</InfoLabel>
+                <InfoLabel>{'(' + trip.passengers?.length + ')'}</InfoLabel>
               </View>
               <Divider />
               <ScrollView>
