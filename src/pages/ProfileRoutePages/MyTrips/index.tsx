@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {getTrips} from '../../../utils/firestore';
 import {TripListItem} from '../../../components/atom/TriplistItem';
 import {useAppSelector} from '../../../store/store';
@@ -7,7 +7,8 @@ import {colors} from '../../../constants/colors';
 import {Trip} from '../../../types/trip';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {useTranslation} from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {fontSizes} from '../../../constants/fonts';
 
 const PageMyTrips = ({navigation}: any) => {
   const {t} = useTranslation();
@@ -34,55 +35,80 @@ const PageMyTrips = ({navigation}: any) => {
     fetchData();
   }, []);
 
-  const OwnTrips = () => (
-    <FlatList
-      data={tripsData.filter(trip => trip.creator === userData.id)}
-      keyExtractor={item => item.id as string}
-      renderItem={({item}) => (
-        <TripListItem
-          trip={item}
-          onPress={() => navigation.navigate('MyTripDetails', {trip: item})}
-        />
-      )}
-    />
-    // <ScrollView>
-    //   {myTrips?.map((trip, index) => (
-    //     <TripListItem
-    //       key={index}
-    //       trip={trip}
-    //       onPress={() => navigation.navigate('MyTripDetails', {trip: trip})}
-    //     />
-    //   ))}
-    // </ScrollView>
-  );
+  const OwnTrips = () =>
+    tripsData.filter(trip => trip.creator === userData.id).length !== 0 ? (
+      <FlatList
+        data={tripsData.filter(trip => trip.creator === userData.id)}
+        keyExtractor={item => item.id as string}
+        renderItem={({item}) => (
+          <TripListItem
+            trip={item}
+            onPress={() =>
+              navigation.navigate('MyTripDetails', {tripId: item.id})
+            }
+          />
+        )}
+      />
+    ) : (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: fontSizes.medium,
+            fontWeight: 'bold',
+            color: colors.white,
+          }}>
+          {t(`generic:noDataFound`)}
+        </Text>
+      </View>
+    );
 
-  const GuestTrips = () => (
-    <FlatList
-    data={tripsData.filter(trip =>
+  const GuestTrips = () =>
+    tripsData.filter(trip =>
       trip.attendanceRequests?.some(
         request =>
-          request.requesterID === userData.id &&
-          request.status === 'accepted',
+          request.requesterID === userData.id && request.status === 'accepted',
       ),
-    )}
-    keyExtractor={item => item.id as string}
-    renderItem={({item}) => (
-      <TripListItem
-        trip={item}
-        onPress={() => navigation.navigate('MyTripDetails', {trip: item})}
+    ).length !== 0 ? (
+      <FlatList
+        data={tripsData.filter(trip =>
+          trip.attendanceRequests?.some(
+            request =>
+              request.requesterID === userData.id &&
+              request.status === 'accepted',
+          ),
+        )}
+        keyExtractor={item => item.id as string}
+        renderItem={({item}) => (
+          <TripListItem
+            trip={item}
+            onPress={() =>
+              navigation.navigate('MyTripDetails', {tripId: item.id})
+            }
+          />
+        )}
       />
-    )}
-  />
-    // <ScrollView>
-    //   {guestTrips?.map((trip, index) => (
-    //     <TripListItem
-    //       key={index}
-    //       trip={trip}
-    //       onPress={() => navigation.navigate('MyTripDetails', {trip: trip})}
-    //     />
-    //   ))}
-    // </ScrollView>
-  );
+    ) : (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: fontSizes.medium,
+            fontWeight: 'bold',
+            color: colors.white,
+          }}>
+          {t(`generic:noDataFound`)}
+        </Text>
+      </View>
+    );
 
   const _renderScene = SceneMap({
     first: OwnTrips,

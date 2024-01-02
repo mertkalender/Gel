@@ -106,6 +106,25 @@ export async function getTripByCreator(creatorID: string): Promise<Trip[]> {
   });
 }
 
+export async function getTripById(tripID: string): Promise<Trip> {
+  return new Promise<Trip>((resolve, reject) => {
+    const unsubscribe = firestore()
+      .collection(COLLECTIONS.TRIPS)
+      .doc(tripID)
+      .onSnapshot(
+        querySnapshot => {
+          const trip = querySnapshot.data() as Trip;
+          resolve(trip);
+        },
+        error => {
+          console.error('Error fetching trip:', error);
+          reject(error);
+        },
+      );
+    return unsubscribe;
+  });
+}
+
 export const createTrip = async (trip: Trip) => {
   try {
     await firestore().collection(COLLECTIONS.TRIPS).add(trip);
