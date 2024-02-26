@@ -1190,8 +1190,6 @@ PODS:
     - React-Core
   - RNCMaskedView (0.2.9):
     - React-Core
-  - RNCPicker (2.5.1):
-    - React-Core
   - RNFBApp (18.5.0):
     - Firebase/CoreOnly (= 10.15.0)
     - React-Core
@@ -1260,7 +1258,6 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
-  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
@@ -1379,8 +1376,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
-  RNCPicker:
-    :path: "../node_modules/@react-native-picker/picker"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -1458,7 +1453,6 @@ SPEC CHECKSUMS:
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNCMaskedView: 949696f25ec596bfc697fc88e6f95cf0c79669b6
-  RNCPicker: 529d564911e93598cc399b56cc0769ce3675f8c8
   RNFBApp: 082df9f8ffba99f23f7aee3ecb64df703e7e1adb
   RNFBAuth: b055663339aef8ce9d63cd5d03e2ea5360a3aca2
   RNFBFirestore: a9837bc0c4d0911ade436787e995fa20a12a77b0
