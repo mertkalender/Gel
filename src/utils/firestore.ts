@@ -297,3 +297,8 @@ export const sendVerificationEmail = async (receiver: string, verificationCode: 
     throw error;
   }
 }
+
+export async function unsubscribeAll() {
+  await firestore().collection(COLLECTIONS.USERS).onSnapshot(() => {});
+  await firestore().collection(COLLECTIONS.TRIPS).onSnapshot(() => {});
+}

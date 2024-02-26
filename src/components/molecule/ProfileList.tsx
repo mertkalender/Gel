@@ -5,10 +5,10 @@ import {getProfileMenu} from '../../constants/generic';
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn } from '../../store/slices/userSlice';
 import auth from '@react-native-firebase/auth';
-import Toast from 'react-native-toast-message';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { colors } from '../../constants/colors';
+import { unsubscribeAll } from '../../utils/firestore';
 
 const ListContainer = styled.View`
   background-color: ${colors.gray};
@@ -30,7 +30,8 @@ export const ProfileList = ({navigation}: any) => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const _handleSignOut = async () => {
-    await auth().signOut().then(() => {;
+    await auth().signOut().then(async () => {
+      await unsubscribeAll();
       dispatch(setIsLoggedIn(false));
     });
   }
