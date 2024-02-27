@@ -44,7 +44,7 @@ const PageMyTrips = ({navigation}: any) => {
           <TripListItem
             trip={item}
             onPress={() =>
-              navigation.navigate('MyTripDetails', {tripId: item.id})
+              navigation.navigate('MyTripDetails', {trip: item})
             }
           />
         )}
@@ -87,7 +87,7 @@ const PageMyTrips = ({navigation}: any) => {
           <TripListItem
             trip={item}
             onPress={() =>
-              navigation.navigate('MyTripDetails', {tripId: item.id})
+              navigation.navigate('MyTripDetails', {trip: item})
             }
           />
         )}
