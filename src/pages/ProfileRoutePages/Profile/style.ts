@@ -10,16 +10,15 @@ import { colors } from '../../../constants/colors';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #1a1a1a;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 10px;
 `;
 
 export const ProfileInfo = styled.View`
-  background-color: ${colors.gray};
-  border-radius: 10px;
-  width: ${screenWidth * 0.95}px;
+  background-color: #5F9EA0;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  width: ${screenWidth}px;
   height: ${screenHeight * 0.18}px;
   justify-content: space-around;
 `;

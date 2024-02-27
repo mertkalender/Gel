@@ -88,7 +88,7 @@ const PageRegister = ({navigation}: any) => {
 
   return (
     <Container>
-      <VerificationPopup setLoading={setLoading} isVisible={isVerificationPopupVisible} setVisible={setIsVerificationPopupVisible} email={email} name={name} onClose={() => setIsVerificationPopupVisible(false)} onSubmit={handleRegister}/>
+      <VerificationPopup setLoading={setLoading} isVisible={isVerificationPopupVisible} setVisible={setIsVerificationPopupVisible} email={email} name={name} onClose={() => {setIsVerificationPopupVisible(false), navigation.goBack()}} onSubmit={handleRegister}/>
       <RegisterBox>
         <Title>{t('register:title')}</Title>
         <Input

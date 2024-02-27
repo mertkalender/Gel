@@ -1,15 +1,12 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {
-  View,
-  Text,
-  TextInput,
-  Modal,
-} from 'react-native';
+import {View, Text, TextInput, Modal} from 'react-native';
 import {colors} from '../../constants/colors';
 import {GenericButton} from '../atom/GenericButton';
 import Toast from 'react-native-toast-message';
-import { sendVerificationEmail } from '../../utils/firestore';
+import {sendVerificationEmail} from '../../utils/firestore';
+import { TouchableOpacity } from 'react-native';
+import { verificationEmailTimeLimit } from '../../constants/generic';
 
 interface VerificationPopupProps {
   isVisible: boolean;
@@ -30,9 +27,10 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
   setVisible,
   setLoading,
 }) => {
-
   const [verificationCode, setVerificationCode] = useState('');
   const [code, setCode] = useState(['', '', '', '', '', '']);
+  const [timer, setTimer] = useState(verificationEmailTimeLimit);
+  const [isTimerActive, setIsTimerActive] = useState(true);
   const inputRefs = useRef<Array<TextInput | null>>([
     null,
     null,
@@ -42,6 +40,20 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
     null,
   ]);
   const {t} = useTranslation();
+
+  useEffect(() => {
+    if (isTimerActive) {
+      const interval = setInterval(() => {
+        setTimer(timer => timer - 1);
+      }, 1000);
+      if (timer === 0) {
+        setIsTimerActive(false);
+        setTimer(verificationEmailTimeLimit);
+        clearInterval(interval);
+      }
+      return () => clearInterval(interval);
+    }
+  }, [isTimerActive, timer]);
 
   const renderDigitInput = (index: number) => (
     <TextInput
@@ -100,8 +112,7 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
       // if the code is correct, submit
       setLoading(true);
       onSubmit();
-    }
-    else {
+    } else {
       Toast.show({
         type: 'error',
         text1: t('register:verificationError'),
@@ -113,15 +124,21 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
   };
 
   const handleOnShow = () => {
-    inputRefs.current[0]?.focus()
+    inputRefs.current[0]?.focus();
+    sendVerification();
+  };
+
+  const sendVerification = () => {
     // create a 6 digit random number for verification
     const tempCode = Math.floor(100000 + Math.random() * 900000).toString();
     setVerificationCode(tempCode);
-
     sendVerificationEmail(email, tempCode, name).then(() => {
       setVisible(true);
+      setIsTimerActive(true);
+      setTimer(verificationEmailTimeLimit);
     });
   }
+
   return (
     <Modal
       onShow={handleOnShow}
@@ -162,13 +179,26 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
               paddingHorizontal: 10,
             }}>
             <GenericButton
-              buttonStyle={{backgroundColor: colors.primary, marginVertical: 10}}
+              buttonStyle={{
+                backgroundColor: colors.primary,
+                marginVertical: 10,
+              }}
               textStyle={{color: colors.white}}
               text={t('generic:submit')}
               onPress={handleSubmit}
             />
+            {/* add resend button with timer on it */}
+            <TouchableOpacity disabled={isTimerActive} onPress={sendVerification}>
+              <Text style={{color: isTimerActive ? colors.gray : colors.primary, textAlign: 'center'}}>
+                {t('register:resendVerification')} {isTimerActive && timer.toString()}
+              </Text>
+            </TouchableOpacity>
             <GenericButton
-              buttonStyle={{backgroundColor: 'transparent', width: '30%', alignSelf: 'center'}}
+              buttonStyle={{
+                backgroundColor: 'transparent',
+                width: '30%',
+                alignSelf: 'center',
+              }}
               textStyle={{color: colors.red}}
               text={t('generic:cancel')}
               onPress={onClose}

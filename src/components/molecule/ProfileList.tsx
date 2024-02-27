@@ -11,7 +11,6 @@ import { colors } from '../../constants/colors';
 import { unsubscribeAll } from '../../utils/firestore';
 
 const ListContainer = styled.View`
-  background-color: ${colors.gray};
   margin: 10px;
   border-radius: 10px;
   width: ${screenWidth * 0.95}px;
@@ -47,7 +46,7 @@ export const ProfileList = ({navigation}: any) => {
                 leftIconName={item.leftIconName}
                 title={item.title}
                 onPress={() => navigation.navigate(item.navigationPage)}
-                color={colors.white}
+                color={colors.orange}
               />
             ) : (
               <ProfileListItem

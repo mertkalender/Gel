@@ -13,7 +13,7 @@ export const registerBoxHeight =screenHeight > limitScreenSize ? screenHeight * 
 export const triplistBoxHeight = screenHeight > limitScreenSize ? screenHeight * 0.12 : screenHeight * 0.13
 export const profileListItemHeight = screenHeight > limitScreenSize ? screenHeight * 0.08 : screenHeight * 0.09
 export const passengerImageSize = screenHeight > limitScreenSize ? 40 : 30;
-
+export const verificationEmailTimeLimit = 90;
 export const getProfileMenu = () => {
     const { t } = useTranslation();
   

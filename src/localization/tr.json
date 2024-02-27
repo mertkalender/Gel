@@ -45,7 +45,8 @@
         "sthWrong" : "Bir şeyler yanlış",
         "unknownError" : "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
         "verificationText": "E-posta adresinize bir onay kodu gönderildi. Lütfen kodu giriniz.",
-        "verificationError": "Onay kodu hatalı. Lütfen tekrar deneyiniz."
+        "verificationError": "Onay kodu hatalı. Lütfen tekrar deneyiniz.",
+        "resendVerification": "Tekrar Gönder"
     },
     "profile": {
         "title": "Profil",

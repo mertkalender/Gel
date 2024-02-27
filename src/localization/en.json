@@ -45,7 +45,8 @@
         "sthWrong" : "Something went wrong",
         "unknownError" : "An unexpected error occurred. Please try again later.",
         "verificationText": "A verification code has been sent to your email. Please enter the code to verify your account.",
-        "verificationError": "Verification code is wrong. Please try again."
+        "verificationError": "Verification code is wrong. Please try again.",
+        "resendVerification": "Resend"
     },
     "profile": {
         "title" : "Profile",
