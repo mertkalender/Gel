@@ -18,10 +18,10 @@ export const SettingsRow = styled.View`
 
 export const SettingsItemText = styled.Text`
     font-size: 16px;
-    color: ${colors.white};
+    color: ${colors.orange};
     flex: 1;
 `;
 
 export const PickerContainer = styled.View`
-    flex: 3;
+    flex: 2;
 `;
