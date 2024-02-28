@@ -60,7 +60,7 @@ const PageMyTrips = ({navigation}: any) => {
           style={{
             fontSize: fontSizes.medium,
             fontWeight: 'bold',
-            color: colors.white,
+            color: colors.orange,
           }}>
           {t(`generic:noDataFound`)}
         </Text>
@@ -103,7 +103,7 @@ const PageMyTrips = ({navigation}: any) => {
           style={{
             fontSize: fontSizes.medium,
             fontWeight: 'bold',
-            color: colors.white,
+            color: colors.orange,
           }}>
           {t(`generic:noDataFound`)}
         </Text>
@@ -120,12 +120,12 @@ const PageMyTrips = ({navigation}: any) => {
       renderTabBar={props => (
         <TabBar
           indicatorStyle={{
-            backgroundColor: colors.lightGray,
+            backgroundColor: colors.blue,
             width: '45%',
             marginLeft: 10,
           }}
           labelStyle={{fontWeight: 'bold'}}
-          activeColor={colors.white}
+          activeColor={colors.blue}
           inactiveColor={colors.lightGray}
           style={{backgroundColor: 'transparent'}}
           {...props}

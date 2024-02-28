@@ -5,13 +5,12 @@ import { colors } from '../../../constants/colors';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #1a1a1a;
   justify-content: center;
   align-items: center;
 `;
 
 export const LoginBox = styled.View`
-  background-color: ${colors.gray};
+  background-color: ${colors.blue};
   padding: 20px;
   border-radius: 10px;
   width: ${screenWidth * 0.9}px;
@@ -41,7 +40,7 @@ export const ButtonContainer = styled.View`
 
 export const LoginButton = styled.TouchableOpacity`
   flex-direction: row;
-  background-color: ${colors.primary};
+  background-color: ${colors.orange};
   padding: 2%;
   border-radius: 5px;
   align-items: center;
@@ -51,7 +50,7 @@ export const LoginButton = styled.TouchableOpacity`
 `;
 
 export const RegisterButton = styled.TouchableOpacity`
-  background-color: #555;
+  background-color: ${colors.gray};
   padding: 2%;
   border-radius: 5px;
   align-items: center;

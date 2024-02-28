@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeRoutes} from './routes/HomeRoutes';
 import {ProfileRoutes} from './routes/ProfileRoutes';
 import {LoginRoutes} from './routes/LoginRoutes';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useAppSelector} from './store/store';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from './constants/colors';
 import {fontSizes} from './constants/fonts';
-import {tabbarHeight} from './constants/generic';
 import {TripsRoutes} from './routes/TripsRoutes';
 import { useTranslation } from 'react-i18next';
 
@@ -52,7 +50,7 @@ export default function Root() {
           <Tab.Navigator
             screenOptions={({route}) => ({
               headerShown: false,
-              tabBarActiveBackgroundColor: '#000000',
+              tabBarActiveBackgroundColor: colors.blue,
               tabBarIcon: ({focused, color}) => {
                 return _renderIcons({focused, color, route});
               },

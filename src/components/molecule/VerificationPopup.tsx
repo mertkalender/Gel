@@ -61,9 +61,10 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
       style={{
         width: 40,
         height: 40,
-        color: colors.black,
+        color: colors.blue,
         borderWidth: 1,
         borderRadius: 8,
+        borderColor: colors.blue,
         textAlign: 'center',
         margin: 5,
       }}
@@ -156,7 +157,7 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
         }}>
         <View
           style={{
-            backgroundColor: colors.white,
+            backgroundColor: colors.background,
             padding: 20,
             borderRadius: 10,
             elevation: 5,
@@ -180,7 +181,7 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
             }}>
             <GenericButton
               buttonStyle={{
-                backgroundColor: colors.primary,
+                backgroundColor: colors.orange,
                 marginVertical: 10,
               }}
               textStyle={{color: colors.white}}
@@ -189,7 +190,7 @@ const VerificationPopup: React.FC<VerificationPopupProps> = ({
             />
             {/* add resend button with timer on it */}
             <TouchableOpacity disabled={isTimerActive} onPress={sendVerification}>
-              <Text style={{color: isTimerActive ? colors.gray : colors.primary, textAlign: 'center'}}>
+              <Text style={{color: isTimerActive ? colors.gray : colors.blue, textAlign: 'center'}}>
                 {t('register:resendVerification')} {isTimerActive && timer.toString()}
               </Text>
             </TouchableOpacity>
