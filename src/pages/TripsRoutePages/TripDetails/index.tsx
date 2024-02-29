@@ -28,13 +28,13 @@ import {useAppSelector} from '../../../store/store';
 import Toast from 'react-native-toast-message';
 import {Alert} from 'react-native';
 import {isAlreadyRequested} from '../../../utils/functions';
-import { colors } from '../../../constants/colors';
 
 export const PageTripDetails = ({route, navigation}: any) => {
-  const trip: Trip = route.params.trip;
+  const tripId = route.params.tripId;
   const [user, setUser] = React.useState<User>();
-
   const userData = useAppSelector(state => state.user.userData);
+  const tripsData = useAppSelector(state => state.trips.trips);
+  const trip = tripsData.find(trip => trip.id === tripId) as Trip;
   const isOwnTrip = userData.id === trip.creator;
   const fetchUser = async () => {
     setUser(await getUser(trip.creator));

@@ -4,7 +4,7 @@ import {Trip, TripStatus} from '../types/trip';
 import {User} from '../types/user';
 import {AttendanceRequest, Invitation} from '../types/trip';
 import {setTrips} from '../store/slices/tripsSlice';
-import { generateEmailVerificationHTML } from '../assets/email/email-verification';
+import {generateEmailVerificationHTML} from '../assets/email/email-verification';
 
 export function createUser(
   _userId: string,
@@ -81,29 +81,6 @@ export async function getTrips(dispatch: any) {
         console.error('Error fetching trips:', error);
       },
     );
-}
-
-export async function getTripByCreator(creatorID: string): Promise<Trip[]> {
-  return new Promise<Trip[]>((resolve, reject) => {
-    const unsubscribe = firestore()
-      .collection(COLLECTIONS.TRIPS)
-      .orderBy('date', 'desc')
-      .where('creator', '==', creatorID)
-      .onSnapshot(
-        querySnapshot => {
-          const trips = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-          })) as Trip[];
-          resolve(trips);
-        },
-        error => {
-          console.error('Error fetching trips:', error);
-          reject(error);
-        },
-      );
-    return unsubscribe;
-  });
 }
 
 export async function getTripById(tripID: string): Promise<Trip> {
@@ -284,21 +261,32 @@ export const rejectInvitation = async (trip: Trip, invitation: Invitation) => {
   }
 };
 
-export const sendVerificationEmail = async (receiver: string, verificationCode: string, receiverName: string) => {
+export const sendVerificationEmail = async (
+  receiver: string,
+  verificationCode: string,
+  receiverName: string,
+) => {
   try {
-    await firestore().collection(COLLECTIONS.EMAIL).add({
-      to: [receiver],
-      message: {
-        subject: `GEL Verification - ${verificationCode}`,
-        html: generateEmailVerificationHTML({ verificationCode, receiverName }),
-      }})
+    await firestore()
+      .collection(COLLECTIONS.EMAIL)
+      .add({
+        to: [receiver],
+        message: {
+          subject: `GEL Verification - ${verificationCode}`,
+          html: generateEmailVerificationHTML({verificationCode, receiverName}),
+        },
+      });
   } catch (error) {
     console.error('Error:', error);
     throw error;
   }
-}
+};
 
 export async function unsubscribeAll() {
-  await firestore().collection(COLLECTIONS.USERS).onSnapshot(() => {});
-  await firestore().collection(COLLECTIONS.TRIPS).onSnapshot(() => {});
+  await firestore()
+    .collection(COLLECTIONS.USERS)
+    .onSnapshot(() => {});
+  await firestore()
+    .collection(COLLECTIONS.TRIPS)
+    .onSnapshot(() => {});
 }

@@ -1,4 +1,4 @@
-import {ImageBackground, Touchable, View} from 'react-native';
+import { View} from 'react-native';
 import styled from 'styled-components/native';
 import {Trip} from '../../types/trip';
 import {triplistBoxHeight} from '../../constants/generic';

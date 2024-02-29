@@ -28,7 +28,7 @@ const PageTrips = ({navigation}: any) => {
         <TripListItem
           key={index}
           trip={trip}
-          onPress={() => navigation.navigate('TripDetails', {trip: trip})}
+          onPress={() => navigation.navigate('TripDetails', {tripId: trip.id})}
         />
       ))}
     </ScrollView>
