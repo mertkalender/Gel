@@ -1,7 +1,7 @@
 import {colors} from '../../../constants/colors';
 import styled from 'styled-components/native';
 import {TouchableOpacity, View} from 'react-native';
-import {createTripBoxHeight, screenWidth} from '../../../constants/generic';
+import {screenWidth} from '../../../constants/generic';
 import { fontSizes } from '../../../constants/fonts';
 
 interface CreateButtonProps {
@@ -10,15 +10,13 @@ interface CreateButtonProps {
 
 export const Container = styled(View)`
   flex: 1;
-  background-color: ${colors.background};
-  padding: 5%;
-  justify-content: center;
+  padding: 4%;
 `;
 
 export const FormContainer = styled(View)`
+  height: auto;
+  margin-top: 20px;
   justify-content: space-around;
-  width: ${screenWidth * 0.9}px;
-  height: ${createTripBoxHeight}px;
 `;
 
 export const Input = styled.TextInput`
@@ -27,8 +25,8 @@ export const Input = styled.TextInput`
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
-  flex: 1;
   margin-bottom: 20px;
+  height: 50px;
 `;
 
 export const DatePickerContainer = styled(TouchableOpacity)`
@@ -37,8 +35,8 @@ export const DatePickerContainer = styled(TouchableOpacity)`
   padding: 10px;
   border-radius: 5px;
   justify-content: center;
-  flex: 1;
   margin-bottom: 20px;
+  height: 50px;
 `;
 
 export const CreateButton = styled(TouchableOpacity)<CreateButtonProps>`
@@ -48,9 +46,9 @@ export const CreateButton = styled(TouchableOpacity)<CreateButtonProps>`
   padding: 10px;
   border-radius: 5px;
   align-items: center;
-  flex: 1;
   justify-content: center;
   margin-bottom: 10px;
+  height: 50px;
 `;
 
 export const ButtonText = styled.Text`

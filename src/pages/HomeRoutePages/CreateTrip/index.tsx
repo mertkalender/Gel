@@ -182,7 +182,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       ) : (
         <MapView
           provider={PROVIDER_GOOGLE}
-          style={{flex: 1, width: '100%', height: '100%'}}
+          style={{flex: 2, width: '100%', height: '100%'}}
           initialRegion={{
             latitude: location.latitude,
             longitude: location.longitude,
@@ -197,8 +197,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
             }}
             title={t('createTrip:from')}
             description={t('createTrip:fromDescription')}
-            pinColor='tan'
-            // move marker when user clicks on the map
+            pinColor={colors.orange}
             draggable
             onDragEnd={e => {
               setStartLocation({
@@ -214,7 +213,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
             }}
             title={t('createTrip:to')}
             description={t('createTrip:toDescription')}
-            // move marker when user clicks on the map
+            pinColor={colors.blue}
             draggable
             onDragEnd={e => {
               setEndLocation({

@@ -254,7 +254,7 @@ const PageMyTripDetails = ({route}: any) => {
           }}
           title={t('createTrip:from')}
           description={t('createTrip:fromDescription')}
-          pinColor="tan"
+          pinColor={colors.orange}
         />
         <Marker
           coordinate={{
@@ -263,6 +263,7 @@ const PageMyTripDetails = ({route}: any) => {
           }}
           title={t('createTrip:to')}
           description={t('createTrip:toDescription')}
+          pinColor={colors.blue}
         />
         <MapViewDirections
           origin={trip.startLocation}
