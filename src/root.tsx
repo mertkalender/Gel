@@ -9,7 +9,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from './constants/colors';
 import {fontSizes} from './constants/fonts';
 import {TripsRoutes} from './routes/TripsRoutes';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {SafeAreaView} from 'react-native';
 
 const MainTheme = {
   ...DefaultTheme,
@@ -20,10 +21,11 @@ const MainTheme = {
 };
 
 export default function Root() {
-  const { t } = useTranslation();
+  
+  const {t} = useTranslation();
   const Tab = createBottomTabNavigator();
   const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
-  
+
   const _renderIcons = ({focused, color, route}: any) => {
     let iconName = '';
     switch (route.name) {
@@ -36,14 +38,12 @@ export default function Root() {
       case 'TripsRoute':
         iconName = focused ? 'car' : 'car-outline';
     }
-    return (
-      <Icon name={iconName} size={fontSizes.tabbarIcons} color={color} />
-    );
+    return <Icon name={iconName} size={fontSizes.tabbarIcons} color={color} />;
   };
 
-  
   return (
-    <NavigationContainer theme={MainTheme}>
+    <SafeAreaView style={{flex: 1}}>
+      <NavigationContainer theme={MainTheme}>
         {!isLoggedIn ? (
           <LoginRoutes />
         ) : (
@@ -75,6 +75,7 @@ export default function Root() {
             />
           </Tab.Navigator>
         )}
-    </NavigationContainer>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }

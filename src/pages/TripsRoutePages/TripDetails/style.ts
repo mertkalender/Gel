@@ -8,12 +8,12 @@ interface ButtonProps {
 
 interface InfoTextProps {
   bold?: boolean;
+  color?: string
 }
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${colors.background};
-  justify-content: flex-start;
+  margin-horizontal: 4%;
 `;
 
 export const BackgroundImage = styled.ImageBackground`
@@ -34,39 +34,35 @@ export const DestinationRow = styled.View`
 
 export const DestinationText = styled.Text`
   font-size: ${fontSizes.extraLarge}px;
-  color: ${colors.black};
+  color: ${colors.orange};
   font-weight: bold;
 `;
 
 export const InfoContainer = styled.View`
-  background-color: ${colors.gray};
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-  padding: 5%;
-  width: 100%;
+  margin-vertical: 5%;
   flex: 1;
+  width: 100%;
   justify-content: center;
 `;
 
 export const InfoRow = styled.View`
-  flex: 1;
+  height: 80px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: 10px;
-  padding-horizontal: 5%;
-  margin-bottom: 5%;
 `;
 
 export const InfoLabel = styled.Text<InfoTextProps>`
-  font-size: ${fontSizes.medium}px;
+  font-size: ${fontSizes.large}px;
   font-weight: ${props => (props.bold ? 'bold' : 'normal')};
-  color: ${colors.white};
+  color: ${colors.orange};
+  margin-left: 10px;
+
 `;
 
 export const StyledButton = styled.TouchableOpacity<ButtonProps>`
   background-color: ${props =>
-    props.disabled ? colors.darkGray : colors.primary};
+    props.disabled ? colors.lightGray : colors.orange};
   padding: 10px;
   border-radius: 5px;
   align-items: center;

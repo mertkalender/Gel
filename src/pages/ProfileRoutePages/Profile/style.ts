@@ -15,7 +15,7 @@ export const Container = styled.View`
 `;
 
 export const ProfileInfo = styled.View`
-  background-color: #5F9EA0;
+  background-color: ${colors.blue};
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
   width: ${screenWidth}px;

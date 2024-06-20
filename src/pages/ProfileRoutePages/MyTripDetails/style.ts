@@ -1,69 +1,48 @@
 import styled from 'styled-components/native';
 import {colors} from '../../../constants/colors';
 import {fontSizes} from '../../../constants/fonts';
-import { passengerImageSize } from '../../../constants/generic';
+import {passengerImageSize} from '../../../constants/generic';
 
-  interface InfoTextProps {
-    bold?: boolean;
-  }
-  
+interface InfoTextProps {
+  bold?: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${colors.gray};
-  justify-content: flex-start;
+  margin-horizontal: 4%;
 `;
 
 export const BackgroundImage = styled.ImageBackground`
-  flex: 1;
-  justify-content: flex-start;
-  align-items: center;
-  position: absolute;
+  align-self: flex-start;
   width: 100%;
-  height: 80%;
-`;
-
-export const DestinationRow = styled.View`
-  flex: 5;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 5%;
+  aspect-ratio: 2.17;
+  top: 0;
 `;
 
 export const DestinationText = styled.Text`
   font-size: ${fontSizes.extraLarge}px;
-  color: ${colors.black};
+  color: ${colors.orange};
   font-weight: bold;
 `;
 
 export const InfoRow = styled.View`
-  flex: 1;
-  max-height: 40%;
+  height: 80px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-horizontal: 5%;
 `;
 
 export const InfoLabel = styled.Text<InfoTextProps>`
-  font-size: ${fontSizes.medium}px;
-  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
-  color: ${colors.white};
-`;
-
-export const StyledButton = styled.TouchableOpacity`
-  background-color: ${colors.primary};
-  padding: 10px;
-  border-radius: 5px;
-  align-items: center;
-  flex: 1;
-  justify-content: center;
-  margin-bottom: 10px;
-`;
-
-export const ButtonText = styled.Text`
-  color: #fff;
   font-size: ${fontSizes.large}px;
+  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
+  color: ${colors.orange};
+  margin-left: 10px;
+`;
+
+export const RequesterLabel = styled.Text`
+  font-size: ${fontSizes.medium}px;
+  font-weight: bold;
+  color: ${colors.blue};
 `;
 
 export const ArrowImage = styled.Image`
@@ -82,7 +61,6 @@ export const RequestRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: ${colors.gray};
   border-radius: 10px;
   padding: 5%;
   margin-bottom: 5%;
@@ -121,7 +99,7 @@ export const PassengersWrapper = styled.View`
 
 export const PassengerInfo = styled.Text`
   font-size: ${fontSizes.medium}px;
-  color: ${colors.white};
+  color: ${colors.orange};
 `;
 
 export const PassengerImage = styled.Image`

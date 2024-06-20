@@ -68,6 +68,7 @@ export function getUsers(userIDs: string[]): Promise<User[]> {
 export async function getTrips(dispatch: any) {
   firestore()
     .collection(COLLECTIONS.TRIPS)
+    .where('status', '==', TripStatus.ACTIVE)
     .orderBy('date', 'desc')
     .onSnapshot(
       querySnapshot => {

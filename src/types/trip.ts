@@ -3,6 +3,7 @@ import { FirebaseFirestoreTypes, firebase } from '@react-native-firebase/firesto
 export class Timestamp extends firebase.firestore.Timestamp {}
 
 export enum TripStatus {
+    PENDING = 'PENDING',
     ACTIVE = 'ACTIVE',
     CANCELLED = 'CANCELLED',
     COMPLETED = 'COMPLETED',
@@ -20,6 +21,8 @@ export type Trip = {
     creator: string;
     startPoint: string;
     endPoint: string;
+    startLocation: FirebaseFirestoreTypes.GeoPoint;
+    endLocation: FirebaseFirestoreTypes.GeoPoint;
     date: FirebaseFirestoreTypes.Timestamp;
     passengerCount: number;
     passengers: string[];

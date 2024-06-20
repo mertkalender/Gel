@@ -26,16 +26,8 @@ export function ProfileRoutes() {
       })}>
       <ProfileStack.Screen
         options={{
-          headerTitle: '',
-          headerBackground() {
-            return (
-              <View
-                style={{
-                  backgroundColor: colors.blue,
-                  flex: 1,
-                }}
-              />
-            );
+          header(props) {
+            return <></>;
           },
         }}
         name="Profile"

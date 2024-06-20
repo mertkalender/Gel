@@ -8,13 +8,22 @@ import {
   Input,
 } from './style';
 import {useTranslation} from 'react-i18next';
-import {useState} from 'react';
-import {ActivityIndicator, Alert, Text} from 'react-native';
+import {useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  Alert,
+  PermissionsAndroid,
+  Platform,
+  Text,
+} from 'react-native';
 import {createTrip} from '../../../utils/firestore';
 import {Timestamp, Trip, TripStatus} from '../../../types/trip';
 import Toast from 'react-native-toast-message';
 import {useAppSelector} from '../../../store/store';
 import {colors} from '../../../constants/colors';
+import Geolocation from '@react-native-community/geolocation';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import { firebase } from '@react-native-firebase/firestore';
 
 const PageCreateTrip = ({route, navigation}: any) => {
   const {t} = useTranslation();
@@ -25,12 +34,15 @@ const PageCreateTrip = ({route, navigation}: any) => {
   const [to, setTo] = useState('');
   const [passengerCount, setPassengerCount] = useState(0);
   const {isDriver} = route.params;
-  const [loading, setLoading] = useState(false)
-  const [disabled, setDisabled] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const userData = useAppSelector(state => state.user.userData);
+  const [location, setLocation] = useState({latitude: 0, longitude: 0});
+  const [startLocation, setStartLocation] = useState({latitude: 0, longitude: 0});
+  const [endLocation, setEndLocation] = useState({latitude: 0, longitude: 0});
 
   const validateInputs = () => {
-    if (!from || !to || !isDateSelected) {
+    if (!isDateSelected) {
       Alert.alert(t('createTrip:sthWrong'), t('createTrip:emptyFields'));
       return false;
     }
@@ -57,30 +69,46 @@ const PageCreateTrip = ({route, navigation}: any) => {
   const handleCreateTrip = async () => {
     setLoading(true);
     if (!validateInputs()) {
-      setLoading(false);      
+      setLoading(false);
       return;
     }
     const tempTripDriver: Trip = {
       creator: userData.id,
       startPoint: from,
       endPoint: to,
+      startLocation: new firebase.firestore.GeoPoint(
+        startLocation.latitude,
+        startLocation.longitude,
+      ),
+      endLocation: new firebase.firestore.GeoPoint(
+        endLocation.latitude,
+        endLocation.longitude,
+      ),
       date: Timestamp.fromDate(date),
       passengerCount: passengerCount,
       passengers: [],
       isCreatorDriver: isDriver,
       attendanceRequests: [],
-      status: TripStatus.ACTIVE,
+      status: TripStatus.PENDING,
     };
     const tempTripHitchhiker: Trip = {
       creator: userData.id,
       startPoint: from,
       endPoint: to,
+      startLocation: new firebase.firestore.GeoPoint(
+        startLocation.latitude,
+        startLocation.longitude,
+      ),
+      endLocation: new firebase.firestore.GeoPoint(
+        endLocation.latitude,
+        endLocation.longitude,
+      ),
       date: Timestamp.fromDate(date),
       passengerCount: passengerCount,
       passengers: [],
       isCreatorDriver: isDriver,
       invitations: [],
-      status: TripStatus.ACTIVE,
+      status: TripStatus.PENDING,
     };
     await createTrip(isDriver ? tempTripDriver : tempTripHitchhiker)
       .then(() => {
@@ -100,19 +128,105 @@ const PageCreateTrip = ({route, navigation}: any) => {
       });
     setLoading(false);
   };
+  // call Request location permission function on page render if location is not granted
+  useEffect(() => {
+    requestLocationPermission().then(() => {
+      // get longitude and latitude
+      Geolocation.getCurrentPosition(info => {
+        setLocation({
+          latitude: info.coords.latitude,
+          longitude: info.coords.longitude,
+        });
+        setStartLocation({
+          latitude: info.coords.latitude,
+          longitude: info.coords.longitude,
+        });
+        setEndLocation({
+          latitude: info.coords.latitude + 0.01,
+          longitude: info.coords.longitude + 0.01,
+        });
+      });
+    });
+  }, []);
+
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization();
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: t('createTrip:locationPermissionTitle'),
+            message: t('createTrip:locationPermissionMessage'),
+            buttonNeutral: t('createTrip:askMeLater'),
+            buttonNegative: t('createTrip:cancel'),
+            buttonPositive: t('createTrip:ok'),
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Location permission granted');
+        } else {
+          console.log('Location permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+  };
+
   return (
     <Container>
+      {location.latitude === 0 && location.longitude === 0 ? (
+        <ActivityIndicator size="large" color={colors.primary} />
+      ) : (
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{flex: 1, width: '100%', height: '100%'}}
+          initialRegion={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: startLocation.latitude,
+              longitude: startLocation.longitude,
+            }}
+            title={t('createTrip:from')}
+            description={t('createTrip:fromDescription')}
+            pinColor='tan'
+            // move marker when user clicks on the map
+            draggable
+            onDragEnd={e => {
+              setStartLocation({
+                latitude: e.nativeEvent.coordinate.latitude,
+                longitude: e.nativeEvent.coordinate.longitude,
+              });
+            }}
+          />
+          <Marker
+            coordinate={{
+              latitude: endLocation.latitude,
+              longitude: endLocation.longitude,
+            }}
+            title={t('createTrip:to')}
+            description={t('createTrip:toDescription')}
+            // move marker when user clicks on the map
+            draggable
+            onDragEnd={e => {
+              setEndLocation({
+                latitude: e.nativeEvent.coordinate.latitude,
+                longitude: e.nativeEvent.coordinate.longitude,
+              });
+            }}
+          />
+        </MapView>
+      )}
+
       <FormContainer>
-        <Input
-          placeholderTextColor={colors.gray}
-          placeholder={t('createTrip:from')}
-          onChangeText={setFrom}
-        />
-        <Input
-          placeholderTextColor={colors.gray}
-          placeholder={t('createTrip:to')}
-          onChangeText={setTo}
-        />
         <DatePickerContainer onPress={() => setShowDatePicker(true)}>
           <Text style={{color: isDateSelected ? colors.black : colors.gray}}>
             {isDateSelected ? date.toLocaleString() : t('createTrip:date')}
@@ -140,7 +254,13 @@ const PageCreateTrip = ({route, navigation}: any) => {
         )}
         <CreateButton disabled={disabled} onPress={handleCreateTrip}>
           <ButtonText>{t('createTrip:create')}</ButtonText>
-          {loading && <ActivityIndicator style={{marginLeft: 10}} size="small" color={colors.white} />}
+          {loading && (
+            <ActivityIndicator
+              style={{marginLeft: 10}}
+              size="small"
+              color={colors.white}
+            />
+          )}
         </CreateButton>
       </FormContainer>
     </Container>

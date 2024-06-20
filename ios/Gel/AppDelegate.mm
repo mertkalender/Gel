@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -7,6 +8,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyCO4eR1T5Zd3pwaOzTc-lz_yhWHcRix_ww"]; // api key obtained from Google Console for Google Maps integration
+
   [FIRApp configure];
   self.moduleName = @"Gel";
   // You can add your custom initial props in the dictionary below.

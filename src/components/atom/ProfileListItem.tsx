@@ -34,6 +34,7 @@ interface Props {
     rightIconName: string;
     leftIconName: string;
     color: string;
+    iconColor: string;
 }
 
 export const ProfileListItem = (props: Props) => {
@@ -41,7 +42,7 @@ export const ProfileListItem = (props: Props) => {
   return (
     <ListItem onPress={() => props.onPress()}>
       <Left>
-        <Icon name={props.leftIconName} size={fontSizes.tabbarIcons} color={props.color}/>
+        <Icon name={props.leftIconName} size={fontSizes.tabbarIcons} color={props.iconColor}/>
         <ListItemText color={props.color}>
           {props.title}
         </ListItemText>

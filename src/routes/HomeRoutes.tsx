@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PageHome from '../pages/HomeRoutePages/Home';
 import PageCreateTrip from '../pages/HomeRoutePages/CreateTrip';
-import { View } from 'react-native';
-import { colors } from '../constants/colors';
+import {View} from 'react-native';
+import {colors} from '../constants/colors';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -19,10 +19,17 @@ export function HomeRoutes() {
               }}
             />
           );
-        
         },
       })}>
-      <HomeStack.Screen name="Home" component={PageHome} />
+      <HomeStack.Screen
+        options={{
+          header(props) {
+            return <></>;
+          },
+        }}
+        name="Home"
+        component={PageHome}
+      />
       <HomeStack.Screen name="CreateTrip" component={PageCreateTrip} />
     </HomeStack.Navigator>
   );

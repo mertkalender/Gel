@@ -85,11 +85,17 @@
         "rejectInvitationMessage": "Are you sure you want to reject this invitation",
         "rejectRequestMessage": "Are you sure you want to reject this request?",
         "own": "Own",
-        "guest": "Guest"
+        "guest": "Guest",
+        "from": "From",
+        "fromDescription": "Start point of your trip",
+        "to": "To",
+        "toDescription": "End point of your trip"
     },
     "createTrip": {
         "from": "From",
+        "fromDescription": "Start point of your trip",
         "to": "To",
+        "toDescription": "End point of your trip",
         "selectDate": "Select Date",
         "date": "Date",
         "passengerCount": "Passenger Count",

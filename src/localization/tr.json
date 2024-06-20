@@ -85,11 +85,17 @@
         "rejectInvitationMessage": "Daveti reddetmek istediğine emin misin?",
         "rejectRequestMessage": "İsteği reddetmek istediğine emin misin?",
         "own": "Benim Sürüşlerim",
-        "guest": "Katıldıklarım"
+        "guest": "Katıldıklarım",
+        "from": "Nereden",
+        "fromDescription": "Başlangıç noktası",
+        "to": "Nereye",
+        "toDescription": "Varış noktası"
     },
     "createTrip": {
         "from": "Nereden",
+        "fromDescription": "Başlangıç noktası",
         "to": "Nereye",
+        "toDescription": "Varış noktası",
         "selectDate": "Tarih seçiniz",
         "date": "Tarih",
         "passengerCount": "Yolcu sayısı",

@@ -47,6 +47,7 @@ export const ProfileList = ({navigation}: any) => {
                 title={item.title}
                 onPress={() => navigation.navigate(item.navigationPage)}
                 color={colors.orange}
+                iconColor={colors.iconColor}
               />
             ) : (
               <ProfileListItem
@@ -55,6 +56,7 @@ export const ProfileList = ({navigation}: any) => {
                 title={item.title}
                 onPress={_handleSignOut}
                 color={colors.red}
+                iconColor={colors.red}
               />
             )}
             {index !== getProfileMenu().length - 1 ? <Divider /> : <></>}

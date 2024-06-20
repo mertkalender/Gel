@@ -1,11 +1,8 @@
 import React, {useEffect} from 'react';
 import {
-  ArrowImage,
   AttendanceRequestsContainer,
-  BackgroundImage,
   ButtonsContainer,
   Container,
-  DestinationRow,
   DestinationText,
   Divider,
   InfoLabel,
@@ -16,6 +13,7 @@ import {
   PassengerInfo,
   PassengersWrapper,
   RequestRow,
+  RequesterLabel,
 } from './style';
 import {useTranslation} from 'react-i18next';
 import {Trip} from '../../../types/trip';
@@ -27,40 +25,43 @@ import {
   rejectInvitation,
 } from '../../../utils/firestore';
 import {User} from '../../../types/user';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {SceneMap} from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Alert, ScrollView, TouchableOpacity, View} from 'react-native';
-import {
-  Invitation,
-  AttendanceRequest,
-  RequestStatus,
-} from '../../../types/trip';
+import {RequestStatus} from '../../../types/trip';
 import {colors} from '../../../constants/colors';
+import {useAppSelector} from '../../../store/store';
+import {fontSizes} from '../../../constants/fonts';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 
 const PageMyTripDetails = ({route}: any) => {
   const {t} = useTranslation();
-  const trip: Trip = route.params.trip;
-  const [index, setIndex] = React.useState(0);
-  const [passengers, setPassengers] = React.useState<User[]>([]);
-  const [filteredRequests] = React.useState<AttendanceRequest[]>(
-    trip.attendanceRequests?.filter(
-      request => request.status === RequestStatus.PENDING,
-    ) as AttendanceRequest[],
-  );
-  const [filteredInvitations] = React.useState<Invitation[]>(
-    trip.invitations?.filter(
-      invitation => invitation.status === RequestStatus.PENDING,
-    ) as Invitation[],
-  );
 
+  const tripId: string = route.params.tripId;
+  const tripsData = useAppSelector(state => state.trips.trips);
+  const trip = tripsData.find(trip => trip.id === tripId) as Trip;
+  const currentDate = new Date(trip.date.toDate());
+  const [passengers, setPassengers] = React.useState<User[]>([]);
+  const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'first', title: `${t(`trips:details`)}`},
     {
       key: 'second',
       title: `${
         trip.isCreatorDriver
-          ? t(`trips:requests`) + ` (${filteredRequests?.length})`
-          : t(`trips:invitations`) + ` (${filteredInvitations?.length})`
+          ? t(`trips:requests`) +
+            ` (${
+              trip.attendanceRequests?.filter(
+                request => request.status === RequestStatus.PENDING,
+              )?.length
+            })`
+          : t(`trips:invitations`) +
+            ` (${
+              trip.invitations?.filter(
+                invitation => invitation.status === RequestStatus.PENDING,
+              )?.length
+            })`
       }`,
     },
   ]);
@@ -70,9 +71,13 @@ const PageMyTripDetails = ({route}: any) => {
   const fetchRequesters = async () => {
     let tempArray: string[] = [];
     if (trip.isCreatorDriver) {
-      tempArray = filteredRequests?.map(request => request.requesterID);
+      tempArray = trip.attendanceRequests
+        ?.filter(request => request.status === RequestStatus.PENDING)
+        .map(request => request.requesterID) as string[];
     } else {
-      tempArray = filteredInvitations?.map(invitation => invitation.inviterID);
+      tempArray = trip.invitations
+        ?.filter(invitation => invitation.status === RequestStatus.PENDING)
+        ?.map(invitation => invitation.inviterID) as string[];
     }
     const response = await getUsers(tempArray as string[]);
     setRequesters(response);
@@ -95,16 +100,19 @@ const PageMyTripDetails = ({route}: any) => {
         t(`trips:acceptRequestMessage`),
         [
           {
+            text: t(`generic:cancel`),
+          },
+          {
             text: t(`generic:accept`),
             onPress: () => {
               acceptAttendanceRequest(trip, {
                 requesterID: requester.id,
                 status: RequestStatus.ACCEPTED,
+              }).then(() => {
+                fetchRequesters();
+                fetchPassengers();
               });
             },
-          },
-          {
-            text: t(`generic:cancel`),
           },
         ],
         {cancelable: false},
@@ -115,16 +123,19 @@ const PageMyTripDetails = ({route}: any) => {
         t(`trips:acceptInvitationMessage`),
         [
           {
+            text: t(`generic:cancel`),
+          },
+          {
             text: t(`generic:accept`),
             onPress: () => {
               acceptInvitation(trip, {
                 inviterID: requester.id,
                 status: RequestStatus.ACCEPTED,
+              }).then(() => {
+                fetchRequesters();
+                fetchPassengers();
               });
             },
-          },
-          {
-            text: t(`generic:cancel`),
           },
         ],
         {cancelable: false},
@@ -139,16 +150,18 @@ const PageMyTripDetails = ({route}: any) => {
         t(`trips:rejectRequestMessage`),
         [
           {
+            text: t(`generic:cancel`),
+          },
+          {
             text: t(`generic:reject`),
             onPress: () => {
               rejectAttendanceRequest(trip, {
                 requesterID: requester.id,
                 status: RequestStatus.REJECTED,
+              }).then(() => {
+                fetchRequesters();
               });
             },
-          },
-          {
-            text: t(`generic:cancel`),
           },
         ],
         {cancelable: false},
@@ -159,16 +172,18 @@ const PageMyTripDetails = ({route}: any) => {
         t(`trips:rejectInvitationMessage`),
         [
           {
+            text: t(`generic:cancel`),
+          },
+          {
             text: t(`generic:reject`),
             onPress: () => {
               rejectInvitation(trip, {
                 inviterID: requester.id,
                 status: RequestStatus.REJECTED,
+              }).then(() => {
+                fetchRequesters();
               });
             },
-          },
-          {
-            text: t(`generic:cancel`),
           },
         ],
         {cancelable: false},
@@ -176,12 +191,111 @@ const PageMyTripDetails = ({route}: any) => {
     }
   };
 
-  const DetailsTab = () => {
+  const RequestsTab = () => {
     return (
-      <View style={{flex: 1, marginTop: 10}}>
+      <AttendanceRequestsContainer
+        style={{
+          alignItems: requesters.length === 0 ? 'center' : 'flex-start',
+          justifyContent: requesters.length === 0 ? 'center' : 'flex-start',
+        }}>
+        {requesters.length === 0 ? (
+          <InfoLabel>{t(`generic:noDataFound`)}</InfoLabel>
+        ) : (
+          <></>
+        )}
+        {requesters?.map((requester, index) => (
+          <RequestRow>
+            <NameContainer>
+              <RequesterLabel key={index}>
+                {requester.name} {requester.surname}
+              </RequesterLabel>
+            </NameContainer>
+            <ButtonsContainer>
+              <TouchableOpacity onPress={() => _handleAcceptRequest(requester)}>
+                <Icon
+                  name="checkmark-circle-outline"
+                  size={30}
+                  color={colors.blue}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => _handleRejectRequest(requester)}>
+                <Icon
+                  name="close-circle-outline"
+                  size={30}
+                  color={colors.orange}
+                />
+              </TouchableOpacity>
+            </ButtonsContainer>
+          </RequestRow>
+        ))}
+      </AttendanceRequestsContainer>
+    );
+  };
+
+  return (
+    <Container>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={{flex: 2, width: '100%', height: '100%'}}
+        initialRegion={{
+          latitude:
+            (trip.startLocation.latitude + trip.endLocation.latitude) / 2,
+          longitude:
+            (trip.startLocation.longitude + trip.endLocation.longitude) / 2,
+          latitudeDelta:
+            (trip.startLocation.latitude - trip.endLocation.latitude) * 2,
+          longitudeDelta:
+            (trip.startLocation.longitude - trip.endLocation.longitude) * 2,
+        }}>
+        <Marker
+          coordinate={{
+            latitude: trip.startLocation.latitude,
+            longitude: trip.startLocation.longitude,
+          }}
+          title={t('createTrip:from')}
+          description={t('createTrip:fromDescription')}
+          pinColor="tan"
+        />
+        <Marker
+          coordinate={{
+            latitude: trip.endLocation.latitude,
+            longitude: trip.endLocation.longitude,
+          }}
+          title={t('createTrip:to')}
+          description={t('createTrip:toDescription')}
+        />
+        <MapViewDirections
+          origin={trip.startLocation}
+          destination={trip.endLocation}
+          apikey={'AIzaSyCNsdSD1KAGF7USFCJBWTVYQXffZLL-qx0'}
+          timePrecision="now"
+          strokeColor={colors.blue}
+          strokeWidth={7}
+        />
+      </MapView>
+      <View style={{flex: 1}}>
         <InfoRow>
-          <InfoLabel bold>{t(`trips:date`)}</InfoLabel>
-          <InfoLabel>{new Date(trip.date.toDate()).toDateString()}</InfoLabel>
+          <DestinationText>{trip.startPoint}</DestinationText>
+          <Icon
+            name="navigate"
+            size={fontSizes.tabbarIcons}
+            color={colors.iconColor}
+          />
+          <DestinationText>{trip.endPoint}</DestinationText>
+        </InfoRow>
+        <InfoRow>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon
+              name="calendar"
+              size={fontSizes.tabbarIcons}
+              color={colors.iconColor}
+            />
+            <InfoLabel>{currentDate.toDateString()}</InfoLabel>
+          </View>
+          <InfoLabel>
+            {currentDate.getHours().toString().padStart(2, '0')}.
+            {currentDate.getMinutes().toString().padStart(2, '0')}
+          </InfoLabel>
         </InfoRow>
         {trip.isCreatorDriver ? (
           <>
@@ -218,82 +332,6 @@ const PageMyTripDetails = ({route}: any) => {
           <></>
         )}
       </View>
-    );
-  };
-
-  const RequestsTab = () => {
-    return (
-      <AttendanceRequestsContainer
-        style={{
-          alignItems: requesters.length === 0 ? 'center' : 'flex-start',
-          justifyContent: requesters.length === 0 ? 'center' : 'flex-start',
-        }}>
-        {requesters.length === 0 ? (
-          <InfoLabel>{t(`generic:noDataFound`)}</InfoLabel>
-        ) : (
-          <></>
-        )}
-        {requesters?.map((requester, index) => (
-          <RequestRow>
-            <NameContainer>
-              <InfoLabel key={index}>
-                {requester.name} {requester.surname}
-              </InfoLabel>
-            </NameContainer>
-            <ButtonsContainer>
-              <TouchableOpacity onPress={() => _handleAcceptRequest(requester)}>
-                <Icon name="checkmark-circle-outline" size={30} color="green" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => _handleRejectRequest(requester)}>
-                <Icon name="close-circle-outline" size={30} color="red" />
-              </TouchableOpacity>
-            </ButtonsContainer>
-          </RequestRow>
-        ))}
-      </AttendanceRequestsContainer>
-    );
-  };
-
-  const _renderScene = SceneMap({
-    first: DetailsTab,
-    second: RequestsTab,
-  });
-
-  return (
-    <Container>
-      <BackgroundImage
-        resizeMode="cover"
-        source={require('../../../assets/images/road.png')}
-      />
-      <DestinationRow>
-        <DestinationText>{trip.startPoint.toUpperCase()}</DestinationText>
-        <ArrowImage
-          resizeMode="contain"
-          source={require('../../../assets/images/arrow-vertical.png')}
-        />
-        <DestinationText>{trip.endPoint.toUpperCase()}</DestinationText>
-      </DestinationRow>
-      <TabView
-        renderTabBar={props => (
-          <TabBar
-            indicatorStyle={{
-              backgroundColor: colors.gray,
-              width: '35%',
-              marginLeft: 25,
-            }}
-            labelStyle={{fontWeight: 'bold'}}
-            activeColor={colors.black}
-            inactiveColor={colors.gray}
-            style={{backgroundColor: 'transparent'}}
-            {...props}
-          />
-        )}
-        sceneContainerStyle={{backgroundColor: colors.gray, borderRadius: 30}}
-        style={{flex: 6, height: 100}}
-        navigationState={{index, routes}}
-        renderScene={_renderScene}
-        onIndexChange={setIndex}
-      />
     </Container>
   );
 };
