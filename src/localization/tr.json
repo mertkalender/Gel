@@ -7,7 +7,9 @@
         "accept": "Kabul Et",
         "submit": "Gönder",
         "cancel": "İptal",
-        "reject": "Reddet"
+        "reject": "Reddet",
+        "delete": "Sil",
+        "save": "Kaydet"
     },
     "login" : {
         "title" : "Giriş Yap",
@@ -89,7 +91,8 @@
         "from": "Nereden",
         "fromDescription": "Başlangıç noktası",
         "to": "Nereye",
-        "toDescription": "Varış noktası"
+        "toDescription": "Varış noktası",
+        "deleteTripMessage": "Seyahati kalıcı olarak silmek istediğine emin misin?"
     },
     "createTrip": {
         "from": "Nereden",

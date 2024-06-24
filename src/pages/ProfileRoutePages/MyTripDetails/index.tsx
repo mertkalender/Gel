@@ -20,6 +20,7 @@ import {Trip} from '../../../types/trip';
 import {
   acceptAttendanceRequest,
   acceptInvitation,
+  deleteTrip,
   getUsers,
   rejectAttendanceRequest,
   rejectInvitation,
@@ -34,10 +35,35 @@ import {useAppSelector} from '../../../store/store';
 import {fontSizes} from '../../../constants/fonts';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
+import { screenHeight } from '../../../constants/generic';
+import Toast from 'react-native-toast-message';
 
-const PageMyTripDetails = ({route}: any) => {
+const PageMyTripDetails = ({route, navigation}: any) => {
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: t(`trips:details`),
+      headerRight: () => (
+      <>
+      <Icon
+      name="create"
+      size={20}
+      color={colors.blue}
+      onPress={() => { handleEditTrip()}}
+      style={{marginRight: 10}}
+      />
+      <Icon
+      name="trash"
+      size={20}
+      color={colors.red}
+      onPress={() => { handleDeleteTrip() }}
+      />
+      </>
+      ),
+    });
+  }, [navigation]);
+
   const {t} = useTranslation();
-
   const tripId: string = route.params.tripId;
   const tripsData = useAppSelector(state => state.trips.trips);
   const trip = tripsData.find(trip => trip.id === tripId) as Trip;
@@ -87,6 +113,39 @@ const PageMyTripDetails = ({route}: any) => {
     const response = await getUsers(trip.passengers as string[]);
     setPassengers(response);
   };
+
+  const handleDeleteTrip = () => {
+    Alert.alert(
+      t(`generic:wait`),
+      t(`trips:deleteTripMessage`),
+      [
+        {
+          text: t(`generic:cancel`),
+        },
+        {
+          style: 'destructive',
+          text: t(`generic:delete`),
+          onPress: async () => {
+            await navigation.goBack();
+            deleteTrip(trip.id as string);
+            Toast.show({
+              type: 'success',
+              text1: t(`generic:success`),
+              text2: t(`trips:deleteTripSuccessMessage`),
+              visibilityTime: 2000,
+              autoHide: true,
+              position: 'bottom',
+            });
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  }
+
+  const handleEditTrip = () => {
+    navigation.navigate('EditTrip', {trip: trip});
+  }
 
   useEffect(() => {
     fetchRequesters();
@@ -236,7 +295,7 @@ const PageMyTripDetails = ({route}: any) => {
     <Container>
       <MapView
         provider={PROVIDER_GOOGLE}
-        style={{flex: 2, width: '100%', height: '100%'}}
+        style={{height: screenHeight * 0.5}}
         initialRegion={{
           latitude:
             (trip.startLocation.latitude + trip.endLocation.latitude) / 2,
@@ -274,7 +333,7 @@ const PageMyTripDetails = ({route}: any) => {
           strokeWidth={7}
         />
       </MapView>
-      <View style={{flex: 1}}>
+      <View style={{height: 'auto'}}>
         <InfoRow>
           <DestinationText>{trip.startPoint}</DestinationText>
           <Icon

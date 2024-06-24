@@ -40,7 +40,7 @@ export const DestinationText = styled.Text`
 
 export const InfoContainer = styled.View`
   margin-vertical: 5%;
-  flex: 1;
+  height: auto;
   width: 100%;
   justify-content: center;
 `;

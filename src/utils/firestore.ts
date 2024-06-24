@@ -112,6 +112,29 @@ export const createTrip = async (trip: Trip) => {
   }
 };
 
+export const deleteTrip = async (tripID: string) => {
+  try {
+    await firestore().collection(COLLECTIONS.TRIPS).doc(tripID).set(
+      {
+        status: TripStatus.CANCELLED,
+      },
+      {merge: true},
+    );
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export const updateTrip = async (tripID: string, updatedTrip: Partial<Trip>) => {
+  try {
+    await firestore().collection(COLLECTIONS.TRIPS).doc(tripID).set(updatedTrip, {merge: true});
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
 export const createAttendanceRequest = async (
   tripID: string,
   attendanceRequest: AttendanceRequest,

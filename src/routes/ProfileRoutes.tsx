@@ -3,6 +3,7 @@ import PageProfile from '../pages/ProfileRoutePages/Profile';
 import PageSettings from '../pages/ProfileRoutePages/Settings';
 import PageMyTrips from '../pages/ProfileRoutePages/MyTrips';
 import PageMyTripDetails from '../pages/ProfileRoutePages/MyTripDetails';
+import PageEditTrips from '../pages/ProfileRoutePages/EditTrip';
 import {View} from 'react-native';
 import {colors} from '../constants/colors';
 
@@ -36,6 +37,7 @@ export function ProfileRoutes() {
       <ProfileStack.Screen name="Settings" component={PageSettings} />
       <ProfileStack.Screen name="MyTrips" component={PageMyTrips} />
       <ProfileStack.Screen name="MyTripDetails" component={PageMyTripDetails} />
+      <ProfileStack.Screen name="EditTrip" component={PageEditTrips} />
     </ProfileStack.Navigator>
   );
 }

@@ -5,7 +5,6 @@ import { fontSizes } from "../../../constants/fonts";
 
 export const HomeContainer = styled(View)`
     flex: 1;
-    background-color: ${colors.background};
     justify-content: center;
     align-items: center;
 `;
