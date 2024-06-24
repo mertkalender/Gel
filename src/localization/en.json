@@ -9,7 +9,8 @@
         "cancel": "Cancel",
         "reject": "Reject",
         "delete": "Delete",
-        "save": "Save"
+        "save": "Save",
+        "all": "All"
     },
     "login": {
         "title": "Login",
@@ -110,5 +111,10 @@
         "sthWrong": "Something went wrong",
         "unknownError": "An unexpected error occurred. Please try again later.",
         "passengerCountError": "Passenger count must be between 1 and 10."
+    },
+    "tripList": {
+        "from": "from",
+        "to": "to",
+        "date": "date"
     }
 }

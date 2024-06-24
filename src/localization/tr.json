@@ -9,7 +9,8 @@
         "cancel": "İptal",
         "reject": "Reddet",
         "delete": "Sil",
-        "save": "Kaydet"
+        "save": "Kaydet",
+        "all": "Hepsi"
     },
     "login" : {
         "title" : "Giriş Yap",
@@ -109,5 +110,10 @@
         "sthWrong": "Bir şeyler yanlış",
         "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
         "passengerCountError": "Yolcu sayısı 1 ile 10 arasında olmalıdır."
+    },
+    "tripList": {
+        "from": "başlngç",
+        "to": "varış",
+        "date": "tarih"
     }
 }
