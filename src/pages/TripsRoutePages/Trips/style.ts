@@ -10,7 +10,7 @@ export const StyledHeader = styled.View`
   height: 40px;
 `;
 
-export const FilterContainer = styled.TouchableOpacity`
+export const FilterContainer = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: center;

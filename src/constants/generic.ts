@@ -18,7 +18,7 @@ export const getProfileMenu = () => {
       {
         leftIconName: 'person',
         title: t('profile:myInfo'),
-        navigationPage: 'Settings',
+        navigationPage: 'MyInfo',
       },
       {
         leftIconName: 'car',

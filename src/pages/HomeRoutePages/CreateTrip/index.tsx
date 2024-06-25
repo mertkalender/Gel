@@ -114,7 +114,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
       .then(() => {
         Toast.show({
           type: 'success',
-          text1: t('createTrip:success'),
+          text1: t('generic:success'),
           text2: t('createTrip:successMessage'),
           position: 'bottom',
         });

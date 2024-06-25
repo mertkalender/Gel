@@ -10,7 +10,8 @@
         "reject": "Reject",
         "delete": "Delete",
         "save": "Save",
-        "all": "All"
+        "all": "All",
+        "success": "Success!"
     },
     "login": {
         "title": "Login",
@@ -38,7 +39,6 @@
         "passwordConfirm": "Confirm Password",
         "register": "Register",
         "login": "You have an account? Login",
-        "success" : "Success!",
         "successMessage" : "Registration successful. You can login now.",
         "emptyFields" : "Please fill all fields.",
         "passwordsNotMatch" : "Passwords do not match.",
@@ -75,7 +75,6 @@
         "passengerCount": "Passenger Count",
         "passengers": "Passengers",
         "date": "Date",
-        "success": "Success!",
         "requestSentSuccess": "Request sent successfully.",
         "invitationSentSuccess": "Invitation sent successfully.",
         "details": "Details",
@@ -105,12 +104,18 @@
         "date": "Date",
         "passengerCount": "Passenger Count",
         "create": "Create",
-        "success": "Success!",
         "successMessage": "Trip created successfully.",
         "emptyFields": "Please fill all fields.",
         "sthWrong": "Something went wrong",
         "unknownError": "An unexpected error occurred. Please try again later.",
         "passengerCountError": "Passenger count must be between 1 and 10."
+    },
+    "editTrip": {
+        "selectDate":"Select Date",
+        "tripUpdateSuccessMessage": "Trip updated successfully."
+    },
+    "myInfo": {
+        "myInfoUpdateSuccessMessage": "Your info updated successfully."
     },
     "tripList": {
         "from": "from",

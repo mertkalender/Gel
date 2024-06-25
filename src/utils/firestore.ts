@@ -25,6 +25,16 @@ export function createUser(
     });
 }
 
+export function updateUser(userId: string, updatedUser: Partial<User>) {
+  firestore()
+    .collection(COLLECTIONS.USERS)
+    .doc(userId)
+    .set(updatedUser, {merge: true})
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
 export async function getUser(userId: string): Promise<User> {
   try {
     const documentSnapshot = await firestore()

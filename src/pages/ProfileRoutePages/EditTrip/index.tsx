@@ -6,6 +6,7 @@ import {colors} from '../../../constants/colors';
 import {ButtonText, Container, DatePickerContainer, SaveButton} from './style';
 import {useTranslation} from 'react-i18next';
 import DatePicker from 'react-native-date-picker';
+import Toast from 'react-native-toast-message';
 
 const PageEditTrip = ({route, navigation}: any) => {
   const trip: Trip = route.params.trip;
@@ -25,11 +26,14 @@ const PageEditTrip = ({route, navigation}: any) => {
       await updateTrip(trip.id as string, {
         date: Timestamp.fromDate(tripDate as Date),
       });
-      Alert.alert('Success', 'Trip updated successfully');
-      navigation.goBack();
+      Toast.show({
+        type: 'success',
+        text1: t('generic:success'),
+        text2: t('editTrip:tripUpdateSuccessMessage'),
+    });      navigation.goBack();
     } catch (error) {
       console.error(error);
-      Alert.alert('Error', 'Failed to update the trip');
+      Alert.alert(t('generic:sthWrong'), t('generic:unknownError'));
     }
   };
 
@@ -40,7 +44,7 @@ const PageEditTrip = ({route, navigation}: any) => {
         <DatePicker
           mode="datetime"
           open={showDatePicker}
-          title={t('createTrip:selectDate')}
+          title={t('editTrip:selectDate')}
           date={tripDate as Date}
           onConfirm={date => {
             setTripDate(date), setShowDatePicker(false);

@@ -57,7 +57,7 @@ const PageRegister = ({navigation}: any) => {
         createUser(res.user.uid, name, surname, email);
         Toast.show({
           type: 'success',
-          text1: t('register:success'),
+          text1: t('generic:success'),
           text2: t('register:successMessage'),
           position: 'bottom',
         });

@@ -10,7 +10,7 @@ import {Trip} from '../../../types/trip';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {colors} from '../../../constants/colors';
 import {IstanbulDistricts, screenHeight} from '../../../constants/generic';
-import { fontSizes } from '../../../constants/fonts';
+import {fontSizes} from '../../../constants/fonts';
 
 const PageTrips = ({navigation}: any) => {
   const {t} = useTranslation();
@@ -66,11 +66,10 @@ const PageTrips = ({navigation}: any) => {
     <ScrollView stickyHeaderIndices={[0]}>
       <View>
         <StyledHeader>
-          <FilterContainer onPress={() => null}>
+          <FilterContainer>
             <FilterText>{t('tripList:date')}</FilterText>
           </FilterContainer>
-          <FilterContainer
-            onPress={() => setIsFromPickerOpen(!isFromPickerOpen)}>
+          <FilterContainer>
             <DropDownPicker
               open={isFromPickerOpen}
               value={from}
@@ -92,17 +91,25 @@ const PageTrips = ({navigation}: any) => {
                 color: colors.orange,
               }}
               placeholder={t('tripList:from')}
-              placeholderStyle={{fontWeight: 'bold', color: colors.white, textAlign: 'center'}}
+              placeholderStyle={{
+                fontWeight: 'bold',
+                color: colors.white,
+                textAlign: 'center',
+              }}
               selectedItemLabelStyle={{
                 fontWeight: 'bold',
                 color: colors.orange,
               }}
-              labelStyle={{fontWeight: 'bold', color: colors.white, textAlign: 'center'}}
+              labelStyle={{
+                fontWeight: 'bold',
+                color: colors.white,
+                textAlign: 'center',
+              }}
               showArrowIcon={false}
               labelProps={{numberOfLines: 1, adjustsFontSizeToFit: true}}
             />
           </FilterContainer>
-          <FilterContainer onPress={() => setIsToPickerOpen(!isToPickerOpen)}>
+          <FilterContainer>
             <DropDownPicker
               open={isToPickerOpen}
               value={to}
@@ -124,12 +131,20 @@ const PageTrips = ({navigation}: any) => {
                 color: colors.orange,
               }}
               placeholder={t('tripList:to')}
-              placeholderStyle={{fontWeight: 'bold', color: colors.white, textAlign: 'center'}}
+              placeholderStyle={{
+                fontWeight: 'bold',
+                color: colors.white,
+                textAlign: 'center',
+              }}
               selectedItemLabelStyle={{
                 fontWeight: 'bold',
                 color: colors.orange,
               }}
-              labelStyle={{fontWeight: 'bold', color: colors.white, textAlign: 'center'}}
+              labelStyle={{
+                fontWeight: 'bold',
+                color: colors.white,
+                textAlign: 'center',
+              }}
               showArrowIcon={false}
               labelProps={{numberOfLines: 1, adjustsFontSizeToFit: true}}
             />

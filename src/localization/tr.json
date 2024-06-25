@@ -10,7 +10,8 @@
         "reject": "Reddet",
         "delete": "Sil",
         "save": "Kaydet",
-        "all": "Hepsi"
+        "all": "Hepsi",
+        "success" : "Başarılı!"
     },
     "login" : {
         "title" : "Giriş Yap",
@@ -38,7 +39,6 @@
         "passwordConfirm" : "Şifre Tekrarı",
         "register" : "Kayıt Ol",
         "login" : "Giriş Yap",
-        "success" : "Başarılı!",
         "successMessage" : "Kayıt başarılı. Giriş yapabilirsiniz.",
         "emptyFields" : "Lütfen tüm alanları doldurunuz.",
         "passwordsNotMatch" : "Şifreler uyuşmuyor.",
@@ -75,7 +75,6 @@
         "passengerCount": "Yolcu sayısı",
         "passengers" : "Yolcular",
         "date": "Tarih",
-        "success": "Başarılı!",
         "requestSentSuccess": "Talep başarıyla gönderildi.",
         "invitationSentSuccess": "Davet başarıyla gönderildi.",
         "details": "Detaylar",
@@ -104,12 +103,18 @@
         "date": "Tarih",
         "passengerCount": "Yolcu sayısı",
         "create": "Oluştur",
-        "success": "Başarılı!",
         "successMessage": "Seyahat başarıyla oluşturuldu.",
         "emptyFields": "Lütfen tüm alanları doldurunuz.",
         "sthWrong": "Bir şeyler yanlış",
         "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
         "passengerCountError": "Yolcu sayısı 1 ile 10 arasında olmalıdır."
+    },
+    "editTrip": {
+        "selectDate":"Tarih seçiniz",
+        "tripUpdateSuccessMessage": "Seyahat başarıyla güncellendi."
+    },
+    "myInfo": {
+        "myInfoUpdateSuccessMessage": "Bilgileriniz başarıyla güncellendi"
     },
     "tripList": {
         "from": "başlngç",

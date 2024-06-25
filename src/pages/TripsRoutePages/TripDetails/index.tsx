@@ -61,7 +61,7 @@ export const PageTripDetails = ({route, navigation}: any) => {
         .then(() => {
           Toast.show({
             type: 'success',
-            text1: t('trips:success'),
+            text1: t('generic:success'),
             text2: t('trips:requestSentSuccess'),
             position: 'bottom',
           });
@@ -80,7 +80,7 @@ export const PageTripDetails = ({route, navigation}: any) => {
         .then(() => {
           Toast.show({
             type: 'success',
-            text1: t('trips:success'),
+            text1: t('generic:success'),
             text2: t('trips:invitationSentSuccess'),
             position: 'bottom',
           });

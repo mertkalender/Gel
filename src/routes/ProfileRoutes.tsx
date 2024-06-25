@@ -6,6 +6,7 @@ import PageMyTripDetails from '../pages/ProfileRoutePages/MyTripDetails';
 import PageEditTrips from '../pages/ProfileRoutePages/EditTrip';
 import {View} from 'react-native';
 import {colors} from '../constants/colors';
+import PageMyInfo from '../pages/ProfileRoutePages/MyInfo';
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ export function ProfileRoutes() {
         name="Profile"
         component={PageProfile}
       />
+      <ProfileStack.Screen name="MyInfo" component={PageMyInfo} />
       <ProfileStack.Screen name="Settings" component={PageSettings} />
       <ProfileStack.Screen name="MyTrips" component={PageMyTrips} />
       <ProfileStack.Screen name="MyTripDetails" component={PageMyTripDetails} />
