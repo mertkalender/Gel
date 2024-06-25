@@ -178,7 +178,7 @@ const PageCreateTrip = ({route, navigation}: any) => {
   return (
     <Container>
       {location.latitude === 0 && location.longitude === 0 ? (
-        <ActivityIndicator size="large" color={colors.primary} />
+        <ActivityIndicator style={{flex: 2}} size="large" color={colors.orange} />
       ) : (
         <MapView
           provider={PROVIDER_GOOGLE}

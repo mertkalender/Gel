@@ -8,7 +8,7 @@ export const Container = styled.View`
 `;
 
 export const SaveButton = styled.TouchableOpacity`
-  background-color: ${colors.primary};
+  background-color: ${colors.orange};
   padding: 10px;
   border-radius: 5px;
   align-items: center;

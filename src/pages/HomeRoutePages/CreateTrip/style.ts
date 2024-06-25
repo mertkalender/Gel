@@ -42,7 +42,7 @@ export const DatePickerContainer = styled(TouchableOpacity)`
 export const CreateButton = styled(TouchableOpacity)<CreateButtonProps>`
   flex-direction: row;
   background-color: ${props =>
-    props.disabled ? colors.darkGray : colors.primary};
+    props.disabled ? colors.darkGray : colors.orange};
   padding: 10px;
   border-radius: 5px;
   align-items: center;
