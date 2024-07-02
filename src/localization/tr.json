@@ -107,7 +107,9 @@
         "emptyFields": "Lütfen tüm alanları doldurunuz.",
         "sthWrong": "Bir şeyler yanlış",
         "unknownError": "Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
-        "passengerCountError": "Yolcu sayısı 1 ile 10 arasında olmalıdır."
+        "passengerCountError": "Yolcu sayısı 1 ile 10 arasında olmalıdır.",
+        "locationPermissionTitle": "Konum İzni Gerekli",
+        "locationPermissionMessage": "Seyahat oluşturmak için konum iznine ihtiyacımız var."
     },
     "editTrip": {
         "selectDate":"Tarih seçiniz",
