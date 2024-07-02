@@ -101,13 +101,19 @@ export const PageTripDetails = ({route, navigation}: any) => {
         style={{flex: 2, width: '100%', height: '100%'}}
         initialRegion={{
           latitude:
-            (trip.startLocation.latitude + trip.endLocation.latitude) / 2,
+            Math.abs(trip.startLocation.latitude + trip.endLocation.latitude) /
+            2,
           longitude:
-            (trip.startLocation.longitude + trip.endLocation.longitude) / 2,
+            Math.abs(
+              trip.startLocation.longitude + trip.endLocation.longitude,
+            ) / 2,
           latitudeDelta:
-            (trip.startLocation.latitude - trip.endLocation.latitude) * 2,
+            Math.abs(trip.startLocation.latitude - trip.endLocation.latitude) *
+            2,
           longitudeDelta:
-            (trip.startLocation.longitude - trip.endLocation.longitude) * 2,
+            Math.abs(
+              trip.startLocation.longitude - trip.endLocation.longitude,
+            ) * 2,
         }}>
         <Marker
           coordinate={{
@@ -153,7 +159,9 @@ export const PageTripDetails = ({route, navigation}: any) => {
               size={fontSizes.tabbarIcons}
               color={colors.iconColor}
             />
-            <InfoLabel>{user?.name} {user?.surname}</InfoLabel>
+            <InfoLabel>
+              {user?.name} {user?.surname}
+            </InfoLabel>
           </View>
         </InfoRow>
         <InfoRow>

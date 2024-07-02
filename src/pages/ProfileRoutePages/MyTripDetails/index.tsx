@@ -35,30 +35,33 @@ import {useAppSelector} from '../../../store/store';
 import {fontSizes} from '../../../constants/fonts';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import { screenHeight } from '../../../constants/generic';
+import {screenHeight} from '../../../constants/generic';
 import Toast from 'react-native-toast-message';
 
 const PageMyTripDetails = ({route, navigation}: any) => {
-
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: t(`trips:details`),
       headerRight: () => (
-      <>
-      <Icon
-      name="create"
-      size={20}
-      color={colors.blue}
-      onPress={() => { handleEditTrip()}}
-      style={{marginRight: 10}}
-      />
-      <Icon
-      name="trash"
-      size={20}
-      color={colors.red}
-      onPress={() => { handleDeleteTrip() }}
-      />
-      </>
+        <>
+          <Icon
+            name="create"
+            size={20}
+            color={colors.blue}
+            onPress={() => {
+              handleEditTrip();
+            }}
+            style={{marginRight: 10}}
+          />
+          <Icon
+            name="trash"
+            size={20}
+            color={colors.red}
+            onPress={() => {
+              handleDeleteTrip();
+            }}
+          />
+        </>
       ),
     });
   }, [navigation]);
@@ -141,11 +144,11 @@ const PageMyTripDetails = ({route, navigation}: any) => {
       ],
       {cancelable: false},
     );
-  }
+  };
 
   const handleEditTrip = () => {
     navigation.navigate('EditTrip', {trip: trip});
-  }
+  };
 
   useEffect(() => {
     fetchRequesters();
@@ -298,13 +301,19 @@ const PageMyTripDetails = ({route, navigation}: any) => {
         style={{height: screenHeight * 0.5}}
         initialRegion={{
           latitude:
-            (trip.startLocation.latitude + trip.endLocation.latitude) / 2,
+            Math.abs(trip.startLocation.latitude + trip.endLocation.latitude) /
+            2,
           longitude:
-            (trip.startLocation.longitude + trip.endLocation.longitude) / 2,
+            Math.abs(
+              trip.startLocation.longitude + trip.endLocation.longitude,
+            ) / 2,
           latitudeDelta:
-            (trip.startLocation.latitude - trip.endLocation.latitude) * 2,
+            Math.abs(trip.startLocation.latitude - trip.endLocation.latitude) *
+            2,
           longitudeDelta:
-            (trip.startLocation.longitude - trip.endLocation.longitude) * 2,
+            Math.abs(
+              trip.startLocation.longitude - trip.endLocation.longitude,
+            ) * 2,
         }}>
         <Marker
           coordinate={{
