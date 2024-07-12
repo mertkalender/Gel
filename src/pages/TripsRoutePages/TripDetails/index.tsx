@@ -136,7 +136,7 @@ export const PageTripDetails = ({route, navigation}: any) => {
         <MapViewDirections
           origin={trip.startLocation}
           destination={trip.endLocation}
-          apikey={'AIzaSyCNsdSD1KAGF7USFCJBWTVYQXffZLL-qx0'}
+          apikey={ENV.GOOGLE_MAPS_API_KEY}
           timePrecision="now"
           strokeColor={colors.blue}
           strokeWidth={7}
